@@ -1,0 +1,7 @@
+.home{
+    background-color: red;
+    min-height: 100vh;
+    width: calc(100%-200px);
+    margin-left: 200px;
+    margin-top: 56px;
+}
