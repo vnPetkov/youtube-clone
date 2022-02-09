@@ -1,8 +1,9 @@
-.sidebar{
-    position: fixed;
-    top:56px;
-    left: 0;
-    width: 200px;
-    height: 100vh;
-    background-color: aqua;
+.sidebar {
+  flex: 0.14;
+  border: 1px solid gray;
+}
+
+.sidebar a {
+  color: black;
+  text-decoration: none;
 }

@@ -1,4 +1,4 @@
-.content-wrapper{
-  width: 100%;
-
+.appPage {
+  display: flex;
+  margin-top: 56px;
 }

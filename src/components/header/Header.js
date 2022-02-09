@@ -1,6 +1,7 @@
-import React from 'react'
+import React from "react";
 import styles from "./Header.module.css";
 import header_logo from "../../images/header_logo.svg";
+<<<<<<< HEAD
 import header_delete from "../../images/header_delete.png"
 import { FaMicrophone, FaRegUserCircle } from "react-icons/fa";
 import { BsSearch, BsThreeDotsVertical } from 'react-icons/bs';
@@ -46,8 +47,39 @@ export default function Header() {
             </div>
 
 
+=======
+import { FaMicrophone, FaSearch } from "react-icons/fa";
+import { GiHamburgerMenu } from "react-icons/gi";
+import { BrowserRouter, Link } from "react-router-dom";
+
+export default function Header() {
+  return (
+    <div className={styles.header}>
+      <div className={styles.header_burger_logo}>
+        <span>
+          <GiHamburgerMenu />
+        </span>
+        <div>
+          <img src={header_logo} alt="logo"></img>
+>>>>>>> 283782053d381ce61ec09a9bcbcd896f5ca1a31d
         </div>
-    )
+      </div>
 
+      <div className={styles.header_search}>
+        <input placeholder="Search"></input>
+
+        <Link to="/search_page">
+          <FaSearch />
+        </Link>
+
+        <span>
+          <FaMicrophone />
+        </span>
+      </div>
+
+      <div className={styles.header_signin}>
+        <a>Sign in</a>
+      </div>
+    </div>
+  );
 }
-
