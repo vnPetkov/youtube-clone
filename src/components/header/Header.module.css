@@ -2,12 +2,8 @@
   box-sizing: border-box;
 }
 .header {
-<<<<<<< HEAD
   background-color: white;
   color: black;
-=======
-  border: 1px solid gray;
->>>>>>> 283782053d381ce61ec09a9bcbcd896f5ca1a31d
   display: flex;
   justify-content: space-between;
   align-items: center;
