@@ -9,6 +9,7 @@ import History from "./components/history/History";
 import Upload from "./components/upload/Upload";
 import Liked from "./components/liked/Liked";
 import Search from "./components/search/Search";
+import WatchVideo from "./components/watchVideo/WatchVideo";
 
 function App() {
   return (
@@ -25,6 +26,8 @@ function App() {
             <Route path="/upload_page" element={<Upload />} />
             <Route path="/liked_page" element={<Liked />} />
             <Route path="/search_page" element={<Search />} />
+            <Route path="/search_page" element={<Search />} />
+            <Route path="/watchVideo_page" element={<WatchVideo />} />
           </Routes>
         </div>
       </BrowserRouter>

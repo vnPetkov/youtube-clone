@@ -12,6 +12,7 @@ export default function Sidebar() {
       <Link to="/">
         <SidebarTab Icon={HomeIcon} tabName="Начало" />
       </Link>
+      <div className={styles.sidebatLine}></div>
 
       <Link to="/history_page">
         <SidebarTab Icon={HistoryIcon} tabName="История" />
