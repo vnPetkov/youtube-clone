@@ -8,11 +8,13 @@ export default function WatchVideo() {
     <div>
       <div className="watchScreen">
         <iframe
-          title="watched video"
-          frameBorder="0"
-          src="https://www.youtube.com/embed/tgbNymZ7vqY"
-          width="100%"
-          height="100%"
+          width="1500"
+          height="800"
+          src="https://www.youtube.com/embed/lheapd7bgLA"
+          title="YouTube video player"
+          frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen
         ></iframe>
       </div>
       <VideoInfo />
