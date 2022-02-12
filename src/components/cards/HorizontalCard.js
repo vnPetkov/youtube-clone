@@ -1,9 +1,8 @@
 import React from "react";
-import styles from "./Search_card.module.scss";
-import { BrowserRouter, Link, Route, Routes } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 // CAN ADD PROPERTIES FOR WIDTH AND HEIGHT LATER
-export default function Search_card({
+export default function HorizontalCard({
   title,
   img,
   user,
@@ -11,19 +10,20 @@ export default function Search_card({
   desc,
   views,
   uploaded,
+  currentClass,
 }) {
   return (
     <Link to={"/watchVideo_page"}>
-      <div className={styles.search_card}>
-        <img src={img} />
+      <div className={currentClass}>
+        <img src={img} alt="video poster" />
         <div>
           <h3>{title}</h3>
-          <p>
-            {" "}
-            {views} {uploaded}
-          </p>
           <div>
-            <img src={userPic} />
+            <p>{views} &#9679;</p>
+            <p>{uploaded}</p>
+          </div>
+          <div>
+            <img src={userPic} alt="user pic" />
             <p>{user}</p>
           </div>
           <p>{desc}</p>

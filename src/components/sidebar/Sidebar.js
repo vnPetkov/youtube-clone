@@ -7,30 +7,35 @@ import ThumbUpOutlinedIcon from "@mui/icons-material/ThumbUpOutlined";
 import { Link } from "react-router-dom";
 
 export default function Sidebar() {
-  return (
-    <div className={styles.sidebar}>
-      <Link to="/">
-        <SidebarTab Icon={HomeIcon} tabName="Начало" />
-      </Link>
-      <div></div>
+  console.log(window.location.pathname);
+  if (window.location.pathname === "/watchVideo_page") {
+    return null;
+  } else {
+    return (
+      <div className={styles.sidebar}>
+        <Link to="/">
+          <SidebarTab Icon={HomeIcon} tabName="Начало" />
+        </Link>
+        <div></div>
 
-      <Link to="/history_page">
-        <SidebarTab Icon={HistoryIcon} tabName="История" />
-      </Link>
+        <Link to="/history_page">
+          <SidebarTab Icon={HistoryIcon} tabName="История" />
+        </Link>
 
-      <Link to="/upload_page">
-        <SidebarTab
-          Icon={VideoLibraryOutlinedIcon}
-          tabName="Вашите видеоклипове"
-        />
-      </Link>
+        <Link to="/upload_page">
+          <SidebarTab
+            Icon={VideoLibraryOutlinedIcon}
+            tabName="Вашите видеоклипове"
+          />
+        </Link>
 
-      <Link to="/liked_page">
-        <SidebarTab
-          Icon={ThumbUpOutlinedIcon}
-          tabName="Харесани видеоклипове"
-        />
-      </Link>
-    </div>
-  );
+        <Link to="/liked_page">
+          <SidebarTab
+            Icon={ThumbUpOutlinedIcon}
+            tabName="Харесани видеоклипове"
+          />
+        </Link>
+      </div>
+    );
+  }
 }

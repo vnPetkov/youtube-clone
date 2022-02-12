@@ -1,6 +1,6 @@
 import "./App.scss";
-import React, { useState } from "react";
-import { BrowserRouter, Link, Route, Routes } from "react-router-dom";
+import React from "react";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 import Header from "./components/header/Header.js";
 import Sidebar from "./components/sidebar/Sidebar.js";
@@ -18,15 +18,52 @@ function App() {
         <Header />
 
         <div className="appPage">
-          <Sidebar />
-
           <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/history_page" element={<History />} />
-            <Route path="/upload_page" element={<Upload />} />
-            <Route path="/liked_page" element={<Liked />} />
-            <Route path="/search_page" element={<Search />} />
-            <Route path="/search_page" element={<Search />} />
+            <Route
+              path="/"
+              element={
+                <>
+                  <Sidebar />
+                  <Home />
+                </>
+              }
+            />
+            <Route
+              path="/history_page"
+              element={
+                <>
+                  <Sidebar />
+                  <History />
+                </>
+              }
+            />
+            <Route
+              path="/upload_page"
+              element={
+                <>
+                  <Sidebar />
+                  <Upload />
+                </>
+              }
+            />
+            <Route
+              path="/liked_page"
+              element={
+                <>
+                  <Sidebar />
+                  <Liked />
+                </>
+              }
+            />
+            <Route
+              path="/search_page"
+              element={
+                <>
+                  <Sidebar />
+                  <Search />
+                </>
+              }
+            />
             <Route path="/watchVideo_page" element={<WatchVideo />} />
           </Routes>
         </div>

@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "./HomeVideo.module.scss";
-import { BrowserRouter, Link, Route, Routes } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 import Avatar from "@mui/material/Avatar";
 

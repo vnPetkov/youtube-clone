@@ -1,0 +1,64 @@
+.videoInfo {
+  width: 1280px;
+  > div {
+    margin-bottom: 15px;
+    border-bottom: 1px solid #cccccc;
+    padding-bottom: 10px;
+
+    h5 {
+      font-size: 18px;
+      font-weight: 500;
+      line-height: 20px;
+      margin-top: 20px;
+      margin-bottom: 10px;
+    }
+
+    p {
+      color: rgb(95, 95, 95);
+      font-size: 14px;
+    }
+
+    a {
+      text-decoration: none;
+      color: #030303;
+      font-weight: 500;
+    }
+
+    button {
+      margin-left: 10px;
+    }
+    span {
+      margin-left: 20px;
+      display: flex;
+
+      p {
+        margin-left: 10px;
+        font-size: 14px;
+        font-weight: 500;
+        height: 17px;
+        letter-spacing: 0.5px;
+      }
+    }
+
+    > div {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      > div {
+        display: flex;
+        align-items: center;
+      }
+    }
+    & > p:last-child {
+      color: #030303;
+      display: block;
+      width: 615px;
+      margin-top: 20px;
+      margin-left: 60px;
+    }
+  }
+}
+.avatar {
+  margin-right: 15px;
+}

@@ -1,24 +1,9 @@
 import React, { useState } from "react";
+import { categories } from "../../server/data";
 import styles from "./HomeCategories.module.scss";
 
 export default function HomeCategories() {
   const [activeCategory, setActiveCategory] = useState("Всички");
-
-  const categories = [
-    "Всички",
-    "Варене на ракия",
-    "Миксове",
-    "Музика",
-    "Мис баба 2022",
-    "Природа",
-    "Кози",
-    "Изкуство",
-    "Бански дядо",
-    "На живо",
-    "Фитнес",
-    "Аниме",
-    "Кокошки",
-  ];
 
   let handleClick = (category) => {
     setActiveCategory(category);

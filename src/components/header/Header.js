@@ -4,7 +4,7 @@ import header_logo from "../../images/header_logo.svg";
 import header_delete from "../../images/header_delete.png";
 import HomeCategories from "./HomeCategories";
 
-import { BrowserRouter, Link, Route, Routes } from "react-router-dom";
+import { Link, Route, Routes } from "react-router-dom";
 import { FaMicrophone, FaRegUserCircle } from "react-icons/fa";
 import { BsSearch, BsThreeDotsVertical } from "react-icons/bs";
 import MenuIcon from "@mui/icons-material/Menu";
