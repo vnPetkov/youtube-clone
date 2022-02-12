@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "./HomeVideo.module.css";
+import styles from "./HomeVideo.module.scss";
 import { BrowserRouter, Link, Route, Routes } from "react-router-dom";
 
 import Avatar from "@mui/material/Avatar";
@@ -8,14 +8,10 @@ export default function HomeVideo(props) {
   return (
     <Link to={"/watchVideo_page"}>
       <div className={styles.videoCard}>
-        <img className={styles.videoImg} src={props.img} alt="video poster" />
-        <div className={styles.videoDetails}>
-          <Avatar
-            className={styles.videoAvatar}
-            alt={props.channel}
-            src={props.channelImg}
-          />
-          <div className={styles.videoText}>
+        <img src={props.img} alt="video poster" />
+        <div>
+          <Avatar alt={props.channel} src={props.channelImg} />
+          <div>
             <h4>{props.title}</h4>
             <p>{props.channel}</p>
             <p>

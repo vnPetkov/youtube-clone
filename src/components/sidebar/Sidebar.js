@@ -1,10 +1,10 @@
-import styles from "./Sidebar.module.css";
+import styles from "./Sidebar.module.scss";
 import SidebarTab from "./SidebarTab";
 import HomeIcon from "@mui/icons-material/Home";
 import HistoryIcon from "@mui/icons-material/History";
 import VideoLibraryOutlinedIcon from "@mui/icons-material/VideoLibraryOutlined";
 import ThumbUpOutlinedIcon from "@mui/icons-material/ThumbUpOutlined";
-import { BrowserRouter, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 export default function Sidebar() {
   return (
@@ -12,7 +12,7 @@ export default function Sidebar() {
       <Link to="/">
         <SidebarTab Icon={HomeIcon} tabName="Начало" />
       </Link>
-      <div className={styles.sidebatLine}></div>
+      <div></div>
 
       <Link to="/history_page">
         <SidebarTab Icon={HistoryIcon} tabName="История" />

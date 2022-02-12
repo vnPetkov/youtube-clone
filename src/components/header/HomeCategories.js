@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import styles from "./HomeCategories.module.css";
+import styles from "./HomeCategories.module.scss";
 
 export default function HomeCategories() {
   const [activeCategory, setActiveCategory] = useState("Всички");

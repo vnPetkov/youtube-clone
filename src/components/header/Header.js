@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "./Header.module.css";
+import styles from "./Header.module.scss";
 import header_logo from "../../images/header_logo.svg";
 import header_delete from "../../images/header_delete.png";
 import HomeCategories from "./HomeCategories";
@@ -13,7 +13,7 @@ import AppsIcon from "@mui/icons-material/Apps";
 export default function Header() {
   return (
     <div className={styles.headerContainer}>
-      <div className={styles.header}>
+      <div>
         <div className={styles.header_burger_logo}>
           <span>
             <MenuIcon />
@@ -26,35 +26,35 @@ export default function Header() {
         </div>
 
         <div className={styles.header_search}>
-          <div className={styles.header_search_input}>
+          <div>
             <input placeholder="Search"></input>
             {/* This will be hidden when input is empty */}
-            <span className={styles.header_search_del}>
+            <span>
               <img src={header_delete} alt="delete" />
             </span>
           </div>
           <Link to="/search_page">
-            <span className={styles.header_searach_icon}>
+            <span>
               <BsSearch />
             </span>
           </Link>
-          <span className={styles.header_searach_microphone}>
+          <span>
             <FaMicrophone />
           </span>
         </div>
 
         <div className={styles.header_signin}>
-          <span className={styles.header_signin_apps}>
+          <span>
             <AppsIcon />
           </span>
-          <span className={styles.header_sigin_dots}>
+          <span>
             <BsThreeDotsVertical />
           </span>
-          <div className={styles.header_singin_user}>
-            <span className={styles.header_sigin_user_logo}>
+          <div>
+            <span>
               <FaRegUserCircle />
             </span>
-            <span className={styles.header_sigin_user_text}>SIGN IN</span>
+            <span>SIGN IN</span>
           </div>
         </div>
       </div>

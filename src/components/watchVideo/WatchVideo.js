@@ -1,7 +1,7 @@
 import React from "react";
 import Comments from "./Comments";
 import VideoInfo from "./VideoInfo";
-import styles from "./WatchVideo.module.css";
+import styles from "./WatchVideo.module.scss";
 
 export default function WatchVideo() {
   return (

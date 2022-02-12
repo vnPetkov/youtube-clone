@@ -1,11 +1,11 @@
-import styles from "./Home.module.css";
+import styles from "./Home.module.scss";
 import HomeVideo from "./HomeVideo";
 
 export default function Home() {
   return (
     <>
       <div className={styles.home}>
-        <div className={styles.homeVideos}>
+        <div>
           <HomeVideo
             img="https://i.ytimg.com/vi/lheapd7bgLA/hq720.jpg?sqp=-oaymwEcCOgCEMoBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLCiLqulhrTi8vWAHqDKlnk3cQBNNg"
             channelImg="https://yt3.ggpht.com/ytc/AKedOLQO2-DfuqwtPYTqBcZ8rEWt8g4p1sB_LyddKS5msQ=s68-c-k-c0x00ffffff-no-rj"
