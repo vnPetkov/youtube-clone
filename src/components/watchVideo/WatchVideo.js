@@ -1,22 +1,26 @@
 import React from "react";
 import { testSearch, testWatch } from "../../server/data.js";
 import HorizontalCard from "../cards/HorizontalCard";
+import { useParams } from "react-router-dom";
 import Comments from "./Comments";
 import VideoInfo from "./VideoInfo";
 
 import styles from "./WatchVideo.module.scss";
 
 export default function WatchVideo() {
+  const params = useParams();
+  console.log(params.videoId);
+
   return (
     <div className={styles.watchVideo}>
       <div className={styles.mainColumn}>
         <div className={styles.watchPlayer}>
           <iframe
-            src="https://www.youtube.com/embed/lheapd7bgLA"
+            src={`https://www.youtube.com/embed/${params.videoId}`}
             title="video player"
-            frameborder="0"
+            frameBorder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowfullscreen
+            allowFullscreen
             width="100%"
             height="100%"
           ></iframe>

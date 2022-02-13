@@ -456,7 +456,7 @@ const testWatch = {
   timestamp: "6.07.2021 г.",
   likes: "1,5 ХИЛ.",
   channelImg:
-    "https://yt3.ggpht.com/ytc/AKedOLQO2-DfuqwtPYTqBcZ8rEWt8g4p1sB_LyddKS5msQ=s68-c-k-c0x00ffffff-no-rj",
+    "https://yt3.ggpht.com/ytc/AKedOLQO2-DfuqwtPYTqBcZ8rEWt8g4p1sB_LyddKS5msQ=s68-c-k-c0x00ffffff-no-rj?controls=1",
   channel: "Kurzgesagt",
   subscribers: "4,65 хил. абонати",
   description:

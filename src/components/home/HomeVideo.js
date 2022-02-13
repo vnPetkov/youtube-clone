@@ -6,7 +6,7 @@ import Avatar from "@mui/material/Avatar";
 
 export default function HomeVideo(props) {
   return (
-    <Link to={"/watchVideo_page"}>
+    <Link to={`/watchVideo_page/${props.id}`}>
       <div className={styles.videoCard}>
         <img src={props.img} alt="video poster" />
         <div>
