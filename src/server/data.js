@@ -182,7 +182,7 @@ const homeVideos = [
     channelImg:
       "https://yt3.ggpht.com/ytc/AKedOLQO2-DfuqwtPYTqBcZ8rEWt8g4p1sB_LyddKS5msQ=s68-c-k-c0x00ffffff-no-rj",
     channel: "Kurzgesagt",
-    title: "What Happens if the Moon Crashes into Earth?",
+    title: "What1 Happens if the Moon Crashes into Earth?",
     views: "3,4 млн. показвания",
     timestamp: "преди 1 ден",
   },
@@ -190,7 +190,7 @@ const homeVideos = [
     img: "https://i.ytimg.com/vi/88oX1GsDFrQ/hq720.jpg?sqp=-oaymwEcCNAFEJQDSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLDfjQML5PsAgzUuCRF84z9HT6gQ7Q",
     channelImg:
       "https://yt3.ggpht.com/uRH8BsGICrSK59oh91g0CcfKHRgL1slecUSjrRhWvkx03w26FTg-jahk1nLYzuAD1xkOlULWBQ=s88-c-k-c0x00ffffff-no-rj",
-    channel: "Oliver Heldens",
+    channel: "Oliver Hel3dens",
     title: "Oliver Heldens - Heldeep Radio #398",
     views: "17 хил. показвания",
     timestamp: "преди 4 дни",
@@ -208,7 +208,7 @@ const homeVideos = [
 
 const testSearch = [
   {
-    title: "G-Eazy - Random (Official Audio)",
+    title: "G-Eazy - Ran1dom (Official Audio)",
     img: "https://i.ytimg.com/vi/oCNucnhn6fU/hq720.jpg?sqp=-oaymwEcCOgCEMoBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLBkfbkfcpf3KuRnosdIgHRoa0C2Eg",
     user: "G-Eazy",
     userPic:
@@ -218,7 +218,7 @@ const testSearch = [
     uploaded: "преди 6 години",
   },
   {
-    title: "LoL Gameplay",
+    title: "LoL Ga1meplay",
     img: "https://cdn.europosters.eu/image/1300/posters/league-of-legends-champions-i102252.jpg",
     user: "Riot Games",
     userPic:
@@ -228,7 +228,7 @@ const testSearch = [
     uploaded: "преди 1 година",
   },
   {
-    title: "Eminem - Without you",
+    title: "Eminem - Without you1",
     img: "https://i1.sndcdn.com/avatars-000227103862-tfu8r3-t500x500.jpg",
     user: "user123",
     userPic:
@@ -238,7 +238,7 @@ const testSearch = [
     uploaded: "преди 3 години",
   },
   {
-    title: "Random Video",
+    title: "Random Vi1deo",
     img: "https://i.ytimg.com/vi/cQZqPi1aHNo/hq720.jpg?sqp=-oaymwEcCOgCEMoBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLCMFTyaS7tRry3pHkCVxZt2LDgUgw",
     user: "user2222",
     userPic:
@@ -248,7 +248,7 @@ const testSearch = [
     uploaded: "преди 6 години",
   },
   {
-    title: "G-Eazy - Random (Official Audio)",
+    title: "G-Eazy 1- Random (Official Audio)",
     img: "https://i.ytimg.com/vi/oCNucnhn6fU/hq720.jpg?sqp=-oaymwEcCOgCEMoBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLBkfbkfcpf3KuRnosdIgHRoa0C2Eg",
     user: "G-Eazy",
     userPic:
@@ -258,7 +258,7 @@ const testSearch = [
     uploaded: "преди 6 години",
   },
   {
-    title: "LoL Gameplay",
+    title: "LoL Game1play",
     img: "https://cdn.europosters.eu/image/1300/posters/league-of-legends-champions-i102252.jpg",
     user: "Riot Games",
     userPic:
@@ -268,7 +268,7 @@ const testSearch = [
     uploaded: "преди 1 година",
   },
   {
-    title: "Eminem - Without you",
+    title: "Eminem - Without 2you",
     img: "https://i1.sndcdn.com/avatars-000227103862-tfu8r3-t500x500.jpg",
     user: "user123",
     userPic:
@@ -278,7 +278,7 @@ const testSearch = [
     uploaded: "преди 3 години",
   },
   {
-    title: "Random Video",
+    title: "Random Vzxcideo",
     img: "https://i.ytimg.com/vi/cQZqPi1aHNo/hq720.jpg?sqp=-oaymwEcCOgCEMoBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLCMFTyaS7tRry3pHkCVxZt2LDgUgw",
     user: "user2222",
     userPic:
@@ -288,7 +288,7 @@ const testSearch = [
     uploaded: "преди 6 години",
   },
   {
-    title: "G-Eazy - Random (Official Audio)",
+    title: "G-Eazy - Randxczom (Official Audio)",
     img: "https://i.ytimg.com/vi/oCNucnhn6fU/hq720.jpg?sqp=-oaymwEcCOgCEMoBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLBkfbkfcpf3KuRnosdIgHRoa0C2Eg",
     user: "G-Eazy",
     userPic:
@@ -308,7 +308,7 @@ const testSearch = [
     uploaded: "преди 1 година",
   },
   {
-    title: "Eminem - Without you",
+    title: "Eminem - Withou2t you",
     img: "https://i1.sndcdn.com/avatars-000227103862-tfu8r3-t500x500.jpg",
     user: "user123",
     userPic:
@@ -318,7 +318,7 @@ const testSearch = [
     uploaded: "преди 3 години",
   },
   {
-    title: "Random Video",
+    title: "Random Vi123deo",
     img: "https://i.ytimg.com/vi/cQZqPi1aHNo/hq720.jpg?sqp=-oaymwEcCOgCEMoBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLCMFTyaS7tRry3pHkCVxZt2LDgUgw",
     user: "user2222",
     userPic:
@@ -328,7 +328,7 @@ const testSearch = [
     uploaded: "преди 6 години",
   },
   {
-    title: "G-Eazy - Random (Official Audio)",
+    title: "G-Eazy - Rando21m (Official Audio)",
     img: "https://i.ytimg.com/vi/oCNucnhn6fU/hq720.jpg?sqp=-oaymwEcCOgCEMoBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLBkfbkfcpf3KuRnosdIgHRoa0C2Eg",
     user: "G-Eazy",
     userPic:
@@ -338,7 +338,7 @@ const testSearch = [
     uploaded: "преди 6 години",
   },
   {
-    title: "LoL Gameplay",
+    title: "LoL Gam21eplay",
     img: "https://cdn.europosters.eu/image/1300/posters/league-of-legends-champions-i102252.jpg",
     user: "Riot Games",
     userPic:
@@ -348,7 +348,7 @@ const testSearch = [
     uploaded: "преди 1 година",
   },
   {
-    title: "Eminem - Without you",
+    title: "Eminem - Wit1hout you",
     img: "https://i1.sndcdn.com/avatars-000227103862-tfu8r3-t500x500.jpg",
     user: "user123",
     userPic:
@@ -358,7 +358,7 @@ const testSearch = [
     uploaded: "преди 3 години",
   },
   {
-    title: "Random Video",
+    title: "Random Vi21deo",
     img: "https://i.ytimg.com/vi/cQZqPi1aHNo/hq720.jpg?sqp=-oaymwEcCOgCEMoBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLCMFTyaS7tRry3pHkCVxZt2LDgUgw",
     user: "user2222",
     userPic:
@@ -368,7 +368,7 @@ const testSearch = [
     uploaded: "преди 6 години",
   },
   {
-    title: "G-Eazy - Random (Official Audio)",
+    title: "G-Eazy - Rand11om (Official Audio)",
     img: "https://i.ytimg.com/vi/oCNucnhn6fU/hq720.jpg?sqp=-oaymwEcCOgCEMoBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLBkfbkfcpf3KuRnosdIgHRoa0C2Eg",
     user: "G-Eazy",
     userPic:
@@ -378,7 +378,7 @@ const testSearch = [
     uploaded: "преди 6 години",
   },
   {
-    title: "LoL Gameplay",
+    title: "LozL Gameplay",
     img: "https://cdn.europosters.eu/image/1300/posters/league-of-legends-champions-i102252.jpg",
     user: "Riot Games",
     userPic:
@@ -388,7 +388,7 @@ const testSearch = [
     uploaded: "преди 1 година",
   },
   {
-    title: "Eminem - Without you",
+    title: "Em1inem - Wit1hout you",
     img: "https://i1.sndcdn.com/avatars-000227103862-tfu8r3-t500x500.jpg",
     user: "user123",
     userPic:
@@ -398,7 +398,7 @@ const testSearch = [
     uploaded: "преди 3 години",
   },
   {
-    title: "Random Video",
+    title: "Random Vide2132123o",
     img: "https://i.ytimg.com/vi/cQZqPi1aHNo/hq720.jpg?sqp=-oaymwEcCOgCEMoBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLCMFTyaS7tRry3pHkCVxZt2LDgUgw",
     user: "user2222",
     userPic:
@@ -408,7 +408,7 @@ const testSearch = [
     uploaded: "преди 6 години",
   },
   {
-    title: "G-Eazy - Random (Official Audio)",
+    title: "G-Eazy - Random (21Official Audio)",
     img: "https://i.ytimg.com/vi/oCNucnhn6fU/hq720.jpg?sqp=-oaymwEcCOgCEMoBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLBkfbkfcpf3KuRnosdIgHRoa0C2Eg",
     user: "G-Eazy",
     userPic:
@@ -418,7 +418,7 @@ const testSearch = [
     uploaded: "преди 6 години",
   },
   {
-    title: "LoL Gameplay",
+    title: "LoL Gamep2lay",
     img: "https://cdn.europosters.eu/image/1300/posters/league-of-legends-champions-i102252.jpg",
     user: "Riot Games",
     userPic:
@@ -428,7 +428,7 @@ const testSearch = [
     uploaded: "преди 1 година",
   },
   {
-    title: "Eminem - Without you",
+    title: "Eminem -1123 Without you",
     img: "https://i1.sndcdn.com/avatars-000227103862-tfu8r3-t500x500.jpg",
     user: "user123",
     userPic:
@@ -438,7 +438,7 @@ const testSearch = [
     uploaded: "преди 3 години",
   },
   {
-    title: "Random Video",
+    title: "Random21 Video",
     img: "https://i.ytimg.com/vi/cQZqPi1aHNo/hq720.jpg?sqp=-oaymwEcCOgCEMoBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLCMFTyaS7tRry3pHkCVxZt2LDgUgw",
     user: "user2222",
     userPic:
@@ -451,7 +451,7 @@ const testSearch = [
 
 const testWatch = {
   videoSrc: "https://www.youtube.com/embed/lheapd7bgLA",
-  title: "What Happens if the Moon Crashes into Earth?",
+  title: "What Happens if the Moon Crashes i1nto Earth?",
   views: "500 хил. показвания",
   timestamp: "6.07.2021 г.",
   likes: "1,5 ХИЛ.",

@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+// import styles from "./HorizontalCard.module.scss"
 
 // CAN ADD PROPERTIES FOR WIDTH AND HEIGHT LATER
 export default function HorizontalCard({

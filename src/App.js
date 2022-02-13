@@ -1,6 +1,6 @@
 import "./App.scss";
-import React from "react";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import React, { useState } from "react";
+import { BrowserRouter, Route, Routes} from "react-router-dom";
 
 import Header from "./components/header/Header.js";
 import Sidebar from "./components/sidebar/Sidebar.js";
@@ -12,10 +12,14 @@ import Search from "./components/search/Search";
 import WatchVideo from "./components/watchVideo/WatchVideo";
 
 function App() {
+  const [search, setSearch] = useState("");
+  const [searchResults, setSearchResults] = useState([]);
+
+
   return (
     <div className="content-wrapper">
       <BrowserRouter>
-        <Header />
+        <Header search={search} setSearch={setSearch} setSearchResults={setSearchResults} />
 
         <div className="appPage">
           <Routes>
@@ -60,7 +64,7 @@ function App() {
               element={
                 <>
                   <Sidebar />
-                  <Search />
+                  <Search  searchResults={searchResults}/>
                 </>
               }
             />

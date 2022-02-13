@@ -7,7 +7,6 @@ import ThumbUpOutlinedIcon from "@mui/icons-material/ThumbUpOutlined";
 import { Link } from "react-router-dom";
 
 export default function Sidebar() {
-  console.log(window.location.pathname);
   if (window.location.pathname === "/watchVideo_page") {
     return null;
   } else {
