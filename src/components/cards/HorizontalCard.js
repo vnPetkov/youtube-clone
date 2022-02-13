@@ -24,7 +24,7 @@ export default function HorizontalCard({
             <p>{uploaded}</p>
           </div>
           <div>
-            <img src={userPic} alt="user pic" />
+            {/* <img src={userPic} alt="user pic" /> */}
             <p>{user}</p>
           </div>
           <p>{desc}</p>

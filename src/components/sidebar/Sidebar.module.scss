@@ -1,12 +1,13 @@
 .sidebar {
-  flex: 0.13;
-  padding-right: 15px;
+flex:0.13;
+  // padding-right: 15px;
+  background-color: white;
   a {
     color: black;
     text-decoration: none;
   }
   > div {
-    border-bottom: 1px solid #cccccc;
+    // border-bottom: 1px solid #cccccc;
   }
 }
 

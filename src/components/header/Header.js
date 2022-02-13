@@ -4,7 +4,7 @@ import styles from "./Header.module.scss";
 import header_logo from "../../images/header_logo.svg";
 import header_delete from "../../images/header_delete.png";
 import HomeCategories from "./HomeCategories";
-import { Link, Route, Routes } from "react-router-dom";
+import { Link, Route, Routes, useHistory } from "react-router-dom";
 import { FaMicrophone, FaRegUserCircle } from "react-icons/fa";
 import { BsSearch, BsThreeDotsVertical } from "react-icons/bs";
 import MenuIcon from "@mui/icons-material/Menu";
@@ -14,14 +14,20 @@ const API_KEY = 'AIzaSyAv-MkDUeNmYR9Kh1ON2ZOCRVj00qGO2L0';
 
 export default function Header({search,setSearch , setSearchResults}) {
 
+
+
 const searchVideos = (e)=>{
   e.preventDefault();
-  fetch(`https://www.googleapis.com/youtube/v3/search?key=${API_KEY}&maxResults=25&part=snippet&q=${search}`)
-    .then(res=>res.json())
-    .then(data=>{
-      setSearchResults(data);
-    })
-}
+  if(search !==""){
+    window.location.href = "/search_page";
+    fetch(`https://www.googleapis.com/youtube/v3/search?key=${API_KEY}&maxResults=25&part=snippet&q=${search}`)
+      .then(res=>res.json())
+      .then(data=>{
+        setSearchResults(data);
+      })
+  }
+  }
+
 
   return (
     <div className={styles.headerContainer}>
@@ -39,7 +45,7 @@ const searchVideos = (e)=>{
 
         <div className={styles.header_search}>
           <div>
-            <form onSubmit={searchVideos}>
+            <form onSubmit={searchVideos} >
             <input placeholder="Search" value={search} onChange={(e)=>{
               setSearch(e.target.value);
             }}/>
@@ -55,11 +61,13 @@ const searchVideos = (e)=>{
           
             </form>
           </div>
-          <Link to="/search_page">
+
+          {/* <Link to="/search_page">
+          </Link> */}
             <button onClick={searchVideos}>
             <BsSearch />
             </button>
-          </Link>
+
           <span>
             <FaMicrophone />
           </span>
