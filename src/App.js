@@ -68,7 +68,7 @@ function App() {
                 </>
               }
             />
-            <Route path="/watchVideo_page" element={<WatchVideo />} />
+            <Route path="/watchVideo_page/:videoId" element={<WatchVideo />} />
           </Routes>
         </div>
       </BrowserRouter>
