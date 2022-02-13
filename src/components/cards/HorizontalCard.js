@@ -12,9 +12,10 @@ export default function HorizontalCard({
   views,
   uploaded,
   currentClass,
+  videoId
 }) {
   return (
-    <Link to={"/watchVideo_page"}>
+    <Link to={`/watchVideo_page/${videoId}`}>
       <div className={currentClass}>
         <img src={img} alt="video poster" />
         <div>

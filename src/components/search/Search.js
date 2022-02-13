@@ -17,13 +17,13 @@ export default function Search({searchResults}) {
         <div>
           {searchResults && searchResults.map(
             (element) => {
-              console.log(element.snippet.thumbnails.high.url);
               return (
                 <HorizontalCard
                   title={element.snippet.title}
                   img={element.snippet.thumbnails.high.url}
                   user={element.snippet.channelTitle}
                   desc={element.snippet.description}
+                  videoId={element.id.videoId}
                   currentClass={styles.search_card}
                   // userPic={userPic}
                   // views={views}
