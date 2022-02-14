@@ -1,23 +1,26 @@
 import styles from "./Home.module.scss";
 import HomeVideo from "./HomeVideo";
 import React, { useState, useEffect } from "react";
+import InfiniteScroll from "react-infinite-scroll-component";
 
 export default function Home() {
-  const url =
-    "https://youtube.googleapis.com/youtube/v3/videos?part=snippet%2CcontentDetails%2Cstatistics&chart=mostPopular&locale=BG&maxResults=20&regionCode=BG&key=AIzaSyA_7IYSyNXzIfLjkWLAjF-R7g5W8pdAcS8";
-  const [homeVideos, setHomeVideos] = useState(null);
-  const [channels, setChannels] = useState(null);
+  const [homeVideos, setHomeVideos] = useState([]);
+  const [channels, setChannels] = useState([]);
   let content = null;
 
-  useEffect(() => {
-    fetch(url)
+  function homePageFetch() {
+    console.log("avtivated");
+    let apiKey = "AIzaSyDKuYQmUW8Sza0hX2uexPM4dIG7mS440vU";
+    fetch(
+      `https://youtube.googleapis.com/youtube/v3/videos?part=snippet%2CcontentDetails%2Cstatistics&chart=mostPopular&locale=BG&maxResults=24&regionCode=BG&key=${apiKey}`
+    )
       .then((resp) => resp.json())
       .then((result) => {
-        setHomeVideos(result.items);
+        setHomeVideos([...homeVideos, ...result.items]);
         return Promise.all(
           result.items.map((video) => {
             return fetch(
-              `https://youtube.googleapis.com/youtube/v3/channels?part=snippet%2CcontentDetails%2Cstatistics&id=${video.snippet.channelId}&key=AIzaSyA_7IYSyNXzIfLjkWLAjF-R7g5W8pdAcS8`
+              `https://youtube.googleapis.com/youtube/v3/channels?part=snippet%2CcontentDetails%2Cstatistics&id=${video.snippet.channelId}&key=${apiKey}`
             );
           })
         );
@@ -27,13 +30,22 @@ export default function Home() {
       })
       .then((result) => result.map((е) => е.items))
       .then((result) => result.flat())
-      .then((result) => setChannels(result));
+      .then((result) => setChannels([...channels, ...result]));
+  }
+
+  useEffect(() => {
+    homePageFetch();
   }, []);
 
-  if (homeVideos && channels) {
+  if (homeVideos.length === 0 && channels.length === 0) {
     content = (
       <div className={styles.home}>
-        <div>
+        <InfiniteScroll
+          dataLength={homeVideos.length}
+          //next={}
+          hasMore={true}
+          loader={<div>ЗАРЕЖДАНИНГ...</div>}
+        >
           {homeVideos.map((e, index) => {
             return (
               <HomeVideo
@@ -48,7 +60,7 @@ export default function Home() {
               />
             );
           })}
-        </div>
+        </InfiniteScroll>
       </div>
     );
   }
