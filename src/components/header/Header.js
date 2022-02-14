@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Search from "../search/Search"
+import Search from "../search/Search";
 import styles from "./Header.module.scss";
 import header_logo from "../../images/header_logo.svg";
 import header_delete from "../../images/header_delete.png";
@@ -10,25 +10,23 @@ import { BsSearch, BsThreeDotsVertical } from "react-icons/bs";
 import MenuIcon from "@mui/icons-material/Menu";
 import AppsIcon from "@mui/icons-material/Apps";
 
-const API_KEY = 'AIzaSyA_7IYSyNXzIfLjkWLAjF-R7g5W8pdAcS8';
+const API_KEY = "AIzaSyDKuYQmUW8Sza0hX2uexPM4dIG7mS440vU";
 
 export default function Header({ search, setSearch, setSearchResults }) {
-
-
-
   const searchVideos = (e) => {
     e.preventDefault();
     if (search !== "") {
       window.location.href = "/search_page";
-      fetch(`https://www.googleapis.com/youtube/v3/search?key=${API_KEY}&maxResults=25&part=snippet&q=${search}`)
-        .then(res => res.json())
-        .then(data => {
+      fetch(
+        `https://www.googleapis.com/youtube/v3/search?key=${API_KEY}&maxResults=25&part=snippet&q=${search}`
+      )
+        .then((res) => res.json())
+        .then((data) => {
           setSearchResults(data);
           console.log(data);
-        })
+        });
     }
-  }
-
+  };
 
   return (
     <div className={styles.headerContainer}>
@@ -46,20 +44,27 @@ export default function Header({ search, setSearch, setSearchResults }) {
 
         <div className={styles.header_search}>
           <div>
-            <form onSubmit={searchVideos} >
-              <input placeholder="Search" value={search} onChange={(e) => {
-                setSearch(e.target.value);
-              }} />
-
-
+            <form onSubmit={searchVideos}>
+              <input
+                placeholder="Search"
+                value={search}
+                onChange={(e) => {
+                  setSearch(e.target.value);
+                }}
+              />
 
               {/* This will be hidden when input is empty */}
-              {search != "" &&
+              {search != "" && (
                 <span>
-                  <img src={header_delete} alt="delete" onClick={() => { setSearch("") }} />
+                  <img
+                    src={header_delete}
+                    alt="delete"
+                    onClick={() => {
+                      setSearch("");
+                    }}
+                  />
                 </span>
-              }
-
+              )}
             </form>
           </div>
 
