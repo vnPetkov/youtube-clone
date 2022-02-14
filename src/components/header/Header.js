@@ -20,15 +20,18 @@ export default function Header({ search, setSearch, setSearchResults, API_KEY })
   const [inputFocus, setInputFocus] = useState(true);
 
 
-  // HAVE TO ADD DEBOUNCE
-  useEffect(() => {
+  // DEBOUNCED AUTOCOMPLETE
+  function fetchAutocomplete() {
     fetch(`https://www.googleapis.com/youtube/v3/search?key=AIzaSyA_7IYSyNXzIfLjkWLAjF-R7g5W8pdAcS8&maxResults=15&part=snippet&q=${search}`)
       .then((res) => res.json())
       .then((data) => {
         setAutocompleteResults(data);
-        console.log(data)
       })
-  }, [search])
+  }
+  useEffect(() => {
+    const timeOutId = setTimeout(() => fetchAutocomplete(), 500);
+    return () => clearTimeout(timeOutId);
+  }, [search]);
 
 
   const searchVideos = (e) => {
