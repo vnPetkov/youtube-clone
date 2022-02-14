@@ -10,7 +10,7 @@ export default function Home() {
   let content = null;
 
   function homePageFetch() {
-    console.log("avtivated");
+    // console.log("avtivated");
     let apiKey = "AIzaSyDKuYQmUW8Sza0hX2uexPM4dIG7mS440vU";
 
     fetch(
@@ -18,7 +18,7 @@ export default function Home() {
     )
       .then((resp) => resp.json())
       .then((result) => {
-        console.log(result);
+        // console.log(result);
         setNextPageToken(result.nextPageToken);
         setHomeVideos([...homeVideos, ...result.items]);
 
@@ -34,15 +34,15 @@ export default function Home() {
         return Promise.all(resp.map((e) => e.json()));
       })
       .then((result) => {
-        console.log("reeeeeeeeeeeeeeeeeeees : ", result);
+        // console.log("reeeeeeeeeeeeeeeeeeees : ", result);
         return result.map((е) => е.items);
       })
       .then((result) => {
-        console.log("rerrrr rerr : ", result);
+        // console.log("rerrrr rerr : ", result);
         return result.flat();
       })
       .then((result) => {
-        console.log("kur kur kur : ", result);
+        // console.log("kur kur kur : ", result);
         setChannels([...channels, ...result]);
       });
   }
@@ -59,14 +59,14 @@ export default function Home() {
           setTimeout(() => {
             homePageFetch();
           }, 2000);
-          console.log("finaleto  1 : ", homeVideos);
-          console.log("finaleto 2 : ", channels);
+          // console.log("finaleto  1 : ", homeVideos);
+          // console.log("finaleto 2 : ", channels);
         }}
         hasMore={true}
         loader={<div>ЗАРЕЖДАНИНГ...</div>}
       >
         {homeVideos.map((e, index) => {
-          console.log(index);
+          // console.log(index);
           return (
             <HomeVideo
               id={e.id}

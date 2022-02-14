@@ -1,15 +1,30 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { testSearch, testWatch } from "../../server/data.js";
 import HorizontalCard from "../cards/HorizontalCard";
 import { useParams } from "react-router-dom";
 import Comments from "./Comments";
 import VideoInfo from "./VideoInfo";
-
 import styles from "./WatchVideo.module.scss";
 
-export default function WatchVideo() {
+
+export default function WatchVideo(props) {
+  // console.log(props)
+  // console.log(params.videoId);
+
   const params = useParams();
-  console.log(params.videoId);
+  const [comments, setComments] = useState([]);
+
+  useEffect(() => {
+    fetch(`https://www.googleapis.com/youtube/v3/commentThreads?key=${props.API_KEY}&textFormat=plainText&part=snippet&videoId=${params.videoId}&maxResults=1`)
+      .then(res => res.json())
+      .then(data => {
+        console.log(data) //tuk sa ok
+        setComments(data)
+        console.log(comments)  //tuk vrushta prazen masiv
+      })
+  }, [])
+
+
 
   return (
     <div className={styles.watchVideo}>
@@ -20,7 +35,7 @@ export default function WatchVideo() {
             title="video player"
             frameBorder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowFullscreen
+            allowFullScreen
             width="100%"
             height="100%"
           ></iframe>
@@ -35,7 +50,7 @@ export default function WatchVideo() {
           subscribers={testWatch.subscribers}
           description={testWatch.description}
         />
-        <Comments />
+        <Comments id={params.videoId} />
       </div>
 
       <div className={styles.recomendedColumn}>

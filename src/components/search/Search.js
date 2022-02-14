@@ -5,7 +5,6 @@ import HorizontalCard from "../cards/HorizontalCard";
 
 export default function Search({searchResults}) {
   searchResults = searchResults.items;
-  console.log(searchResults);
   return (
     <div className={styles.search_wrapper}>
       <div>

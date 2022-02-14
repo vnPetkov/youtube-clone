@@ -1,32 +1,32 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Search from "../search/Search";
 import styles from "./Header.module.scss";
 import header_logo from "../../images/header_logo.svg";
 import header_delete from "../../images/header_delete.png";
 import HomeCategories from "./HomeCategories";
-import { Link, Route, Routes, useHistory } from "react-router-dom";
+import { Link, Route, Routes, useNavigate } from "react-router-dom";
 import { FaMicrophone, FaRegUserCircle } from "react-icons/fa";
 import { BsSearch, BsThreeDotsVertical } from "react-icons/bs";
 import MenuIcon from "@mui/icons-material/Menu";
 import AppsIcon from "@mui/icons-material/Apps";
 
-const API_KEY = "AIzaSyDKuYQmUW8Sza0hX2uexPM4dIG7mS440vU";
 
-export default function Header({ search, setSearch, setSearchResults }) {
+
+export default function Header({ search, setSearch, setSearchResults, API_KEY }) {
+  const history = useNavigate();
+
+
   const searchVideos = (e) => {
     e.preventDefault();
-    if (search !== "") {
-      window.location.href = "/search_page";
-      fetch(
-        `https://www.googleapis.com/youtube/v3/search?key=${API_KEY}&maxResults=25&part=snippet&q=${search}`
-      )
-        .then((res) => res.json())
-        .then((data) => {
-          setSearchResults(data);
-          console.log(data);
-        });
-    }
+    fetch(`https://www.googleapis.com/youtube/v3/search?key=${API_KEY}&maxResults=25&part=snippet&q=${search}`)
+      .then((res) => res.json())
+      .then((data) => {
+        setSearchResults(data);
+        history("/search_page");
+      });
   };
+
+
 
   return (
     <div className={styles.headerContainer}>
@@ -68,11 +68,12 @@ export default function Header({ search, setSearch, setSearchResults }) {
             </form>
           </div>
 
-          {/* <Link to="/search_page">
-          </Link> */}
-          <button onClick={searchVideos}>
-            <BsSearch />
-          </button>
+          <div onClick={searchVideos}>
+            <button>
+              <BsSearch />
+            </button>
+          </div>
+
 
           <span>
             <FaMicrophone />

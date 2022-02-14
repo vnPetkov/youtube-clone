@@ -1,10 +1,15 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import styles from "./Comments.module.scss";
 import { testComments } from "../../server/data.js";
 
 export default function Comments(props) {
+
+
+
+
+
   return (
     <div className="comments">
       <div className="commentForm">
@@ -23,7 +28,7 @@ export default function Comments(props) {
         <Button variant="contained">КОМЕНТАР</Button>
       </div>
       <div className="commentsList">
-        {testComments.map((comment, index) => {
+        {/* {testComments.map((comment, index) => {
           return (
             <div className={styles.comment} key={index}>
               <Avatar
@@ -43,7 +48,7 @@ export default function Comments(props) {
               </div>
             </div>
           );
-        })}
+        })} */}
       </div>
     </div>
   );

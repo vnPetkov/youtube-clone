@@ -11,15 +11,19 @@ import Liked from "./components/liked/Liked";
 import Search from "./components/search/Search";
 import WatchVideo from "./components/watchVideo/WatchVideo";
 
+
 function App() {
   const [search, setSearch] = useState("");
   const [searchResults, setSearchResults] = useState([]);
 
 
+  const API_KEY = "AIzaSyDKuYQmUW8Sza0hX2uexPM4dIG7mS440vU";
+
+
   return (
     <div className="content-wrapper">
       <BrowserRouter>
-        <Header search={search} setSearch={setSearch} setSearchResults={setSearchResults} />
+        <Header search={search} setSearch={setSearch} setSearchResults={setSearchResults} API_KEY={API_KEY} />
 
         <div className="appPage">
           <Routes>
@@ -68,7 +72,7 @@ function App() {
                 </>
               }
             />
-            <Route path="/watchVideo_page/:videoId" element={<WatchVideo />} />
+            <Route path="/watchVideo_page/:videoId"  element={<WatchVideo API_KEY={API_KEY}/>}  />
           </Routes>
         </div>
       </BrowserRouter>
