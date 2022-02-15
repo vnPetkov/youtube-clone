@@ -15,6 +15,7 @@ import WatchVideo from "./components/watchVideo/WatchVideo";
 function App() {
   const [search, setSearch] = useState("");
   const [searchResults, setSearchResults] = useState([]);
+  const [inputFocus, setInputFocus] = useState(false);
 
 
   const API_KEY = "AIzaSyDKuYQmUW8Sza0hX2uexPM4dIG7mS440vU";
@@ -23,7 +24,7 @@ function App() {
   return (
     <div className="content-wrapper">
       <BrowserRouter>
-        <Header search={search} setSearch={setSearch} setSearchResults={setSearchResults} API_KEY={API_KEY} />
+        <Header search={search} setSearch={setSearch} setSearchResults={setSearchResults} API_KEY={API_KEY} inputFocus={inputFocus} setInputFocus={setInputFocus}/>
 
         <div className="appPage">
           <Routes>

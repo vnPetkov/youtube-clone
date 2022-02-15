@@ -1,12 +1,13 @@
 
 .header_autocomplete {
   position: absolute;
+  
   padding-top: 10px;
   top: 39px;
   background-color: white;
   border: 1px solid #cccccc;
   width: 100%;
-  z-index: 2;
+  z-index: 20 !important;
   display: flex;
   flex-flow: column wrap;
   white-space: nowrap;

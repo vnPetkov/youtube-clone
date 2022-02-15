@@ -8,22 +8,21 @@ import styles from "./WatchVideo.module.scss";
 
 
 export default function WatchVideo(props) {
-  // console.log(props)
   // console.log(params.videoId);
-
+  let API_KEY = "AIzaSyDKuYQmUW8Sza0hX2uexPM4dIG7mS440vU";
   const params = useParams();
+  console.log(params)
   const [comments, setComments] = useState([]);
-
+  const [commentsReady, setCommentsReady] = useState(false)
+  
   useEffect(() => {
-    fetch(`https://www.googleapis.com/youtube/v3/commentThreads?key=${props.API_KEY}&textFormat=plainText&part=snippet&videoId=${params.videoId}&maxResults=1`)
-      .then(res => res.json())
-      .then(data => {
-        console.log(data) //tuk sa ok
+    fetch(`https://www.googleapis.com/youtube/v3/commentThreads?key=${API_KEY}&textFormat=plainText&part=snippet&videoId=${params.videoId}&maxResults=50`)
+    .then(res => res.json())
+    .then(data => {
         setComments(data)
-        console.log(comments)  //tuk vrushta prazen masiv
+        setCommentsReady(true);
       })
   }, [])
-
 
 
   return (
@@ -50,7 +49,7 @@ export default function WatchVideo(props) {
           subscribers={testWatch.subscribers}
           description={testWatch.description}
         />
-        <Comments id={params.videoId} />
+        {setCommentsReady && <Comments comments={comments}/>}
       </div>
 
       <div className={styles.recomendedColumn}>
