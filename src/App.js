@@ -15,6 +15,7 @@ import FetchVideo from "./components/utilities/FetchVideo";
 function App() {
   const [search, setSearch] = useState("");
   const [searchResults, setSearchResults] = useState([]);
+  const [inputFocus, setInputFocus] = useState(false);
 
   const API_KEY = "AIzaSyCnFTj5eA2iaolTqTq5IppRiwbGq-W1OFg";
 
@@ -26,6 +27,8 @@ function App() {
           setSearch={setSearch}
           setSearchResults={setSearchResults}
           API_KEY={API_KEY}
+          inputFocus={inputFocus}
+          setInputFocus={setInputFocus}
         />
 
         <div className="appPage">
@@ -76,7 +79,7 @@ function App() {
               }
             />
             <Route
-              path="/watchVideo_page/:videoId"
+              path="/watchVideo_page/:videoId/:title/:channel/:views/:timestamp/:likes/:subscribers" //:description
               element={<WatchVideo API_KEY={API_KEY} />}
             />
           </Routes>

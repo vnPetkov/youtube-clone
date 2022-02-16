@@ -5,8 +5,11 @@ import { Link } from "react-router-dom";
 import Avatar from "@mui/material/Avatar";
 
 export default function HomeVideo(props) {
+  //let channelImg = encodeURIComponent(props.channelImg);
   return (
-    <Link to={`/watchVideo_page/${props.id}`}>
+    <Link
+      to={`/watchVideo_page/${props.videoId}/${props.title}/${props.channel}/${props.views}/${props.timestamp}/${props.likes}/${props.subscribers}`} //${props.description}
+    >
       <div className={styles.videoCard}>
         <img src={props.img} alt="video poster" />
         <div>

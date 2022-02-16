@@ -12,12 +12,13 @@
       width: 1280px;
     }
   }
-  .recomendedColumn {
+  .relatedColumn {
     padding-right: 50px;
   }
-  .recomendedContainer {
+  .relatedContainer {
     display: flex;
     flex-direction: column;
+    width: 400px;
 
     a {
       text-decoration: none;
@@ -34,6 +35,7 @@
 
   img {
     width: 168px;
+    min-width: 168px;
   }
   > div {
     display: flex;
@@ -45,7 +47,11 @@
       font-size: 14px;
       font-weight: 500;
       line-height: 20px;
-      order: 1;
+      overflow: hidden;
+      /*text-overflow: ellipsis;*/
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 2; /* number of lines to show */
     }
 
     p {
