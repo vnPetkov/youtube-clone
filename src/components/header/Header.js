@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import Autocomplete from "./Autocomplete"
+import Autocomplete from "./Autocomplete";
 import Search from "../search/Search";
 import styles from "./Header.module.scss";
 import header_logo from "../../images/header_logo.svg";
@@ -11,40 +11,43 @@ import { BsSearch, BsThreeDotsVertical } from "react-icons/bs";
 import MenuIcon from "@mui/icons-material/Menu";
 import AppsIcon from "@mui/icons-material/Apps";
 
-
-
-export default function Header({ search, setSearch, setSearchResults, API_KEY }) {
+export default function Header({
+  search,
+  setSearch,
+  setSearchResults,
+  API_KEY,
+}) {
   const history = useNavigate();
 
   const [autocompleteResults, setAutocompleteResults] = useState([]);
   const [inputFocus, setInputFocus] = useState(true);
 
-
   // DEBOUNCED AUTOCOMPLETE
   function fetchAutocomplete() {
-    fetch(`https://www.googleapis.com/youtube/v3/search?key=AIzaSyA_7IYSyNXzIfLjkWLAjF-R7g5W8pdAcS8&maxResults=15&part=snippet&q=${search}`)
+    fetch(
+      `https://www.googleapis.com/youtube/v3/search?key=${API_KEY}&maxResults=15&part=snippet&q=${search}`
+    )
       .then((res) => res.json())
       .then((data) => {
         setAutocompleteResults(data);
-      })
+      });
   }
   useEffect(() => {
     const timeOutId = setTimeout(() => fetchAutocomplete(), 500);
     return () => clearTimeout(timeOutId);
   }, [search]);
 
-
   const searchVideos = (e) => {
     e.preventDefault();
-    fetch(`https://www.googleapis.com/youtube/v3/search?key=${API_KEY}&maxResults=15&part=snippet&q=${search}`)
+    fetch(
+      `https://www.googleapis.com/youtube/v3/search?key=${API_KEY}&maxResults=15&part=snippet&q=${search}`
+    )
       .then((res) => res.json())
       .then((data) => {
         setSearchResults(data);
         history("/search_page");
       });
   };
-
-
 
   return (
     <div className={styles.headerContainer}>
@@ -86,7 +89,9 @@ export default function Header({ search, setSearch, setSearchResults, API_KEY })
                 </span>
               )}
             </form>
-            {inputFocus && !autocompleteResults.error && <Autocomplete autocompleteResults={autocompleteResults} />}
+            {inputFocus && !autocompleteResults.error && (
+              <Autocomplete autocompleteResults={autocompleteResults} />
+            )}
           </div>
 
           <div onClick={searchVideos}>
@@ -94,7 +99,6 @@ export default function Header({ search, setSearch, setSearchResults, API_KEY })
               <BsSearch />
             </button>
           </div>
-
 
           <span>
             <FaMicrophone />

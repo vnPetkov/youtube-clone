@@ -1,6 +1,6 @@
 import "./App.scss";
 import React, { useState } from "react";
-import { BrowserRouter, Route, Routes} from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 import Header from "./components/header/Header.js";
 import Sidebar from "./components/sidebar/Sidebar.js";
@@ -10,20 +10,23 @@ import Upload from "./components/upload/Upload";
 import Liked from "./components/liked/Liked";
 import Search from "./components/search/Search";
 import WatchVideo from "./components/watchVideo/WatchVideo";
-
+import FetchVideo from "./components/utilities/FetchVideo";
 
 function App() {
   const [search, setSearch] = useState("");
   const [searchResults, setSearchResults] = useState([]);
 
-
-  const API_KEY = "AIzaSyDKuYQmUW8Sza0hX2uexPM4dIG7mS440vU";
-
+  const API_KEY = "AIzaSyCnFTj5eA2iaolTqTq5IppRiwbGq-W1OFg";
 
   return (
     <div className="content-wrapper">
       <BrowserRouter>
-        <Header search={search} setSearch={setSearch} setSearchResults={setSearchResults} API_KEY={API_KEY} />
+        <Header
+          search={search}
+          setSearch={setSearch}
+          setSearchResults={setSearchResults}
+          API_KEY={API_KEY}
+        />
 
         <div className="appPage">
           <Routes>
@@ -68,11 +71,14 @@ function App() {
               element={
                 <>
                   <Sidebar />
-                  <Search  searchResults={searchResults}/>
+                  <Search searchResults={searchResults} />
                 </>
               }
             />
-            <Route path="/watchVideo_page/:videoId"  element={<WatchVideo API_KEY={API_KEY}/>}  />
+            <Route
+              path="/watchVideo_page/:videoId"
+              element={<WatchVideo API_KEY={API_KEY} />}
+            />
           </Routes>
         </div>
       </BrowserRouter>
