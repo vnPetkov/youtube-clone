@@ -4,18 +4,20 @@ import { Link } from "react-router-dom";
 
 // CAN ADD PROPERTIES FOR WIDTH AND HEIGHT LATER
 export default function HorizontalCard({
-  title,
+  videoId,
   img,
   user,
-  userPic,
+  title,
   desc,
   views,
   uploaded,
   currentClass,
-  videoId
+  userPic,
 }) {
   return (
-    <Link to={`/watchVideo_page/${videoId}`}>
+    <Link
+      to={`/watchVideo_page/${videoId}/${title}/${user}/${views}/${uploaded}/2.7хил/250310`}
+    >
       <div className={currentClass}>
         <img src={img} alt="video poster" />
         <div>

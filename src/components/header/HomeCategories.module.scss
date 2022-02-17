@@ -6,14 +6,16 @@
   margin-left: auto;
   border-top: 1px solid #cccccc;
   border-bottom: 1px solid #cccccc;
+
+  overflow-y: hidden;
   overflow-x: scroll;
-  scrollbar-width: none;
   padding: 18px;
 
   &::-webkit-scrollbar {
     width: 0px;
     display: none;
   }
+
   span {
     white-space: nowrap;
     border: solid rgb(207, 207, 207) 1px;

@@ -13,12 +13,13 @@ export default function Home() {
   function fetchHomeVideos() {
     FetchVideo(nextPageToken)
       .then((result) => {
+        console.log("finished fetch result : ", result);
         return result;
       })
       .then((result) => {
-        let [videos, channels, nextPage] = result;
-        setHomeVideos(videos);
-        setChannels(channels);
+        let [newVideos, newChannels, nextPage] = result;
+        setHomeVideos((homeVideos) => [...homeVideos, ...newVideos]);
+        setChannels((channels) => [...channels, ...newChannels]);
         setNextPageToken(nextPage);
       });
   }
@@ -32,6 +33,7 @@ export default function Home() {
       <InfiniteScroll
         dataLength={homeVideos.length}
         next={() => {
+          console.log("previous result : ", homeVideos, channels);
           setTimeout(() => {
             fetchHomeVideos();
           }, 2000);
@@ -45,13 +47,14 @@ export default function Home() {
               videoId={e.id}
               key={e.id}
               img={e.snippet.thumbnails.high.url}
-              channelImg={channels[index].snippet.thumbnails.high.url}
-              channel={channels[index].snippet.title}
+              //channelImg={channels[index].snippet.thumbnails.high.url}
+              //channel={channels[index].snippet.localized.title}
               title={e.snippet.title}
               views={e.statistics.viewCount}
+              likes={e.statistics.likeCount}
               timestamp={e.snippet.publishedAt}
-              subscribers={channels[index].statistics.subscriberCount}
-              //description={e.snippet.description}
+              //subscribers={channels[index].statistics.subscriberCount}
+              description={e.snippet.description}
             />
           );
         })}

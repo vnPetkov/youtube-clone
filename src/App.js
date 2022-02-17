@@ -17,7 +17,7 @@ function App() {
   const [searchResults, setSearchResults] = useState([]);
   const [inputFocus, setInputFocus] = useState(false);
 
-  const API_KEY = "AIzaSyCnFTj5eA2iaolTqTq5IppRiwbGq-W1OFg";
+  const API_KEY = "AIzaSyA_7IYSyNXzIfLjkWLAjF-R7g5W8pdAcS8";
 
   return (
     <div className="content-wrapper">

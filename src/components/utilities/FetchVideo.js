@@ -5,7 +5,7 @@ export default function FetchVideo(requiredNextPage) {
   let channels = [];
   let nextPageToken = requiredNextPage;
 
-  let apiKey = "AIzaSyCnFTj5eA2iaolTqTq5IppRiwbGq-W1OFg";
+  let apiKey = "AIzaSyA_7IYSyNXzIfLjkWLAjF-R7g5W8pdAcS8";
   let finalResult;
 
   return fetch(

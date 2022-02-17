@@ -17,7 +17,7 @@ export default function WatchVideo(props) {
   const [nextPageToken, setNextPageToken] = useState("");
   let content = null;
 
-  let API_KEY = "AIzaSyCnFTj5eA2iaolTqTq5IppRiwbGq-W1OFg";
+  let API_KEY = "AIzaSyA_7IYSyNXzIfLjkWLAjF-R7g5W8pdAcS8";
   const params = useParams();
 
   useEffect(() => {
@@ -55,7 +55,7 @@ export default function WatchVideo(props) {
         dataLength={relatedVideos.length}
         next={() => {
           setTimeout(() => {
-            console.log("aktivaraning sasfasfafsa");
+            console.log("infinite scroll activated");
             fetchRelatedVideos();
           }, 1000);
         }}
@@ -65,13 +65,14 @@ export default function WatchVideo(props) {
         {relatedVideos.map((e, index) => {
           return (
             <HorizontalCard
-              title={e.snippet.title}
+              videoId={e.id}
               img={e.snippet.thumbnails.high.url}
               user={e.snippet.channelTitle}
-              videoId={e.id}
-              currentClass={styles.horizonntalCard}
+              title={e.snippet.title}
+              desc={e.snippet.description}
               views={e.statistics.viewCount}
               uploaded={e.snippet.publishedAt}
+              currentClass={styles.horizonntalCard}
               key={e.id}
             />
           );
@@ -79,7 +80,6 @@ export default function WatchVideo(props) {
       </InfiniteScroll>
     );
   }
-
   return (
     <div className={styles.watchVideo}>
       <div className={styles.mainColumn}>
@@ -111,33 +111,4 @@ export default function WatchVideo(props) {
       <div className={styles.relatedColumn}>{content}</div>
     </div>
   );
-}
-
-//////////////////////////////////////////////////////////////////////////
-
-{
-  /* <div className={styles.recomendedColumn}>
-<div className={styles.recomendedContainer}>
-  ////////////////////////////////////////////////////////////
-  {testSearch.map(
-    ({ title, img, user, userPic, desc, views, uploaded }) => {
-      return (
-        <HorizontalCard
-          title={title}
-          img={img}
-          user={user}
-          userPic={userPic}
-          desc={desc}
-          views={views}
-          uploaded={uploaded}
-          currentClass={styles.horizonntalCard}
-          key={title}
-        />
-      );
-    }
-  )}
-  ///////////////////////////////////////////////////////////////////
-</div>
-</div>
-</div> */
 }
