@@ -1,43 +1,8 @@
-/**************************Search_page******************************/
-
-.search_wrapper {
-  display: flex;
-  justify-content: center;
-  width: 100%;
-  background-color: #f9f9f9;
-  min-height: 100vh;
-  padding-top: 25px;
-
-  > div {
-    width: 60%;
-
-    > div:first-child {
-      display: flex;
-      flex-flow: row wrap;
-      align-items: center;
-      border-bottom: 1px solid grey;
-      padding-bottom: 15px;
-      font-size: 16px;
-      font-weight: 700;
-      letter-spacing: 0.5px;
-      color: #030303;
-    }
-    > div:last-child {
-      display: flex;
-      flex-flow: row wrap;
-      gap: 10px;
-      margin-top: 15px;
-
-      a {
-        text-decoration: none;
-        color: #030303;
-      }
-    }
-  }
-}
-
 /**************************Search_card******************************/
-
+* {
+  text-decoration: none;
+  box-sizing: border-box;
+}
 .search_card {
   width: 1100px;
   cursor: pointer;
@@ -57,6 +22,49 @@
       line-height: 26px;
     }
     p {
+      font-size: 12px;
+      color: rgb(95, 95, 95);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      height: 20px;
+    }
+    div {
+      display: flex;
+      margin: 10px 0;
+      align-items: center;
+
+      img {
+        border-radius: 50%;
+        height: 25px;
+        width: 25px;
+      }
+    }
+  }
+}
+
+/**************************history_card******************************/
+.history_card {
+  color: black;
+  width: 1300px;
+  cursor: pointer;
+  height: 150px;
+  display: flex;
+
+  img {
+    margin-right: 10px;
+    width: 300px;
+    height: 100%;
+  }
+  div {
+    width: 490px;
+
+    h3 {
+      font-size: 18px;
+      line-height: 26px;
+    }
+    p {
+      text-decoration: none;
       font-size: 12px;
       color: rgb(95, 95, 95);
       white-space: nowrap;

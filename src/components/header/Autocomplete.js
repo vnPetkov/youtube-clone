@@ -1,21 +1,24 @@
 import styles from "./Autocomplete.module.scss";
-import { Link } from "react-router-dom";
-import { useEffect } from "react";
 
-export default function Autocomplete({ autocompleteResults, setInputFocus }) {
+export default function Autocomplete({ autocompleteResults, setInputFocus,setSearch, searchVideos,search }) {
   autocompleteResults = autocompleteResults.items;
+
 
   return (
     <div className={styles.header_autocomplete}>
       {autocompleteResults &&
         autocompleteResults.map((item) => {
           return (
-            <Link
-              to={`/watchVideo_page/${item.id.videoId}/${item.snippet.title}`} // /${item.snippet.channelTitle}/${item.statistics.viewCount}
-              onClick={() => setInputFocus(false)}
+            <a
+              
+              onClick={(e) => {
+                setSearch(item.snippet.title)
+                searchVideos(e)
+                console.log(search)
+                setInputFocus(false)}}
             >
               {item.snippet.title}
-            </Link>
+            </a>
           );
         })}
     </div>

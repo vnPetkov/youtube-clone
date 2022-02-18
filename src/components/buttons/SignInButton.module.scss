@@ -1,0 +1,25 @@
+.signInButton {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  margin: 0 15px;
+  height: 38px;
+  width: 110px;
+  padding: 5px 11px;
+  color: #065fd4;
+  border: 1px solid #065fd4;
+  letter-spacing: 0.5px;
+  text-decoration: none;
+
+  span:first-of-type {
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 10px;
+  }
+  span:last-of-type {
+    font-size: 14px;
+    font-weight: 500;
+  }
+}

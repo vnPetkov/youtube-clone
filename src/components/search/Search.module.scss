@@ -1,0 +1,37 @@
+/**************************Search_page******************************/
+
+.search_wrapper {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  background-color: #f9f9f9;
+  min-height: 100vh;
+  padding-top: 25px;
+
+  > div {
+    width: 60%;
+
+    > div:first-child {
+      display: flex;
+      flex-flow: row wrap;
+      align-items: center;
+      border-bottom: 1px solid grey;
+      padding-bottom: 15px;
+      font-size: 16px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      color: #030303;
+    }
+    > div:last-child {
+      display: flex;
+      flex-flow: row wrap;
+      gap: 10px;
+      margin-top: 15px;
+
+      a {
+        text-decoration: none;
+        color: #030303;
+      }
+    }
+  }
+}

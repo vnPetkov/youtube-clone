@@ -1,0 +1,43 @@
+.historyContainer {
+  display: flex;
+  align-items: start;
+//   justify-content: center;
+  min-height: 100vh;
+  width: 100%;
+  text-align: center;
+}
+
+.HistorySignedOut {
+    margin-top: 150px;
+    display: flex;
+    flex-flow: column wrap;
+    width: 100%;
+    gap: 25px;
+    align-items: center;
+    h2{
+        font-weight: 400 !important;
+    }
+    .rewind{
+        font-size: 100px;
+    }
+}
+
+.HistorySignedIn{
+    display: flex;
+    
+    flex-direction: column;
+    text-align: left;
+    margin-top: 30px;
+    margin-left: 150px;
+    width: 100%;
+
+    .historyCards{
+      text-decoration: none !important;
+      color: black;
+      margin-top: 20px;
+      text-decoration: none;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+}

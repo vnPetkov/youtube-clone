@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 
 import Autocomplete from "./Autocomplete";
+import SignInButton from "../buttons/SignInButton";
 import styles from "./Header.module.scss";
 import header_logo from "../../images/header_logo.svg";
 import header_delete from "../../images/header_delete.png";
@@ -46,6 +47,7 @@ export default function Header({
       .then((res) => res.json())
       .then((data) => {
         setSearchResults(data);
+        setInputFocus(false);
         history("/search_page");
       });
   };
@@ -101,8 +103,11 @@ export default function Header({
 
             {inputFocus && !autocompleteResults.error && (
               <Autocomplete
+                setSearch={setSearch}
+                searchVideos={(e) => searchVideos(e)}
                 autocompleteResults={autocompleteResults}
                 setInputFocus={setInputFocus}
+                search={search}
               />
             )}
           </div>
@@ -126,12 +131,8 @@ export default function Header({
             <BsThreeDotsVertical />
           </span>
 
-          <Link to={"/login"}>
-            <span>
-              <FaRegUserCircle />
-            </span>
-            <span>SIGN IN</span>
-          </Link>
+          <SignInButton />
+
         </div>
       </div>
 

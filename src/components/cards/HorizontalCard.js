@@ -12,8 +12,9 @@ export default function HorizontalCard({
   views,
   uploaded,
   currentClass,
-  userPic,
+
 }) {
+
   return (
     <Link
       to={`/watchVideo_page/${videoId}/${title}/${user}/${views}/${uploaded}/2.7хил/250310`}
@@ -23,7 +24,7 @@ export default function HorizontalCard({
         <div>
           <h3>{title}</h3>
           <div>
-            <p>{views} &#9679;</p>
+            {/* <p>{views} &#9679;</p> */}
             <p>{uploaded}</p>
           </div>
           <div>
