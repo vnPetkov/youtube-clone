@@ -47,8 +47,8 @@ export default function Home() {
               videoId={e.id}
               key={e.id}
               img={e.snippet.thumbnails.high.url}
-              //channelImg={channels[index].snippet.thumbnails.high.url}
-              //channel={channels[index].snippet.localized.title}
+              channelImg={channels[index].snippet.thumbnails.high.url}
+              channel={channels[index].snippet.localized.title}
               title={e.snippet.title}
               views={e.statistics.viewCount}
               likes={e.statistics.likeCount}

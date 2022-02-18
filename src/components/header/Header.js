@@ -125,12 +125,13 @@ export default function Header({
           <span>
             <BsThreeDotsVertical />
           </span>
-          <div>
+
+          <Link to={"/login"}>
             <span>
               <FaRegUserCircle />
             </span>
             <span>SIGN IN</span>
-          </div>
+          </Link>
         </div>
       </div>
 

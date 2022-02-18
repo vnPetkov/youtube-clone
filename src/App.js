@@ -10,7 +10,9 @@ import Upload from "./components/upload/Upload";
 import Liked from "./components/liked/Liked";
 import Search from "./components/search/Search";
 import WatchVideo from "./components/watchVideo/WatchVideo";
-import FetchVideo from "./components/utilities/FetchVideo";
+import Login from "./components/login/Login";
+import Register from "./components/login/Register";
+import { useSelector } from "react-redux";
 
 function App() {
   const [search, setSearch] = useState("");
@@ -18,18 +20,24 @@ function App() {
   const [inputFocus, setInputFocus] = useState(false);
 
   const API_KEY = "AIzaSyA_7IYSyNXzIfLjkWLAjF-R7g5W8pdAcS8";
+  const logged = useSelector((state) => state.userData.logged);
+  const currentPath = window.location.pathname;
 
   return (
     <div className="content-wrapper">
       <BrowserRouter>
-        <Header
-          search={search}
-          setSearch={setSearch}
-          setSearchResults={setSearchResults}
-          API_KEY={API_KEY}
-          inputFocus={inputFocus}
-          setInputFocus={setInputFocus}
-        />
+        {currentPath !== "/login" ? (
+          <Header
+            search={search}
+            setSearch={setSearch}
+            setSearchResults={setSearchResults}
+            API_KEY={API_KEY}
+            inputFocus={inputFocus}
+            setInputFocus={setInputFocus}
+          />
+        ) : (
+          <></>
+        )}
 
         <div className="appPage">
           <Routes>
@@ -42,6 +50,8 @@ function App() {
                 </>
               }
             />
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
             <Route
               path="/history_page"
               element={
