@@ -5,8 +5,14 @@ import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 
 import styles from "./VideoInfo.module.scss";
+import { useDispatch } from "react-redux";
 
 export default function VideoInfo(props) {
+  const dispatch = useDispatch();
+  const like = () => {
+    dispatch({ type: "LIKE", videoId: props.id });
+  };
+
   return (
     <div className={styles.videoInfo}>
       <div className={styles.infoMain}>
@@ -17,7 +23,7 @@ export default function VideoInfo(props) {
           </p>
 
           <div>
-            <span>
+            <span onClick={like}>
               <ThumbUpOutlinedIcon />
 
               <p>{props.likes}</p>

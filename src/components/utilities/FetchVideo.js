@@ -1,15 +1,14 @@
-import React, { useState } from "react";
+import api_key from "./api_key";
 
 export default function FetchVideo(requiredNextPage) {
   let videos = [];
   let channels = [];
   let nextPageToken = requiredNextPage;
 
-  let apiKey = "AIzaSyA_7IYSyNXzIfLjkWLAjF-R7g5W8pdAcS8";
   let finalResult;
 
   return fetch(
-    `https://youtube.googleapis.com/youtube/v3/videos?part=snippet%2CcontentDetails%2Cstatistics&chart=mostPopular&locale=BG&maxResults=24&regionCode=BG&key=${apiKey}&pageToken=${nextPageToken}`
+    `https://youtube.googleapis.com/youtube/v3/videos?part=snippet%2CcontentDetails%2Cstatistics&chart=mostPopular&locale=BG&maxResults=24&regionCode=BG&key=${api_key}&pageToken=${nextPageToken}`
   )
     .then((resp) => resp.json())
     .then((result) => {
@@ -19,7 +18,7 @@ export default function FetchVideo(requiredNextPage) {
       return Promise.all(
         result.items.map((video) => {
           return fetch(
-            `https://youtube.googleapis.com/youtube/v3/channels?part=snippet%2CcontentDetails%2Cstatistics&id=${video.snippet.channelId}&key=${apiKey}`
+            `https://youtube.googleapis.com/youtube/v3/channels?part=snippet%2CcontentDetails%2Cstatistics&id=${video.snippet.channelId}&key=${api_key}`
           );
         })
       );

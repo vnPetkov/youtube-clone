@@ -1,5 +1,5 @@
 import "./App.scss";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 import Header from "./components/header/Header.js";
@@ -20,13 +20,12 @@ function App() {
   const [inputFocus, setInputFocus] = useState(false);
 
   const API_KEY = "AIzaSyA_7IYSyNXzIfLjkWLAjF-R7g5W8pdAcS8";
-  const logged = useSelector((state) => state.userData.logged);
-  const currentPath = window.location.pathname;
+  const showHeader = useSelector((state) => state.navsDisplay.showHeader);
 
   return (
     <div className="content-wrapper">
       <BrowserRouter>
-        {currentPath !== "/login" ? (
+        {showHeader && (
           <Header
             search={search}
             setSearch={setSearch}
@@ -35,8 +34,6 @@ function App() {
             inputFocus={inputFocus}
             setInputFocus={setInputFocus}
           />
-        ) : (
-          <></>
         )}
 
         <div className="appPage">

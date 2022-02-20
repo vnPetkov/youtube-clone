@@ -1,3 +1,4 @@
+import api_key from "../utilities/api_key";
 import React, { useEffect, useState } from "react";
 
 import Autocomplete from "./Autocomplete";
@@ -11,23 +12,25 @@ import { FaMicrophone, FaRegUserCircle } from "react-icons/fa";
 import { BsSearch, BsThreeDotsVertical } from "react-icons/bs";
 import MenuIcon from "@mui/icons-material/Menu";
 import AppsIcon from "@mui/icons-material/Apps";
+import SignOutButton from "../buttons/SignoutButton";
+import { useSelector } from "react-redux";
 
 export default function Header({
   search,
   setSearch,
   setSearchResults,
-  API_KEY,
   inputFocus,
   setInputFocus,
 }) {
   const history = useNavigate();
 
   const [autocompleteResults, setAutocompleteResults] = useState([]);
+  const logged = useSelector((state) => state.userData.logged);
 
   // DEBOUNCED AUTOCOMPLETE
   function fetchAutocomplete() {
     fetch(
-      `https://www.googleapis.com/youtube/v3/search?key=${API_KEY}&maxResults=15&part=snippet&q=${search}`
+      `https://www.googleapis.com/youtube/v3/search?key=${api_key}&maxResults=15&part=snippet&q=${search}`
     )
       .then((res) => res.json())
       .then((data) => {
@@ -42,7 +45,7 @@ export default function Header({
   const searchVideos = (e) => {
     e.preventDefault();
     fetch(
-      `https://www.googleapis.com/youtube/v3/search?key=${API_KEY}&maxResults=15&part=snippet&q=${search}`
+      `https://www.googleapis.com/youtube/v3/search?key=${api_key}&maxResults=15&part=snippet&q=${search}`
     )
       .then((res) => res.json())
       .then((data) => {
@@ -51,7 +54,6 @@ export default function Header({
         history("/search_page");
       });
   };
-
   return (
     <div className={styles.headerContainer}>
       <div>
@@ -112,7 +114,7 @@ export default function Header({
             )}
           </div>
 
-          <div onClick={searchVideos}>
+          <div>
             <button>
               <BsSearch />
             </button>
@@ -130,9 +132,7 @@ export default function Header({
           <span>
             <BsThreeDotsVertical />
           </span>
-
-          <SignInButton />
-
+          {logged ? <SignOutButton /> : <SignInButton />}
         </div>
       </div>
 

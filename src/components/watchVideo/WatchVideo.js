@@ -1,5 +1,5 @@
+import api_key from "../utilities/api_key";
 import React, { useState, useEffect } from "react";
-import { testSearch, testWatch } from "../../server/data.js";
 import HorizontalCard from "../cards/HorizontalCard";
 import { useParams } from "react-router-dom";
 import Comments from "./Comments";
@@ -17,12 +17,11 @@ export default function WatchVideo(props) {
   const [nextPageToken, setNextPageToken] = useState("");
   let content = null;
 
-  let API_KEY = "AIzaSyA_7IYSyNXzIfLjkWLAjF-R7g5W8pdAcS8";
   const params = useParams();
 
   useEffect(() => {
     fetch(
-      `https://www.googleapis.com/youtube/v3/commentThreads?key=${API_KEY}&textFormat=plainText&part=snippet&videoId=${params.videoId}&maxResults=50`
+      `https://www.googleapis.com/youtube/v3/commentThreads?key=${api_key}&textFormat=plainText&part=snippet&videoId=${params.videoId}&maxResults=50`
     )
       .then((res) => res.json())
       .then((data) => {

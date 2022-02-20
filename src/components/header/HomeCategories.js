@@ -1,16 +1,17 @@
 import React, { useState, useEffect } from "react";
 import styles from "./HomeCategories.module.scss";
+import api_key from "../utilities/api_key";
 
 export default function HomeCategories() {
   const [categoriesList, setCategoriesList] = useState([]);
   const [activeCategory, setActiveCategory] = useState("Всички");
   let content = null;
 
-  let apiKey = "AIzaSyA_7IYSyNXzIfLjkWLAjF-R7g5W8pdAcS8";
+  let apiKey = "AIzaSyDKuYQmUW8Sza0hX2uexPM4dIG7mS440vU";
 
   useEffect(() => {
     fetch(
-      `https://youtube.googleapis.com/youtube/v3/videoCategories?part=snippet&regionCode=BG&key=${apiKey}`
+      `https://youtube.googleapis.com/youtube/v3/videoCategories?part=snippet&regionCode=BG&key=${api_key}`
     )
       .then((resp) => resp.json())
       .then((result) => setCategoriesList(result.items));

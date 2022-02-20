@@ -1,12 +1,9 @@
-import React, { useEffect, useState } from "react";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import styles from "./Comments.module.scss";
-import { testComments } from "../../server/data.js";
 
 export default function Comments(props) {
   let comments = props.comments.items;
-
 
   return (
     <div className="comments">
@@ -26,32 +23,35 @@ export default function Comments(props) {
         <Button variant="contained">КОМЕНТАР</Button>
       </div>
       <div className="commentsList">
-  {comments && comments.map(el=>{
-    let commentText = el.snippet.topLevelComment.snippet.textDisplay;
-    let commentUserPic = el.snippet.topLevelComment.snippet.authorProfileImageUrl;
-    let commentUserName = el.snippet.topLevelComment.snippet.authorDisplayName;
-    let commentData = el.snippet.topLevelComment.snippet.publishedAt;
+        {comments &&
+          comments.map((el) => {
+            let commentText = el.snippet.topLevelComment.snippet.textDisplay;
+            let commentUserPic =
+              el.snippet.topLevelComment.snippet.authorProfileImageUrl;
+            let commentUserName =
+              el.snippet.topLevelComment.snippet.authorDisplayName;
+            let commentData = el.snippet.topLevelComment.snippet.publishedAt;
 
-    return (
-      <div className={styles.comment} key={commentText}>
-        <Avatar
-          className={styles.avatar}
-          alt={commentUserName}
-          src={commentUserPic}
-          sx={{ width: 48, height: 48 }}
-        />
-        <div>
-          <div>
-            <h3>{commentUserName} &nbsp;</h3>
-            <p>{commentData}</p>
-          </div>
-          <div>
-            <p className={styles.comment.text}>{commentText}</p>
-          </div>
-        </div>
-      </div>
-    );
-  })}
+            return (
+              <div className={styles.comment} key={commentText}>
+                <Avatar
+                  className={styles.avatar}
+                  alt={commentUserName}
+                  src={commentUserPic}
+                  sx={{ width: 48, height: 48 }}
+                />
+                <div>
+                  <div>
+                    <h3>{commentUserName} &nbsp;</h3>
+                    <p>{commentData}</p>
+                  </div>
+                  <div>
+                    <p className={styles.comment.text}>{commentText}</p>
+                  </div>
+                </div>
+              </div>
+            );
+          })}
 
         {/* {testComments.map((comment, index) => {
           return (
