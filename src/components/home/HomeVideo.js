@@ -8,6 +8,7 @@ export default function HomeVideo(props) {
   //let channelImg = encodeURIComponent(props.channelImg);
   return (
     <Link
+    channelId={props.channelId}
       to={`/watchVideo_page/${props.videoId}/${props.title}/${props.channel}/${props.views}/${props.timestamp}/${props.likes}/${props.subscribers}`} //${props.description}
     >
       <div className={styles.videoCard}>

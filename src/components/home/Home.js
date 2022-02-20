@@ -42,12 +42,14 @@ export default function Home() {
         loader={<div>ЗАРЕЖДАНИНГ...</div>}
       >
         {homeVideos.map((e, index) => {
+          console.log(e)
           return (
             <HomeVideo
+              channelId={e.snippet.channelId}
               videoId={e.id}
               key={e.id}
               img={e.snippet.thumbnails.high.url}
-              channelImg={channels[index].snippet.thumbnails.high.url}
+              // channelImg={channels[index].snippet.thumbnails.high.url}
               channel={channels[index].snippet.localized.title}
               title={e.snippet.title}
               views={e.statistics.viewCount}
