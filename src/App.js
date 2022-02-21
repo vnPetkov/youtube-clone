@@ -12,6 +12,7 @@ import Search from "./components/search/Search";
 import WatchVideo from "./components/watchVideo/WatchVideo";
 import Login from "./components/login/Login";
 import Register from "./components/login/Register";
+import Channel from "./components/channel/Channel"
 import { useSelector } from "react-redux";
 
 function App() {
@@ -89,6 +90,17 @@ function App() {
               path="/watchVideo_page/:videoId/:title/:channel/:views/:timestamp/:likes/:subscribers" //:description
               element={<WatchVideo API_KEY={API_KEY} />}
             />
+
+
+            <Route path="/channel/:channelid"
+              element={
+                <>
+                  <Sidebar />
+                  <Channel API_KEY={API_KEY} />
+                </>
+              }
+            />
+
           </Routes>
         </div>
       </BrowserRouter>

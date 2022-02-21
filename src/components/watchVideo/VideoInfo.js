@@ -3,6 +3,7 @@ import ThumbUpOutlinedIcon from "@mui/icons-material/ThumbUpOutlined";
 import ThumbDownOutlinedIcon from "@mui/icons-material/ThumbDownOutlined";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
+import { Link,useParams } from "react-router-dom";
 
 import styles from "./VideoInfo.module.scss";
 import { useDispatch, useSelector } from "react-redux";
@@ -50,17 +51,21 @@ export default function VideoInfo(props) {
 
       <div>
         <div className="infoChannel">
-          <div>
-            <Avatar
-              className={styles.avatar}
-              alt={props.channel}
-              src={props.channelImg}
-              sx={{ width: 48, height: 48 }}
-            />
-            <p>
-              <a href="...">{props.channel}</a> <br /> {props.subscribers}
-            </p>
-          </div>
+
+          <Link to={`/channel/test/`}>
+            <div>
+              <Avatar
+                className={styles.avatar}
+                alt={props.channel}
+                src={props.channelImg}
+                sx={{ width: 48, height: 48 }}
+              />
+              <p>
+                <a href="...">{props.channel}</a> <br /> {props.subscribers}
+              </p>
+            </div>
+          </Link>
+
           <div className={styles.channelButtons}>
             <Button variant="outlined" color="primary">
               СТАНЕТЕ ЧЛЕН

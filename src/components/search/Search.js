@@ -17,7 +17,6 @@ export default function Search({ searchResults }) {
         <div>
           {searchResults &&
             searchResults.map((element) => {
-              console.log(element)
               return (
                 <HorizontalCard
                   videoId={element.id.videoId}
@@ -26,6 +25,7 @@ export default function Search({ searchResults }) {
                   title={element.snippet.title}
                   desc={element.snippet.description}
                   // userPic={userPic}
+                  channelId={element.snippet.channelId}
                   views="359578"
                   uploaded={element.snippet.publishedAt}
                   currentClass={card_styles.search_card}

@@ -12,7 +12,8 @@ export default function HorizontalCard({
   views,
   uploaded,
   currentClass,
-
+  channelId
+  
 }) {
 
   return (
@@ -29,7 +30,7 @@ export default function HorizontalCard({
           </div>
           <div>
             {/* <img src={userPic} alt="user pic" /> */}
-            <p>{user}</p>
+            <Link  to={`/channel/${channelId}`}>{user}</Link>
           </div>
           <p>{desc}</p>
         </div>

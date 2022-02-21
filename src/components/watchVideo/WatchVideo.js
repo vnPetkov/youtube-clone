@@ -27,6 +27,7 @@ export default function WatchVideo(props) {
       .then((data) => {
         setComments(data);
         setCommentsReady(true);
+        
       });
   }, []);
 
@@ -94,14 +95,15 @@ export default function WatchVideo(props) {
           ></iframe>
         </div>
         <VideoInfo
+        // channelId={params.channelId}
           id={params.videoId}
           title={params.title}
-          //channelImg={params.channelImg}
           channel={params.channel}
           views={params.views}
           timestamp={params.timestamp}
           likes={params.likes}
           subscribers={params.subscribers}
+          //channelImg={params.channelImg}
           //description={params.description}
         />
         {setCommentsReady && <Comments comments={comments} />}

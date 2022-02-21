@@ -115,7 +115,7 @@ export default function Header({
           </div>
 
           <div>
-            <button>
+            <button onClick={(e)=>searchVideos(e)}>
               <BsSearch />
             </button>
           </div>
