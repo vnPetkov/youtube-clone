@@ -9,6 +9,13 @@ import InfiniteScroll from "react-infinite-scroll-component";
 import FetchVideo from "../utilities/FetchVideo";
 
 export default function WatchVideo(props) {
+
+  const [channelInfoReady, setChannelInfoReady] = useState(false);
+  const [channelInfo,setChannelInfo] = useState([]);
+
+  const [videoInfoReady, setVideoInfoReady] =useState(false);
+  const [videoInfo,setVideoInfo] = useState([]);
+
   const [comments, setComments] = useState([]);
   const [commentsReady, setCommentsReady] = useState(false);
 
@@ -19,6 +26,18 @@ export default function WatchVideo(props) {
 
   const params = useParams();
 
+  // Fetch video
+  useEffect(()=>{
+    console.log(params)
+    fetch(`https://www.googleapis.com/youtube/v3/videos?part=snippet&part=statistics&id=${params.videoId}&key=${props.API_KEY}`)
+      .then(res=>res.json())
+      .then(data=>{
+        setVideoInfo(data);
+        setVideoInfoReady(true);
+      })
+  },[])
+
+  // Fetch comments
   useEffect(() => {
     fetch(
       `https://www.googleapis.com/youtube/v3/commentThreads?key=${api_key}&textFormat=plainText&part=snippet&videoId=${params.videoId}&maxResults=50`
@@ -30,6 +49,20 @@ export default function WatchVideo(props) {
         
       });
   }, []);
+
+  // Fetch channel image
+  useEffect(()=>{
+    if(videoInfoReady){
+      fetch(`https://youtube.googleapis.com/youtube/v3/channels?part=snippet%2CcontentDetails%2Cstatistics&id=${videoInfo.items[0].snippet.channelId}&key=${props.API_KEY}`)
+        .then(res=>res.json())
+        .then(data=>{
+          setChannelInfo(data);
+          setChannelInfoReady(true);
+          console.log(data)
+        })
+    }
+  
+  },[videoInfoReady])
 
   function fetchRelatedVideos() {
     FetchVideo(nextPageToken)
@@ -94,19 +127,8 @@ export default function WatchVideo(props) {
             height="100%"
           ></iframe>
         </div>
-        <VideoInfo
-        // channelId={params.channelId}
-          id={params.videoId}
-          title={params.title}
-          channel={params.channel}
-          views={params.views}
-          timestamp={params.timestamp}
-          likes={params.likes}
-          subscribers={params.subscribers}
-          //channelImg={params.channelImg}
-          //description={params.description}
-        />
-        {setCommentsReady && <Comments comments={comments} />}
+      {videoInfoReady && channelInfoReady && <VideoInfo videoInfo={videoInfo} channelInfo={channelInfo} />}  
+        {commentsReady && <Comments comments={comments} />}
       </div>
 
       <div className={styles.relatedColumn}>{content}</div>

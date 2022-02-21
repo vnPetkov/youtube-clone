@@ -40,21 +40,20 @@ export default function Home() {
         hasMore={true}
         loader={<div>ЗАРЕЖДАНИНГ...</div>}
       >
-        {homeVideos.map((e, index) => {
-          console.log(e)
+        {homeVideos && homeVideos.map((e, index) => {
           return (
             <HomeVideo
               channelId={e.snippet.channelId}
               videoId={e.id}
               key={e.id}
               img={e.snippet.thumbnails.high.url}
-              // channelImg={channels[index].snippet.thumbnails.high.url}
               channel={channels[index].snippet.localized.title}
               title={e.snippet.title}
               views={e.statistics.viewCount}
               likes={e.statistics.likeCount}
               timestamp={e.snippet.publishedAt}
-              //subscribers={channels[index].statistics.subscriberCount}
+              channelImg={channels[index].snippet.thumbnails.high.url}
+              subscribers={channels[index].statistics.subscriberCount}
               description={e.snippet.description}
             />
           );

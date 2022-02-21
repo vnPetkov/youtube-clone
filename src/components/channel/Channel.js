@@ -11,7 +11,7 @@ export default function Channel({ API_KEY }) {
     const [channelInfo, setChannelInfo] = useState([]);
     const [videosReady, setVideosReady] = useState(false);
     const [profileReady, setProfileReady] = useState(false);
-    // fetch(`https://youtube.googleapis.com/youtube/v3/channels?part=snippet&part=contentDetails&part=statistics&id=${params.channeltitle}&key=${API_KEY}`)
+
 
     useEffect(() => {
         console.log(params)
@@ -45,7 +45,7 @@ export default function Channel({ API_KEY }) {
             <div className={styles.channelVideosContainer}>
                 {videosReady && channelPlaylist.map(video => {
                     return (
-                        <Link key={video.id} to={`/watchVideo_page/${video.id}/`} className={styles.channelVideoCard}>
+                        <Link key={video.id} to={`/watchVideo_page/${video.snippet.resourceId.videoId}/`} className={styles.channelVideoCard}>
                             <img src={video.snippet.thumbnails.medium.url} />
                             <h5>{video.snippet.title}</h5>
                             <p>{video.snippet.publishedAt}</p>

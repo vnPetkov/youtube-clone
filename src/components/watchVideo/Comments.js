@@ -1,6 +1,7 @@
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import styles from "./Comments.module.scss";
+import { Link } from "react-router-dom";
 
 export default function Comments(props) {
   let comments = props.comments.items;
@@ -26,30 +27,32 @@ export default function Comments(props) {
         {comments &&
           comments.map((el) => {
             let commentText = el.snippet.topLevelComment.snippet.textDisplay;
-            let commentUserPic =
-              el.snippet.topLevelComment.snippet.authorProfileImageUrl;
-            let commentUserName =
-              el.snippet.topLevelComment.snippet.authorDisplayName;
+            let commentUserPic = el.snippet.topLevelComment.snippet.authorProfileImageUrl;
+            let commentUserName = el.snippet.topLevelComment.snippet.authorDisplayName;
             let commentData = el.snippet.topLevelComment.snippet.publishedAt;
+            let commentChannelId = el.snippet.topLevelComment.snippet.authorChannelId.value;
 
             return (
-              <div className={styles.comment} key={commentText}>
-                <Avatar
-                  className={styles.avatar}
-                  alt={commentUserName}
-                  src={commentUserPic}
-                  sx={{ width: 48, height: 48 }}
-                />
-                <div>
+              <Link to={`/channel/${commentChannelId}/`}>
+                <div className={styles.comment} key={commentText}>
+
+                  <Avatar
+                    className={styles.avatar}
+                    alt={commentUserName}
+                    src={commentUserPic}
+                    sx={{ width: 48, height: 48 }}
+                  />
                   <div>
-                    <h3>{commentUserName} &nbsp;</h3>
-                    <p>{commentData}</p>
-                  </div>
-                  <div>
-                    <p className={styles.comment.text}>{commentText}</p>
+                    <div>
+                      <h3>{commentUserName} &nbsp;</h3>
+                      <p>{commentData}</p>
+                    </div>
+                    <div>
+                      <p className={styles.comment.text}>{commentText}</p>
+                    </div>
                   </div>
                 </div>
-              </div>
+              </Link>
             );
           })}
 

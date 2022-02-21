@@ -11,6 +11,10 @@ import { db } from "../../firebase/firebaseConfig.js";
 import { updateDoc, doc } from "firebase/firestore";
 
 export default function VideoInfo(props) {
+  let videoInfo = props.videoInfo.items[0];
+  let channelInfo = props.channelInfo
+  console.log(videoInfo)
+  
   const logged = useSelector((state) => state.userData.logged);
   const curentUserId = useSelector((state) => state.userData.uid);
   const curentUserLiked = useSelector((state) => state.userData.likedVideos);
@@ -28,17 +32,17 @@ export default function VideoInfo(props) {
   return (
     <div className={styles.videoInfo}>
       <div className={styles.infoMain}>
-        <h5>{props.title}</h5>
+        <h5>{videoInfo.snippet.title}</h5>
         <div>
           <p>
-            {props.views} &#9679; {props.timestamp}
+            {videoInfo.statistics.viewCount} &#9679; гледания {videoInfo.snippet.publishedAt}
           </p>
 
           <div>
             <span onClick={() => like(curentUserId, curentUserLiked)}>
               <ThumbUpOutlinedIcon />
 
-              <p>{props.likes}</p>
+              <p>{videoInfo.statistics.likeCount}</p>
             </span>
 
             <span>
@@ -52,16 +56,17 @@ export default function VideoInfo(props) {
       <div>
         <div className="infoChannel">
 
-          <Link to={`/channel/test/`}>
+          <Link to={`/channel/${videoInfo.snippet.channelId}/`}>
             <div>
               <Avatar
                 className={styles.avatar}
-                alt={props.channel}
-                src={props.channelImg}
+                alt={videoInfo.snippet.channelTitlel}
+                src={channelInfo.items[0].snippet.thumbnails.default.url}
                 sx={{ width: 48, height: 48 }}
               />
               <p>
-                <a href="...">{props.channel}</a> <br /> {props.subscribers}
+                <a href="...">{videoInfo.snippet.channelTitle}</a> <br />
+                 {channelInfo.items[0].statistics.subscriberCount} абоната
               </p>
             </div>
           </Link>
@@ -76,7 +81,7 @@ export default function VideoInfo(props) {
           </div>
         </div>
 
-        <p className={styles.description}>{props.description}</p>
+        <p className={styles.description}>{videoInfo.snippet.description}</p>
       </div>
     </div>
   );

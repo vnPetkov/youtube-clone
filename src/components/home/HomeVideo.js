@@ -7,6 +7,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { db } from "../../firebase/firebaseConfig.js";
 import { updateDoc, doc } from "firebase/firestore";
 
+
+
+
 export default function HomeVideo(props) {
   const logged = useSelector((state) => state.userData.logged);
   const curentUserId = useSelector((state) => state.userData.uid);
@@ -27,7 +30,7 @@ export default function HomeVideo(props) {
   return (
     <Link
     channelId={props.channelId}
-      to={`/watchVideo_page/${props.videoId}/${props.title}/${props.channel}/${props.views}/${props.timestamp}/${props.likes}/${props.subscribers}`} //${props.description}
+      to={`/watchVideo_page/${props.videoId}/`}
       onClick={() => addHistory(curentUserId, curentUserHistory)}
     >
       <div className={styles.videoCard}>

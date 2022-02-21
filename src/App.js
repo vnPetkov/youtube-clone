@@ -87,7 +87,7 @@ function App() {
               }
             />
             <Route
-              path="/watchVideo_page/:videoId/:title/:channel/:views/:timestamp/:likes/:subscribers" //:description
+              path="/watchVideo_page/:videoId/"
               element={<WatchVideo API_KEY={API_KEY} />}
             />
 
