@@ -57,7 +57,7 @@ export default function VideoInfo(props) {
         <div className="infoChannel">
 
           <Link to={`/channel/${videoInfo.snippet.channelId}/`}>
-            <div>
+            <div className={styles.channelInformation}>
               <Avatar
                 className={styles.avatar}
                 alt={videoInfo.snippet.channelTitlel}

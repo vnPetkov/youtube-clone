@@ -18,10 +18,11 @@ export default function Channel({ API_KEY }) {
         fetch(`https://youtube.googleapis.com/youtube/v3/channels?part=snippet%2CcontentDetails%2Cstatistics&id=${params.channelid}&key=${API_KEY}`)
             .then(res => res.json())
             .then(res => {
-                let channelPlaylist = res.items[0].contentDetails.relatedPlaylists.uploads;
+                console.log(res)
+                let channelList = res.items[0].contentDetails.relatedPlaylists.uploads;
                 setChannelInfo(res.items[0]);
                 setProfileReady(true);
-                fetch(`https://www.googleapis.com/youtube/v3/playlistItems?part=snippet%2CcontentDetails&maxResults=50&playlistId=${channelPlaylist}&key=${API_KEY}`)
+                fetch(`https://www.googleapis.com/youtube/v3/playlistItems?part=snippet%2CcontentDetails&maxResults=50&playlistId=${channelList}&key=${API_KEY}`)
                     .then(res => res.json())
                     .then(data => {
                         setChannelPlaylist(data.items);
