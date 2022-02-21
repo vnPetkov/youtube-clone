@@ -13,7 +13,6 @@ export default function Home() {
   function fetchHomeVideos() {
     FetchVideo(nextPageToken)
       .then((result) => {
-        console.log("finished fetch result : ", result);
         return result;
       })
       .then((result) => {

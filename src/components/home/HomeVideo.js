@@ -3,12 +3,31 @@ import styles from "./HomeVideo.module.scss";
 import { Link } from "react-router-dom";
 
 import Avatar from "@mui/material/Avatar";
+import { useDispatch, useSelector } from "react-redux";
+import { db } from "../../firebase/firebaseConfig.js";
+import { updateDoc, doc } from "firebase/firestore";
 
 export default function HomeVideo(props) {
-  //let channelImg = encodeURIComponent(props.channelImg);
+  const logged = useSelector((state) => state.userData.logged);
+  const curentUserId = useSelector((state) => state.userData.uid);
+  const curentUserHistory = useSelector(
+    (state) => state.userData.historyVideos
+  );
+
+  const dispatch = useDispatch();
+  const addHistory = (userId, currentHistory) => {
+    console.log("nashivane v istoriq");
+    dispatch({ type: "HISTORIZE", videoId: props.videoId });
+
+    const userDoc = doc(db, "users", userId);
+    const newFields = { historyVideos: [...currentHistory, props.videoId] };
+    updateDoc(userDoc, newFields);
+  };
+
   return (
     <Link
       to={`/watchVideo_page/${props.videoId}/${props.title}/${props.channel}/${props.views}/${props.timestamp}/${props.likes}/${props.subscribers}`} //${props.description}
+      onClick={() => addHistory(curentUserId, curentUserHistory)}
     >
       <div className={styles.videoCard}>
         <img src={props.img} alt="video poster" />

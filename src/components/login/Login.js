@@ -4,6 +4,9 @@ import { Link, useNavigate } from "react-router-dom";
 import styles from "./Login.module.scss";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../firebase/firebaseConfig.js";
+import { getAuth } from "firebase/auth";
+import { db } from "../../firebase/firebaseConfig.js";
+import { collection, getDoc, doc } from "firebase/firestore";
 
 export default function Login() {
   const [loginEmail, setLoginEmail] = useState("");
@@ -12,24 +15,24 @@ export default function Login() {
   const dispatch = useDispatch();
   let changePath = useNavigate();
 
-  const login = () => {
-    const loginFunc = async () => {
-      try {
-        const user = await signInWithEmailAndPassword(
-          auth,
-          loginEmail,
-          loginPassword
-        );
-        console.log(user);
-      } catch (err) {
-        console.log(err.message);
-        return false;
-      }
-      return true;
-    };
-    loginFunc();
-    console.log("suucessful login");
-    dispatch({ type: "LOGIN" });
+  const login = async () => {
+    const user = await signInWithEmailAndPassword(
+      auth,
+      loginEmail,
+      loginPassword
+    );
+    console.log(user);
+    const userDocRef = doc(db, "users", user.user.uid);
+    const docSnap = await getDoc(userDocRef);
+    let dataBaseHistory = docSnap.data().historyVideos;
+    let dataBaseLiked = docSnap.data().likedVideos;
+
+    dispatch({
+      type: "LOGIN",
+      profileUid: user.user.uid,
+      history: dataBaseHistory,
+      liked: dataBaseLiked,
+    });
     dispatch({ type: "LOGIN_CLOSED" });
     changePath("/");
   };

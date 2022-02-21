@@ -5,12 +5,23 @@ import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 
 import styles from "./VideoInfo.module.scss";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { db } from "../../firebase/firebaseConfig.js";
+import { updateDoc, doc } from "firebase/firestore";
 
 export default function VideoInfo(props) {
+  const logged = useSelector((state) => state.userData.logged);
+  const curentUserId = useSelector((state) => state.userData.uid);
+  const curentUserLiked = useSelector((state) => state.userData.likedVideos);
+
   const dispatch = useDispatch();
-  const like = () => {
+  const like = (userId, currentLiked) => {
+    console.log("nashivane v liked");
     dispatch({ type: "LIKE", videoId: props.id });
+
+    const userDoc = doc(db, "users", userId);
+    const newFields = { likedVideos: [...currentLiked, props.id] };
+    updateDoc(userDoc, newFields);
   };
 
   return (
@@ -23,7 +34,7 @@ export default function VideoInfo(props) {
           </p>
 
           <div>
-            <span onClick={like}>
+            <span onClick={() => like(curentUserId, curentUserLiked)}>
               <ThumbUpOutlinedIcon />
 
               <p>{props.likes}</p>

@@ -3,24 +3,26 @@ import { Link } from "react-router-dom";
 import styles from "./Login.module.scss";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../firebase/firebaseConfig.js";
+import { db } from "../../firebase/firebaseConfig.js";
+import { collection, setDoc, doc } from "firebase/firestore";
 
 export default function Register() {
   const [registerEmail, setRegisterEmail] = useState("");
   const [registerPassword, setRegisterPassword] = useState("");
 
+  const userCollectionRef = collection(db, "users");
+
   const register = async () => {
-    try {
-      const user = await createUserWithEmailAndPassword(
-        auth,
-        registerEmail,
-        registerPassword
-      );
-      console.log(user);
-    } catch (err) {
-      console.log(err.message);
-      return false;
-    }
-    return true;
+    const user = await createUserWithEmailAndPassword(
+      auth,
+      registerEmail,
+      registerPassword
+    );
+    console.log(user.user.uid);
+    await setDoc(doc(db, "users", user.user.uid), {
+      historyVideos: [],
+      likedVideos: [],
+    });
   };
 
   return (
