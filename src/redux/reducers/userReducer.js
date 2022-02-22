@@ -2,8 +2,9 @@ const INITIAL_STATE = {
   logged: false,
   uid: "",
   profileImg: "",
-  likedVideos: [],
   historyVideos: [],
+  likedVideos: [],
+  dislikedVideos: [],
 };
 
 export const userReducer = (state = INITIAL_STATE, action) => {
@@ -15,28 +16,27 @@ export const userReducer = (state = INITIAL_STATE, action) => {
         uid: action.profileUid,
         historyVideos: action.history,
         likedVideos: action.liked,
+        dislikedVideos: action.disliked,
       };
-
     case "LOGOUT":
-      return {
-        ...state,
-        logged: false,
-        uid: "",
-        profileImg: "",
-        likedVideos: [],
-        historyVideos: [],
-      };
+      return { ...state };
 
-    case "LIKE":
-      return {
-        ...state,
-        likedVideos: [...state.likedVideos, action.videoId],
-      };
+    ////////////////////////////////////////////////
 
     case "HISTORIZE":
       return {
         ...state,
         historyVideos: [...state.historyVideos, action.videoId],
+      };
+    case "CHANGE_LIKED":
+      return {
+        ...state,
+        likedVideos: [...action.newLikedArr],
+      };
+    case "CHANGE_DISLIKED":
+      return {
+        ...state,
+        dislikedVideos: [...action.newDislikedArr],
       };
 
     default:

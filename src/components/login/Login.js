@@ -2,11 +2,15 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import styles from "./Login.module.scss";
-import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../firebase/firebaseConfig.js";
-import { getAuth } from "firebase/auth";
 import { db } from "../../firebase/firebaseConfig.js";
-import { collection, getDoc, doc } from "firebase/firestore";
+import { getDoc, doc } from "firebase/firestore";
+import {
+  getAuth,
+  setPersistence,
+  signInWithEmailAndPassword,
+  browserSessionPersistence,
+} from "firebase/auth";
 
 export default function Login() {
   const [loginEmail, setLoginEmail] = useState("");
@@ -16,6 +20,9 @@ export default function Login() {
   let changePath = useNavigate();
 
   const login = async () => {
+    const auth = getAuth();
+    await setPersistence(auth, browserSessionPersistence);
+
     const user = await signInWithEmailAndPassword(
       auth,
       loginEmail,
@@ -26,12 +33,14 @@ export default function Login() {
     const docSnap = await getDoc(userDocRef);
     let dataBaseHistory = docSnap.data().historyVideos;
     let dataBaseLiked = docSnap.data().likedVideos;
+    let dataBaseDisliked = docSnap.data().dislikedVideos;
 
     dispatch({
       type: "LOGIN",
       profileUid: user.user.uid,
       history: dataBaseHistory,
       liked: dataBaseLiked,
+      disliked: dataBaseDisliked,
     });
     dispatch({ type: "LOGIN_CLOSED" });
     changePath("/");

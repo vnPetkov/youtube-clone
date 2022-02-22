@@ -7,9 +7,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { db } from "../../firebase/firebaseConfig.js";
 import { updateDoc, doc } from "firebase/firestore";
 
-
-
-
 export default function HomeVideo(props) {
   const logged = useSelector((state) => state.userData.logged);
   const curentUserId = useSelector((state) => state.userData.uid);
@@ -19,17 +16,18 @@ export default function HomeVideo(props) {
 
   const dispatch = useDispatch();
   const addHistory = (userId, currentHistory) => {
-    console.log("nashivane v istoriq");
-    dispatch({ type: "HISTORIZE", videoId: props.videoId });
-
-    const userDoc = doc(db, "users", userId);
-    const newFields = { historyVideos: [...currentHistory, props.videoId] };
-    updateDoc(userDoc, newFields);
+    !currentHistory.some((e) => e === props.videoId) &&
+      (function () {
+        dispatch({ type: "HISTORIZE", videoId: props.videoId });
+        const userDoc = doc(db, "users", userId);
+        const newFields = { historyVideos: [...currentHistory, props.videoId] };
+        updateDoc(userDoc, newFields);
+      })();
   };
 
   return (
     <Link
-    channelId={props.channelId}
+      channelId={props.channelId}
       to={`/watchVideo_page/${props.videoId}/`}
       onClick={() => addHistory(curentUserId, curentUserHistory)}
     >

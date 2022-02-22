@@ -10,8 +10,6 @@ export default function Register() {
   const [registerEmail, setRegisterEmail] = useState("");
   const [registerPassword, setRegisterPassword] = useState("");
 
-  const userCollectionRef = collection(db, "users");
-
   const register = async () => {
     const user = await createUserWithEmailAndPassword(
       auth,
@@ -22,6 +20,7 @@ export default function Register() {
     await setDoc(doc(db, "users", user.user.uid), {
       historyVideos: [],
       likedVideos: [],
+      dislikedVideos: [],
     });
   };
 

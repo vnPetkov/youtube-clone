@@ -9,12 +9,11 @@ import InfiniteScroll from "react-infinite-scroll-component";
 import FetchVideo from "../utilities/FetchVideo";
 
 export default function WatchVideo(props) {
-
   const [channelInfoReady, setChannelInfoReady] = useState(false);
-  const [channelInfo,setChannelInfo] = useState([]);
+  const [channelInfo, setChannelInfo] = useState([]);
 
-  const [videoInfoReady, setVideoInfoReady] =useState(false);
-  const [videoInfo,setVideoInfo] = useState([]);
+  const [videoInfoReady, setVideoInfoReady] = useState(false);
+  const [videoInfo, setVideoInfo] = useState([]);
 
   const [comments, setComments] = useState([]);
   const [commentsReady, setCommentsReady] = useState(false);
@@ -27,15 +26,18 @@ export default function WatchVideo(props) {
   const params = useParams();
 
   // Fetch video
-  useEffect(()=>{
-    console.log(params)
-    fetch(`https://www.googleapis.com/youtube/v3/videos?part=snippet&part=statistics&id=${params.videoId}&key=${props.API_KEY}`)
-      .then(res=>res.json())
-      .then(data=>{
+  useEffect(() => {
+    console.log(params);
+    fetch(
+      `https://www.googleapis.com/youtube/v3/videos?part=snippet&part=statistics&id=${params.videoId}&key=${props.API_KEY}`
+    )
+      .then((res) => res.json())
+      .then((data) => {
+        console.log("SOS       : ", data);
         setVideoInfo(data);
         setVideoInfoReady(true);
-      })
-  },[])
+      });
+  }, []);
 
   // Fetch comments
   useEffect(() => {
@@ -46,23 +48,23 @@ export default function WatchVideo(props) {
       .then((data) => {
         setComments(data);
         setCommentsReady(true);
-        
       });
   }, []);
 
   // Fetch channel image
-  useEffect(()=>{
-    if(videoInfoReady){
-      fetch(`https://youtube.googleapis.com/youtube/v3/channels?part=snippet%2CcontentDetails%2Cstatistics&id=${videoInfo.items[0].snippet.channelId}&key=${props.API_KEY}`)
-        .then(res=>res.json())
-        .then(data=>{
+  useEffect(() => {
+    if (videoInfoReady) {
+      fetch(
+        `https://youtube.googleapis.com/youtube/v3/channels?part=snippet%2CcontentDetails%2Cstatistics&id=${videoInfo.items[0].snippet.channelId}&key=${props.API_KEY}`
+      )
+        .then((res) => res.json())
+        .then((data) => {
           setChannelInfo(data);
           setChannelInfoReady(true);
-          console.log(data)
-        })
+          console.log(data);
+        });
     }
-  
-  },[videoInfoReady])
+  }, [videoInfoReady]);
 
   function fetchRelatedVideos() {
     FetchVideo(nextPageToken)
@@ -127,7 +129,9 @@ export default function WatchVideo(props) {
             height="100%"
           ></iframe>
         </div>
-      {videoInfoReady && channelInfoReady && <VideoInfo videoInfo={videoInfo} channelInfo={channelInfo} />}  
+        {videoInfoReady && channelInfoReady && (
+          <VideoInfo videoInfo={videoInfo} channelInfo={channelInfo} />
+        )}
         {commentsReady && <Comments comments={comments} />}
       </div>
 

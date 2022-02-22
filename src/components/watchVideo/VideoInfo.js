@@ -1,10 +1,11 @@
 import React from "react";
 import ThumbUpOutlinedIcon from "@mui/icons-material/ThumbUpOutlined";
 import ThumbDownOutlinedIcon from "@mui/icons-material/ThumbDownOutlined";
+import ThumbDownIcon from "@mui/icons-material/ThumbDown";
+import ThumbUpIcon from "@mui/icons-material/ThumbUp";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
-import { Link,useParams } from "react-router-dom";
-
+import { Link } from "react-router-dom";
 import styles from "./VideoInfo.module.scss";
 import { useDispatch, useSelector } from "react-redux";
 import { db } from "../../firebase/firebaseConfig.js";
@@ -12,21 +13,51 @@ import { updateDoc, doc } from "firebase/firestore";
 
 export default function VideoInfo(props) {
   let videoInfo = props.videoInfo.items[0];
-  let channelInfo = props.channelInfo
-  console.log(videoInfo)
-  
+  let channelInfo = props.channelInfo;
+
   const logged = useSelector((state) => state.userData.logged);
   const curentUserId = useSelector((state) => state.userData.uid);
   const curentUserLiked = useSelector((state) => state.userData.likedVideos);
+  const curentUserDisliked = useSelector(
+    (state) => state.userData.dislikedVideos
+  );
+  const isLiked = curentUserLiked.some((e) => e === videoInfo.id);
+  const isDisliked = curentUserDisliked.some((e) => e === videoInfo.id);
+
+  const removeVideo = (array, videoId) => {
+    let index = array.indexOf(videoId);
+    array.splice(index, 1);
+  };
+  const updateFirebase = (liked, disliked) => {
+    const userDoc = doc(db, "users", curentUserId);
+    const newFields = {
+      likedVideos: [...liked],
+      dislikedVideos: [...disliked],
+    };
+    updateDoc(userDoc, newFields);
+  };
 
   const dispatch = useDispatch();
-  const like = (userId, currentLiked) => {
-    console.log("nashivane v liked");
-    dispatch({ type: "LIKE", videoId: props.id });
 
-    const userDoc = doc(db, "users", userId);
-    const newFields = { likedVideos: [...currentLiked, props.id] };
-    updateDoc(userDoc, newFields);
+  const changeLiked = (currentLiked, currentDisliked) => {
+    isLiked
+      ? removeVideo(currentLiked, videoInfo.id)
+      : currentLiked.push(videoInfo.id);
+    isDisliked && removeVideo(currentDisliked, videoInfo.id);
+
+    dispatch({ type: "CHANGE_LIKED", newLikedArr: currentLiked });
+    dispatch({ type: "CHANGE_DISLIKED", newDislikedArr: currentDisliked });
+    updateFirebase(currentLiked, currentDisliked);
+  };
+  const changeDisliked = (currentLiked, currentDisliked) => {
+    isDisliked
+      ? removeVideo(currentDisliked, videoInfo.id)
+      : currentDisliked.push(videoInfo.id);
+    isLiked && removeVideo(currentLiked, videoInfo.id);
+
+    dispatch({ type: "CHANGE_LIKED", newLikedArr: currentLiked });
+    dispatch({ type: "CHANGE_DISLIKED", newDislikedArr: currentDisliked });
+    updateFirebase(currentLiked, currentDisliked);
   };
 
   return (
@@ -35,19 +66,25 @@ export default function VideoInfo(props) {
         <h5>{videoInfo.snippet.title}</h5>
         <div>
           <p>
-            {videoInfo.statistics.viewCount} &#9679; гледания {videoInfo.snippet.publishedAt}
+            {videoInfo.statistics.viewCount} &#9679; views{" "}
+            {videoInfo.snippet.publishedAt}
           </p>
 
           <div>
-            <span onClick={() => like(curentUserId, curentUserLiked)}>
-              <ThumbUpOutlinedIcon />
-
+            <span
+              onClick={() => changeLiked(curentUserLiked, curentUserDisliked)}
+            >
+              {isLiked ? <ThumbUpIcon /> : <ThumbUpOutlinedIcon />}
               <p>{videoInfo.statistics.likeCount}</p>
             </span>
 
-            <span>
-              <ThumbDownOutlinedIcon />
-              <p>НЕХАРЕСВАНЕ</p>
+            <span
+              onClick={() =>
+                changeDisliked(curentUserLiked, curentUserDisliked)
+              }
+            >
+              {isDisliked ? <ThumbDownIcon /> : <ThumbDownOutlinedIcon />}
+              <p>DISLIKE</p>
             </span>
           </div>
         </div>
@@ -55,7 +92,6 @@ export default function VideoInfo(props) {
 
       <div>
         <div className="infoChannel">
-
           <Link to={`/channel/${videoInfo.snippet.channelId}/`}>
             <div className={styles.channelInformation}>
               <Avatar
@@ -66,17 +102,17 @@ export default function VideoInfo(props) {
               />
               <p>
                 <a href="...">{videoInfo.snippet.channelTitle}</a> <br />
-                 {channelInfo.items[0].statistics.subscriberCount} абоната
+                {channelInfo.items[0].statistics.subscriberCount} subscribers
               </p>
             </div>
           </Link>
 
           <div className={styles.channelButtons}>
             <Button variant="outlined" color="primary">
-              СТАНЕТЕ ЧЛЕН
+              JOIN
             </Button>
             <Button variant="contained" color="error">
-              АБОНИРАНЕ
+              SUBSCRIBE
             </Button>
           </div>
         </div>
