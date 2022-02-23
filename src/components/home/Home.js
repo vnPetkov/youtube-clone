@@ -3,12 +3,25 @@ import HomeVideo from "./HomeVideo";
 import React, { useState, useEffect } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
 import FetchVideo from "../utilities/FetchVideo";
+import API_KEY from "../utilities/API_KEY";
 
-export default function Home() {
+export default function Home({categoryTitle}) {
   const [homeVideos, setHomeVideos] = useState([]);
+
   const [channels, setChannels] = useState([]);
   const [nextPageToken, setNextPageToken] = useState("");
   let content = null;
+
+  // TODO FETCH CATEGORIES HAVE TO FINISH IT
+  useEffect(() => {
+    fetch(`https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=20&q=${categoryTitle}&type=video&key=${API_KEY}`)
+      .then(res => res.json())
+      .then(res => {
+        console.log(res)
+        // HOMEVIDEOS(res)
+      })
+  }, [categoryTitle])
+
 
   function fetchHomeVideos() {
     FetchVideo(nextPageToken)
@@ -30,7 +43,7 @@ export default function Home() {
   if (homeVideos.length !== 0 && channels.length !== 0) {
     content = (
       <InfiniteScroll
-      style={{display:"flex", justifyContent:"center"}}
+        style={{ display: "flex", justifyContent: "center" }}
         dataLength={homeVideos.length}
         next={() => {
           console.log("previous result : ", homeVideos, channels);

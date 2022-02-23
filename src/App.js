@@ -20,7 +20,7 @@ function App() {
   const [sidebarOpen, setSidebarOpen] = useState(true);
   const [searchResults, setSearchResults] = useState([]);
   const [inputFocus, setInputFocus] = useState(false);
-
+  const [selectedCategory, setSelectedCategory] = useState("");
   const showHeader = useSelector((state) => state.navsDisplay.showHeader);
 
   return (
@@ -28,6 +28,7 @@ function App() {
       <BrowserRouter>
         {showHeader && (
           <Header
+            setSelectedCategory={setSelectedCategory}
             sidebarOpen={sidebarOpen}
             setSidebarOpen={setSidebarOpen}
             search={search}
@@ -45,7 +46,7 @@ function App() {
               element={
                 <>
                   <Sidebar sidebarOpen={sidebarOpen} />
-                  <Home />
+                  <Home selectedCategory={selectedCategory} />
                 </>
               }
             />

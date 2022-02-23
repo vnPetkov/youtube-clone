@@ -18,6 +18,7 @@ import { useDispatch, useSelector } from "react-redux";
 import UploadModal from "./UploadModal";
 
 export default function Header({
+  setSelectedCategory,
   sidebarOpen,
   setSidebarOpen,
   search,
@@ -168,7 +169,7 @@ export default function Header({
       </div>
 
       <Routes>
-        <Route path="/" element={<HomeCategories />} />
+        <Route path="/" element={<HomeCategories setSelectedCategory={setSelectedCategory}/>} />
       </Routes>
     </div>
   );
