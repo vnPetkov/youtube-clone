@@ -1,4 +1,4 @@
-import api_key from "../utilities/api_key";
+import API_KEY from "../utilities/API_KEY";
 import React, { useEffect, useState } from "react";
 
 import Autocomplete from "./Autocomplete";
@@ -15,8 +15,11 @@ import AppsIcon from "@mui/icons-material/Apps";
 import VideoCallOutlinedIcon from "@mui/icons-material/VideoCallOutlined";
 import SignOutButton from "../buttons/SignoutButton";
 import { useDispatch, useSelector } from "react-redux";
+import UploadModal from "./UploadModal";
 
 export default function Header({
+  sidebarOpen,
+  setSidebarOpen,
   search,
   setSearch,
   setSearchResults,
@@ -26,12 +29,17 @@ export default function Header({
   const history = useNavigate();
 
   const [autocompleteResults, setAutocompleteResults] = useState([]);
+  const [modalIsOpen, setIsOpen] = useState(false);
   const logged = useSelector((state) => state.userData.logged);
+
+  function openModal() {
+    setIsOpen(true);
+}
 
   // DEBOUNCED AUTOCOMPLETE
   function fetchAutocomplete() {
     fetch(
-      `https://www.googleapis.com/youtube/v3/search?key=${api_key}&maxResults=15&part=snippet&q=${search}`
+      `https://www.googleapis.com/youtube/v3/search?key=${API_KEY}&maxResults=15&part=snippet&q=${search}`
     )
       .then((res) => res.json())
       .then((data) => {
@@ -46,7 +54,7 @@ export default function Header({
   const searchVideos = (e) => {
     e.preventDefault();
     fetch(
-      `https://www.googleapis.com/youtube/v3/search?key=${api_key}&maxResults=15&part=snippet&q=${search}`
+      `https://www.googleapis.com/youtube/v3/search?key=${API_KEY}&maxResults=15&part=snippet&q=${search}`
     )
       .then((res) => res.json())
       .then((data) => {
@@ -76,7 +84,7 @@ export default function Header({
   return (
     <div className={styles.headerContainer}>
       <div>
-        <div className={styles.header_burger_logo}>
+        <div className={styles.header_burger_logo} onClick={()=>setSidebarOpen(!sidebarOpen)}>
           <span>
             <MenuIcon />
           </span>
@@ -107,7 +115,6 @@ export default function Header({
                 }}
               />
 
-              {/* This will be hidden when input is empty */}
               {search != "" && (
                 <span>
                   <img
@@ -146,11 +153,9 @@ export default function Header({
 
         <div className={styles.header_signin}>
           <span className={styles.videoUploadSpan}>
-            <VideoCallOutlinedIcon />
-            <div className={styles.uploadVideo}>
-              <input type="file" accept="video/*" id="videoFileInput" />{" "}
-              <button onClick={uploadVideo}>Upload video</button>
-            </div>
+            <VideoCallOutlinedIcon onClick={openModal} />
+            <UploadModal uploadVideo={uploadVideo} modalIsOpen={modalIsOpen} setIsOpen={setIsOpen} />
+            
           </span>
           <span>
             <AppsIcon />

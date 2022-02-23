@@ -30,6 +30,7 @@ export default function Home() {
   if (homeVideos.length !== 0 && channels.length !== 0) {
     content = (
       <InfiniteScroll
+      style={{display:"flex", justifyContent:"center"}}
         dataLength={homeVideos.length}
         next={() => {
           console.log("previous result : ", homeVideos, channels);

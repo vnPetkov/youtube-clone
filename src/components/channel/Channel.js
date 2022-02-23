@@ -2,10 +2,12 @@ import styles from "./Channel.module.scss";
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
+import numberWithCommas from "../utilities/NumbersFormat";
+import API_KEY from "../utilities/API_KEY";
 
 
 
-export default function Channel({ API_KEY }) {
+export default function Channel() {
     const params = useParams();
     const [channelPlaylist, setChannelPlaylist] = useState();
     const [channelInfo, setChannelInfo] = useState([]);
@@ -36,7 +38,7 @@ export default function Channel({ API_KEY }) {
             <img src={channelInfo.snippet.thumbnails.default.url} />
             <div>
                 <p className={styles.channelName}>{channelInfo.snippet.title}</p>
-                <p className={styles.channelSubs}>{channelInfo.statistics.subscriberCount} абонати</p>
+                <p className={styles.channelSubs}>{numberWithCommas(channelInfo.statistics.subscriberCount)} абонати</p>
             </div>
 
         </div>)}

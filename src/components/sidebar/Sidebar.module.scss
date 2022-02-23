@@ -1,6 +1,7 @@
 .sidebar {
-  flex: 0.13;
-  // padding-right: 15px;
+  width: 220px;
+  position: fixed;
+  left: 0px;
   background-color: white;
   a {
     color: black;
@@ -26,4 +27,18 @@
     font-size: 16px;
     font-weight: 500;
   }
+
+}
+.tabActive {
+  display: flex;
+  align-items: center;
+  padding: 10px 20px;
+  background-color: lightgrey;
+  h2 {
+    flex: 1;
+    margin-left: 20px;
+    font-size: 16px;
+    font-weight: 500;
+  }
+
 }

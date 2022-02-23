@@ -1,4 +1,4 @@
-import api_key from "../utilities/api_key";
+import API_KEY from "../utilities/API_KEY";
 import React, { useState, useEffect } from "react";
 import HorizontalCard from "../cards/HorizontalCard";
 import { useParams } from "react-router-dom";
@@ -27,13 +27,11 @@ export default function WatchVideo(props) {
 
   // Fetch video
   useEffect(() => {
-    console.log(params);
     fetch(
-      `https://www.googleapis.com/youtube/v3/videos?part=snippet&part=statistics&id=${params.videoId}&key=${props.API_KEY}`
+      `https://www.googleapis.com/youtube/v3/videos?part=snippet&part=statistics&id=${params.videoId}&key=${API_KEY}`
     )
       .then((res) => res.json())
       .then((data) => {
-        console.log("SOS       : ", data);
         setVideoInfo(data);
         setVideoInfoReady(true);
       });
@@ -42,7 +40,7 @@ export default function WatchVideo(props) {
   // Fetch comments
   useEffect(() => {
     fetch(
-      `https://www.googleapis.com/youtube/v3/commentThreads?key=${api_key}&textFormat=plainText&part=snippet&videoId=${params.videoId}&maxResults=50`
+      `https://www.googleapis.com/youtube/v3/commentThreads?key=${API_KEY}&textFormat=plainText&part=snippet&videoId=${params.videoId}&maxResults=50`
     )
       .then((res) => res.json())
       .then((data) => {
@@ -55,13 +53,12 @@ export default function WatchVideo(props) {
   useEffect(() => {
     if (videoInfoReady) {
       fetch(
-        `https://youtube.googleapis.com/youtube/v3/channels?part=snippet%2CcontentDetails%2Cstatistics&id=${videoInfo.items[0].snippet.channelId}&key=${props.API_KEY}`
+        `https://youtube.googleapis.com/youtube/v3/channels?part=snippet%2CcontentDetails%2Cstatistics&id=${videoInfo.items[0].snippet.channelId}&key=${API_KEY}`
       )
         .then((res) => res.json())
         .then((data) => {
           setChannelInfo(data);
           setChannelInfoReady(true);
-          console.log(data);
         });
     }
   }, [videoInfoReady]);

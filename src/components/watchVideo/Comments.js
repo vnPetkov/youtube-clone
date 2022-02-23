@@ -32,41 +32,43 @@ export default function Comments(props) {
     );
     videoCommentsIndex
       ? dispatch({
-          type: "ADD_COMMENT", ////////////////ako Е коментирано видото до сега --> създаване на нов обект с коментара, който нашиваме в масива намиращ се в големия обект на видеото
-          newComment: commentObj,
-          videoInd: videoCommentsIndex,
-        })
+        type: "ADD_COMMENT", ////////////////ako Е коментирано видото до сега --> създаване на нов обект с коментара, който нашиваме в масива намиращ се в големия обект на видеото
+        newComment: commentObj,
+        videoInd: videoCommentsIndex,
+      })
       : dispatch({
-          type: "ADD_VIDEO_COMMENTS", ////////////////ako НЕ Е коментирано видото до сега --> създаване на целия обект
-          newVideoComments: {
-            videoId: watchedVideoId,
-            comments: [commentObj],
-          },
-        });
+        type: "ADD_VIDEO_COMMENTS", ////////////////ako НЕ Е коментирано видото до сега --> създаване на целия обект
+        newVideoComments: {
+          videoId: watchedVideoId,
+          comments: [commentObj],
+        },
+      });
   };
 
   return (
-    <div className="comments">
-      <div className="commentForm">
-        <Avatar
-          className={styles.avatar}
-          alt={props.user}
-          src={props.userImg}
-          sx={{ width: 48, height: 48 }}
-        />
-        <form>
+    <div className={styles.comments}>
+      <div className={styles.commentForm}>
+        <div className={styles.commentField}>
+          <Avatar
+            className={styles.avatar}
+            alt={props.user}
+            src={props.userImg}
+            sx={{ width: 48, height: 48 }}
+          />
           <input
             type="text"
             placeholder="Добавяне на публичен коментар..."
             id="commentInput"
           ></input>
-        </form>
-        <Button variant="contained">Cancel</Button>
-        <Button variant="contained" onClick={uploadComment}>
-          Comment
-        </Button>
+        </div>
+
+        <div className={styles.commentBtns}>
+          <Button variant="contained" className={styles.cancelCommentBtn}>Cancel</Button>
+          <Button variant="contained" onClick={uploadComment}>Comment</Button>
+        </div>
+
       </div>
-      <div className="commentsList">
+      <div className={styles.commentsList}>
         {comments &&
           comments.map((el) => {
             let commentText = el.snippet.topLevelComment.snippet.textDisplay;
@@ -79,7 +81,7 @@ export default function Comments(props) {
               el.snippet.topLevelComment.snippet.authorChannelId.value;
 
             return (
-              <Link to={`/channel/${commentChannelId}/`}>
+              <Link to={`/channel/${commentChannelId}/`} key={commentText}>
                 <div className={styles.comment} key={commentText}>
                   <Avatar
                     className={styles.avatar}

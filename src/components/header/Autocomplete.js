@@ -8,7 +8,6 @@ export default function Autocomplete({ autocompleteResults, setInputFocus,setSea
     <div className={styles.header_autocomplete}>
       {autocompleteResults &&
         autocompleteResults.map((item) => {
-          console.log(item)
           return (
             <a
               key={item.id.videoId}

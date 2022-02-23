@@ -1,9 +1,10 @@
 .watchVideo {
+  background-color: white;
   display: flex;
   justify-content: center;
-  width: 92%;
+  width: 89%;
   min-height: 100vh;
-  margin: 25px auto;
+  // margin: auto;
 
   .mainColumn {
     padding: 0px 25px;

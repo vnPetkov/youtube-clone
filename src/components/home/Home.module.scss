@@ -1,5 +1,5 @@
 .home {
-  flex: 0.87;
+  width: 100%;
   background-color: #f9f9f9;
   padding: 25px 70px;
 
@@ -7,6 +7,7 @@
     padding-top: 60px;
     display: flex;
     flex-wrap: wrap;
+    align-items: center;
 
     a {
       text-decoration: none;

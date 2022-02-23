@@ -1,4 +1,4 @@
-import api_key from "./api_key";
+import API_KEY from "./API_KEY";
 
 export default function FetchVideosById(idArr) {
   console.log("активиране ");
@@ -7,7 +7,7 @@ export default function FetchVideosById(idArr) {
   let finalResult = [];
 
   return fetch(
-    `https://youtube.googleapis.com/youtube/v3/videos?part=snippet%2CcontentDetails%2Cstatistics${idString}&key=${api_key}`
+    `https://youtube.googleapis.com/youtube/v3/videos?part=snippet%2CcontentDetails%2Cstatistics${idString}&key=${API_KEY}`
   )
     .then((resp) => resp.json())
     .then((result) => result.items)

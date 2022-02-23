@@ -10,6 +10,7 @@ import styles from "./VideoInfo.module.scss";
 import { useDispatch, useSelector } from "react-redux";
 import { db } from "../../firebase/firebaseConfig.js";
 import { updateDoc, doc } from "firebase/firestore";
+import numberWithCommas from "../utilities/NumbersFormat";
 
 export default function VideoInfo(props) {
   let videoInfo = props.videoInfo.items[0];
@@ -66,7 +67,7 @@ export default function VideoInfo(props) {
         <h5>{videoInfo.snippet.title}</h5>
         <div>
           <p>
-            {videoInfo.statistics.viewCount} &#9679; views{" "}
+            {numberWithCommas(videoInfo.statistics.viewCount)} views{" "} &#9679; 
             {videoInfo.snippet.publishedAt}
           </p>
 
@@ -75,7 +76,7 @@ export default function VideoInfo(props) {
               onClick={() => changeLiked(curentUserLiked, curentUserDisliked)}
             >
               {isLiked ? <ThumbUpIcon /> : <ThumbUpOutlinedIcon />}
-              <p>{videoInfo.statistics.likeCount}</p>
+              <p>{isLiked ? videoInfo.statistics.likeCount+1 : videoInfo.statistics.likeCount}</p>
             </span>
 
             <span
@@ -96,7 +97,7 @@ export default function VideoInfo(props) {
             <div className={styles.channelInformation}>
               <Avatar
                 className={styles.avatar}
-                alt={videoInfo.snippet.channelTitlel}
+                alt={videoInfo.snippet.channelTitle}
                 src={channelInfo.items[0].snippet.thumbnails.default.url}
                 sx={{ width: 48, height: 48 }}
               />

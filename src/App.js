@@ -17,10 +17,10 @@ import { useSelector } from "react-redux";
 
 function App() {
   const [search, setSearch] = useState("");
+  const [sidebarOpen, setSidebarOpen] = useState(true);
   const [searchResults, setSearchResults] = useState([]);
   const [inputFocus, setInputFocus] = useState(false);
 
-  const API_KEY = "AIzaSyA_7IYSyNXzIfLjkWLAjF-R7g5W8pdAcS8";
   const showHeader = useSelector((state) => state.navsDisplay.showHeader);
 
   return (
@@ -28,10 +28,11 @@ function App() {
       <BrowserRouter>
         {showHeader && (
           <Header
+            sidebarOpen={sidebarOpen}
+            setSidebarOpen={setSidebarOpen}
             search={search}
             setSearch={setSearch}
             setSearchResults={setSearchResults}
-            API_KEY={API_KEY}
             inputFocus={inputFocus}
             setInputFocus={setInputFocus}
           />
@@ -43,7 +44,7 @@ function App() {
               path="/"
               element={
                 <>
-                  <Sidebar />
+                  <Sidebar sidebarOpen={sidebarOpen} />
                   <Home />
                 </>
               }
@@ -54,7 +55,7 @@ function App() {
               path="/history_page"
               element={
                 <>
-                  <Sidebar />
+                  <Sidebar sidebarOpen={sidebarOpen} />
                   <History />
                 </>
               }
@@ -63,7 +64,7 @@ function App() {
               path="/upload_page"
               element={
                 <>
-                  <Sidebar />
+                  <Sidebar sidebarOpen={sidebarOpen} />
                   <Upload />
                 </>
               }
@@ -72,7 +73,7 @@ function App() {
               path="/liked_page"
               element={
                 <>
-                  <Sidebar />
+                  <Sidebar sidebarOpen={sidebarOpen} />
                   <Liked />
                 </>
               }
@@ -81,22 +82,22 @@ function App() {
               path="/search_page"
               element={
                 <>
-                  <Sidebar />
+                  <Sidebar sidebarOpen={sidebarOpen} />
                   <Search searchResults={searchResults} />
                 </>
               }
             />
             <Route
               path="/watchVideo_page/:videoId/"
-              element={<WatchVideo API_KEY={API_KEY} />}
+              element={<WatchVideo />}
             />
 
             <Route
               path="/channel/:channelid"
               element={
                 <>
-                  <Sidebar />
-                  <Channel API_KEY={API_KEY} />
+                  <Sidebar sidebarOpen={sidebarOpen} />
+                  <Channel />
                 </>
               }
             />

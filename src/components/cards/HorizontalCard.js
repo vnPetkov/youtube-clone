@@ -19,6 +19,7 @@ export default function HorizontalCard({
   return (
     <Link
       to={`/watchVideo_page/${videoId}/`}
+      key = {videoId}
     >
       <div className={currentClass}>
         <img src={img} alt="video poster" />

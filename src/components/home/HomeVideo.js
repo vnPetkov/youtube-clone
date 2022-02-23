@@ -1,5 +1,6 @@
 import React from "react";
 import styles from "./HomeVideo.module.scss";
+import numberWithCommas from "../utilities/NumbersFormat";
 import { Link } from "react-router-dom";
 
 import Avatar from "@mui/material/Avatar";
@@ -25,21 +26,23 @@ export default function HomeVideo(props) {
       })();
   };
 
+
+
   return (
     <Link
-      channelId={props.channelId}
+      // channelId={props.channelId}
       to={`/watchVideo_page/${props.videoId}/`}
       onClick={() => addHistory(curentUserId, curentUserHistory)}
     >
       <div className={styles.videoCard}>
         <img src={props.img} alt="video poster" />
         <div>
-          <Avatar alt={props.channel} src={props.channelImg} />
+          <Avatar alt={props.channel} src={props.channelImg} style={{marginRight:'10px'}}/>
           <div>
             <h4>{props.title}</h4>
             <p>{props.channel}</p>
             <p>
-              {props.views} &#9679; {props.timestamp}
+              {numberWithCommas(props.views)} &#9679; {props.timestamp}
             </p>
           </div>
         </div>

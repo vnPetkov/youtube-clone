@@ -1,4 +1,4 @@
-import api_key from "./api_key";
+import API_KEY from "./API_KEY";
 
 export default function FetchVideo(requiredNextPage) {
   let videos = [];
@@ -8,7 +8,7 @@ export default function FetchVideo(requiredNextPage) {
   let finalResult;
 
   return fetch(
-    `https://youtube.googleapis.com/youtube/v3/videos?part=snippet%2CcontentDetails%2Cstatistics&chart=mostPopular&locale=BG&maxResults=24&regionCode=BG&key=${api_key}&pageToken=${nextPageToken}`
+    `https://youtube.googleapis.com/youtube/v3/videos?part=snippet%2CcontentDetails%2Cstatistics&chart=mostPopular&locale=BG&maxResults=24&regionCode=BG&key=${API_KEY}&pageToken=${nextPageToken}`
   )
     .then((resp) => resp.json())
     .then((result) => {
@@ -18,7 +18,7 @@ export default function FetchVideo(requiredNextPage) {
       return Promise.all(
         result.items.map((video) => {
           return fetch(
-            `https://youtube.googleapis.com/youtube/v3/channels?part=snippet%2CcontentDetails%2Cstatistics&id=${video.snippet.channelId}&key=${api_key}`
+            `https://youtube.googleapis.com/youtube/v3/channels?part=snippet%2CcontentDetails%2Cstatistics&id=${video.snippet.channelId}&key=${API_KEY}`
           );
         })
       );

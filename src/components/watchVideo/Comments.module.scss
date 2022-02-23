@@ -1,6 +1,35 @@
-.commentForm form {
+
+.comments{
   display: flex;
+  flex-flow: column wrap;
 }
+.commentField{
+  display: flex;
+  align-items: center;
+  input{
+    border:none;
+    border-bottom: 1px solid black;
+    outline: none;
+    width: 95%;
+    height: 20px;
+  }
+
+}
+.commentBtns{
+  width:100%;
+  display: flex;
+  justify-content: flex-end;
+  gap: 20px;
+}
+
+.cancelCommentBtn{
+  border:none;
+  box-shadow: none;
+  outline:none;
+  color: grey;
+  background: none !important;
+}
+
 
 .comment {
   margin-top: 30px;

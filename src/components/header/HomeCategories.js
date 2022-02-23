@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import styles from "./HomeCategories.module.scss";
-import api_key from "../utilities/api_key";
+import API_KEY from "../utilities/API_KEY";
 
 export default function HomeCategories() {
   const [categoriesList, setCategoriesList] = useState([]);
@@ -11,7 +11,7 @@ export default function HomeCategories() {
 
   useEffect(() => {
     fetch(
-      `https://youtube.googleapis.com/youtube/v3/videoCategories?part=snippet&regionCode=BG&key=${api_key}`
+      `https://youtube.googleapis.com/youtube/v3/videoCategories?part=snippet&regionCode=BG&key=${API_KEY}`
     )
       .then((resp) => resp.json())
       .then((result) => setCategoriesList(result.items));

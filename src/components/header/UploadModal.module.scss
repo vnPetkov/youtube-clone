@@ -1,0 +1,19 @@
+.closeModalBtn {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 20px;
+  width: 20px;
+  cursor: pointer;
+}
+
+.uploadBtn {
+  position: absolute !important;
+  bottom: 15px !important;
+}
+.uploadVideoTitle {
+  margin-bottom: 40px;
+}

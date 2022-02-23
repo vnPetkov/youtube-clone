@@ -1,5 +1,4 @@
 import styles from "./Sidebar.module.scss";
-import SidebarTab from "./SidebarTab";
 import HomeIcon from "@mui/icons-material/Home";
 import HistoryIcon from "@mui/icons-material/History";
 import VideoLibraryOutlinedIcon from "@mui/icons-material/VideoLibraryOutlined";
@@ -9,49 +8,82 @@ import MovieOutlinedIcon from "@mui/icons-material/MovieOutlined";
 import SubscriptionsOutlinedIcon from "@mui/icons-material/SubscriptionsOutlined";
 import SlideshowOutlinedIcon from "@mui/icons-material/SlideshowOutlined";
 import AccessTimeOutlinedIcon from "@mui/icons-material/AccessTimeOutlined";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
-export default function Sidebar() {
+export default function Sidebar({sidebarOpen}) {
+  const { pathname } = useLocation();
+
+
   if (window.location.pathname === "/watchVideo_page") {
     return null;
   } else {
     return (
-      <div className={styles.sidebar}>
-        <Link to="/">
-          <SidebarTab Icon={HomeIcon} tabName="Home" />
+      sidebarOpen && (<div className={styles.sidebar}>
+        <Link to="/" >
+          <div className={pathname === "/" ? styles.tabActive : styles.tab}>
+            <HomeIcon />
+            <h2>Home</h2>
+          </div>
         </Link>
+
         <Link to="/">
-          <SidebarTab Icon={ExploreOutlinedIcon} tabName="Explore" />
+          <div className={`${styles.tab}`} >
+            <ExploreOutlinedIcon />
+            <h2>Explore</h2>
+          </div>
         </Link>
+
         <Link to="/">
-          <SidebarTab Icon={MovieOutlinedIcon} tabName="Shorts" />
+          <div className={`${styles.tab}`} >
+            <MovieOutlinedIcon />
+            <h2>Shorts</h2>
+          </div>
         </Link>
+
         <Link to="/">
-          <SidebarTab
-            Icon={SubscriptionsOutlinedIcon}
-            tabName="Subscriptions"
-          />
+          <div className={`${styles.tab}`} >
+            <SubscriptionsOutlinedIcon />
+            <h2>Subscriptions</h2>
+          </div>
         </Link>
+
         <div></div>
+
         <Link to="/">
-          <SidebarTab Icon={VideoLibraryOutlinedIcon} tabName="Library" />
+          <div className={`${styles.tab}`} >
+            <VideoLibraryOutlinedIcon />
+            <h2>Library</h2>
+          </div>
         </Link>
 
         <Link to="/history_page">
-          <SidebarTab Icon={HistoryIcon} tabName="History" />
+          <div className={pathname === "/history_page" ? styles.tabActive : styles.tab}>
+            <HistoryIcon />
+            <h2>History</h2>
+          </div>
         </Link>
 
         <Link to="/upload_page">
-          <SidebarTab Icon={SlideshowOutlinedIcon} tabName="Your videos" />
+          <div className={pathname === "/upload_page" ? styles.tabActive : styles.tab}>
+            <SlideshowOutlinedIcon />
+            <h2>Your videos</h2>
+          </div>
         </Link>
+
         <Link to="/">
-          <SidebarTab Icon={AccessTimeOutlinedIcon} tabName="Watch Later" />
+          <div className={`${styles.tab}`} >
+            <AccessTimeOutlinedIcon />
+            <h2>Watch Later</h2>
+          </div>
         </Link>
 
         <Link to="/liked_page">
-          <SidebarTab Icon={ThumbUpOutlinedIcon} tabName="Liked videos" />
+          <div className={pathname === "/liked_page" ? styles.tabActive : styles.tab}>
+            <ThumbUpOutlinedIcon />
+            <h2>Liked videos</h2>
+          </div>
         </Link>
-      </div>
+      </div>)
     );
   }
 }
