@@ -1,11 +1,17 @@
-const INITIAL_STATE = {
-  logged: false,
-  uid: "",
-  profileImg: "",
-  historyVideos: [],
-  likedVideos: [],
-  dislikedVideos: [],
-};
+let user = JSON.parse(localStorage.getItem("user"));
+const initialState = user ? { loggedIn: true, user } : {};
+
+const INITIAL_STATE = user
+  ? {}
+  : {
+      logged: false,
+      uid: "",
+      profileImg: "",
+      historyVideos: [],
+      likedVideos: [],
+      dislikedVideos: [],
+      uploadedVideos: [],
+    };
 
 export const userReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
@@ -37,6 +43,11 @@ export const userReducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         dislikedVideos: [...action.newDislikedArr],
+      };
+    case "CHANGE_UPLOADED":
+      return {
+        ...state,
+        uploadedVideos: [...state.uploadedVideos, action.video],
       };
 
     default:

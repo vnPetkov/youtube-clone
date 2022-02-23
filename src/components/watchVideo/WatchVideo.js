@@ -132,7 +132,9 @@ export default function WatchVideo(props) {
         {videoInfoReady && channelInfoReady && (
           <VideoInfo videoInfo={videoInfo} channelInfo={channelInfo} />
         )}
-        {commentsReady && <Comments comments={comments} />}
+        {commentsReady && (
+          <Comments comments={comments} videoId={params.videoId} />
+        )}
       </div>
 
       <div className={styles.relatedColumn}>{content}</div>

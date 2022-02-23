@@ -12,8 +12,9 @@ import { FaMicrophone, FaRegUserCircle } from "react-icons/fa";
 import { BsSearch, BsThreeDotsVertical } from "react-icons/bs";
 import MenuIcon from "@mui/icons-material/Menu";
 import AppsIcon from "@mui/icons-material/Apps";
+import VideoCallOutlinedIcon from "@mui/icons-material/VideoCallOutlined";
 import SignOutButton from "../buttons/SignoutButton";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 export default function Header({
   search,
@@ -53,6 +54,24 @@ export default function Header({
         setInputFocus(false);
         history("/search_page");
       });
+  };
+  const dispatch = useDispatch();
+  const uploadVideo = () => {
+    let input = document.getElementById("videoFileInput");
+    let freader = new FileReader();
+    freader.readAsDataURL(input.files[0]);
+    freader.onload = function () {
+      let uploadVideoObj = {
+        src: freader.result,
+        name: "Our home",
+        channel: "Deep space geeks",
+        description: "uahfauifhsuoghpuognrgujbntquojwrnquowgnqe",
+      };
+      dispatch({
+        type: "CHANGE_UPLOADED",
+        video: uploadVideoObj,
+      });
+    };
   };
   return (
     <div className={styles.headerContainer}>
@@ -115,7 +134,7 @@ export default function Header({
           </div>
 
           <div>
-            <button onClick={(e)=>searchVideos(e)}>
+            <button onClick={(e) => searchVideos(e)}>
               <BsSearch />
             </button>
           </div>
@@ -126,6 +145,13 @@ export default function Header({
         </div>
 
         <div className={styles.header_signin}>
+          <span className={styles.videoUploadSpan}>
+            <VideoCallOutlinedIcon />
+            <div className={styles.uploadVideo}>
+              <input type="file" accept="video/*" id="videoFileInput" />{" "}
+              <button onClick={uploadVideo}>Upload video</button>
+            </div>
+          </span>
           <span>
             <AppsIcon />
           </span>

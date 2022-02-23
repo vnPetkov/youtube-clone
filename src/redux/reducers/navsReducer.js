@@ -21,3 +21,4 @@ export const navsReducer = (state = INITIAL_STATE, action) => {
       return state;
   }
 };
+//TODO: SET SIDE BAR VISSIBILLITY
