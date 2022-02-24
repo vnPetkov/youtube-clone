@@ -23,9 +23,18 @@ export const userReducer = (state = INITIAL_STATE, action) => {
         historyVideos: action.history,
         likedVideos: action.liked,
         dislikedVideos: action.disliked,
+        uploadedVideos: action.uploaded,
       };
     case "LOGOUT":
-      return { ...state };
+      return {
+        logged: false,
+        uid: "",
+        profileImg: "",
+        historyVideos: [],
+        likedVideos: [],
+        dislikedVideos: [],
+        uploadedVideos: [],
+      };
 
     ////////////////////////////////////////////////
 

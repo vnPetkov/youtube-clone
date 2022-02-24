@@ -16,6 +16,8 @@ import VideoCallOutlinedIcon from "@mui/icons-material/VideoCallOutlined";
 import SignOutButton from "../buttons/SignoutButton";
 import { useDispatch, useSelector } from "react-redux";
 import UploadModal from "./UploadModal";
+import { doc, updateDoc } from "firebase/firestore";
+import { db } from "../../firebase/firebaseConfig";
 
 export default function Header({
   setSelectedCategory,
@@ -32,10 +34,12 @@ export default function Header({
   const [autocompleteResults, setAutocompleteResults] = useState([]);
   const [modalIsOpen, setIsOpen] = useState(false);
   const logged = useSelector((state) => state.userData.logged);
+  const currentUserId = useSelector((state) => state.userData.uid);
+  const uploadedArr = useSelector((state) => state.userData.uploadedVideos);
 
   function openModal() {
     setIsOpen(true);
-}
+  }
 
   // DEBOUNCED AUTOCOMPLETE
   function fetchAutocomplete() {
@@ -80,12 +84,22 @@ export default function Header({
         type: "CHANGE_UPLOADED",
         video: uploadVideoObj,
       });
+
+      const userDoc = doc(db, "users", currentUserId);
+      console.log(uploadedArr);
+      const newFields = {
+        uploadedVideos: [...uploadedArr],
+      };
+      updateDoc(userDoc, newFields);
     };
   };
   return (
     <div className={styles.headerContainer}>
       <div>
-        <div className={styles.header_burger_logo} onClick={()=>setSidebarOpen(!sidebarOpen)}>
+        <div
+          className={styles.header_burger_logo}
+          onClick={() => setSidebarOpen(!sidebarOpen)}
+        >
           <span>
             <MenuIcon />
           </span>
@@ -155,8 +169,11 @@ export default function Header({
         <div className={styles.header_signin}>
           <span className={styles.videoUploadSpan}>
             <VideoCallOutlinedIcon onClick={openModal} />
-            <UploadModal uploadVideo={uploadVideo} modalIsOpen={modalIsOpen} setIsOpen={setIsOpen} />
-            
+            <UploadModal
+              uploadVideo={uploadVideo}
+              modalIsOpen={modalIsOpen}
+              setIsOpen={setIsOpen}
+            />
           </span>
           <span>
             <AppsIcon />
@@ -169,7 +186,10 @@ export default function Header({
       </div>
 
       <Routes>
-        <Route path="/" element={<HomeCategories setSelectedCategory={setSelectedCategory}/>} />
+        <Route
+          path="/"
+          element={<HomeCategories setSelectedCategory={setSelectedCategory} />}
+        />
       </Routes>
     </div>
   );

@@ -22,7 +22,6 @@ export default function Upload() {
   logged
     ? (content = (
         <>
-          <h4>История на гледане</h4>
           <div className={styles.historyCards}>
             {uploadVideos.map((e, index) => {
               return (

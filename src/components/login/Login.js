@@ -34,6 +34,8 @@ export default function Login() {
     let dataBaseHistory = docSnap.data().historyVideos;
     let dataBaseLiked = docSnap.data().likedVideos;
     let dataBaseDisliked = docSnap.data().dislikedVideos;
+    let dataBaseUploaded = docSnap.data().uploadedVideos;
+    console.log("database : ", dataBaseUploaded);
 
     dispatch({
       type: "LOGIN",
@@ -41,6 +43,7 @@ export default function Login() {
       history: dataBaseHistory,
       liked: dataBaseLiked,
       disliked: dataBaseDisliked,
+      uploaded: dataBaseUploaded,
     });
     dispatch({ type: "LOGIN_CLOSED" });
     changePath("/");

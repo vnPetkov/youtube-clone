@@ -15,7 +15,7 @@ import numberWithCommas from "../utilities/NumbersFormat";
 export default function VideoInfo(props) {
   let videoInfo = props.videoInfo.items[0];
   let channelInfo = props.channelInfo;
-
+  //TODO: da popravq vsichki curent na current
   const logged = useSelector((state) => state.userData.logged);
   const curentUserId = useSelector((state) => state.userData.uid);
   const curentUserLiked = useSelector((state) => state.userData.likedVideos);
@@ -67,7 +67,7 @@ export default function VideoInfo(props) {
         <h5>{videoInfo.snippet.title}</h5>
         <div>
           <p>
-            {numberWithCommas(videoInfo.statistics.viewCount)} views{" "} &#9679; 
+            {numberWithCommas(videoInfo.statistics.viewCount)} views &#9679;
             {videoInfo.snippet.publishedAt}
           </p>
 
@@ -76,7 +76,11 @@ export default function VideoInfo(props) {
               onClick={() => changeLiked(curentUserLiked, curentUserDisliked)}
             >
               {isLiked ? <ThumbUpIcon /> : <ThumbUpOutlinedIcon />}
-              <p>{isLiked ? videoInfo.statistics.likeCount+1 : videoInfo.statistics.likeCount}</p>
+              <p>
+                {isLiked
+                  ? videoInfo.statistics.likeCount + 1
+                  : videoInfo.statistics.likeCount}
+              </p>
             </span>
 
             <span
