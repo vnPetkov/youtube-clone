@@ -15,6 +15,10 @@ export default function Comments(props) {
   );
 
   const currentUserId = useSelector((state) => state.userData.uid);
+  const selectorTest = useSelector((state)=>{
+    console.log(state)
+  })
+
 
   let comments = props.comments.items;
   const watchedVideoId = props.videoId;
@@ -90,7 +94,7 @@ export default function Comments(props) {
         </div>
       </div>
       <div className={styles.commentsList}>
-        {/* {videoCommentsIndex !== -1 &&
+        {videoCommentsIndex !== -1 &&
           firebaseCommentsArr[videoCommentsIndex].comments.map((el) => {
             console.log(
               "komentarite na sutbata : ",
@@ -100,7 +104,7 @@ export default function Comments(props) {
             let commentUserPic =
               "https://pm1.narvii.com/8123/89cb06ef5b80554ebbb1bdfc6b15a2d56ebec483r1-1842-2000v2_hq.jpg";
             let commentUserName = "current user";
-            let commentData = new Date();
+            let commentData = new Date().toString()
             let commentChannelId = "current channel";
             //TODO: да сложа в юсър слайс юсърнейм и картинка са да може да се слагат при коментарите
 
@@ -125,7 +129,7 @@ export default function Comments(props) {
                 </div>
               </Link>
             );
-          })} */}
+          })}
 
         {comments &&
           comments.map((el) => {

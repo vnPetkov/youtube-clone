@@ -5,7 +5,7 @@ import InfiniteScroll from "react-infinite-scroll-component";
 import FetchVideo from "../utilities/FetchVideo";
 import API_KEY from "../utilities/API_KEY";
 
-export default function Home({categoryTitle}) {
+export default function Home({ categoryTitle }) {
   const [homeVideos, setHomeVideos] = useState([]);
 
   const [channels, setChannels] = useState([]);
@@ -14,10 +14,10 @@ export default function Home({categoryTitle}) {
 
   // TODO FETCH CATEGORIES HAVE TO FINISH IT
   useEffect(() => {
-    fetch(`https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=20&q=${categoryTitle}&type=video&key=${API_KEY}`)
+    fetch(`https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=10&q=${categoryTitle}&type=video&key=${API_KEY}`)
       .then(res => res.json())
       .then(res => {
-        console.log(res)
+        // console.log(res)
         // HOMEVIDEOS(res)
       })
   }, [categoryTitle])
@@ -30,9 +30,10 @@ export default function Home({categoryTitle}) {
       })
       .then((result) => {
         let [newVideos, newChannels, nextPage] = result;
-        setHomeVideos((homeVideos) => [...homeVideos, ...newVideos]);
-        setChannels((channels) => [...channels, ...newChannels]);
+        setHomeVideos((prevState) => [...prevState, ...newVideos]);
+        setChannels((prevState) => [...prevState, ...newChannels]);
         setNextPageToken(nextPage);
+
       });
   }
 
@@ -54,23 +55,27 @@ export default function Home({categoryTitle}) {
         hasMore={true}
         loader={<div>ЗАРЕЖДАНИНГ...</div>}
       >
-        {homeVideos && homeVideos.map((e, index) => {
-          return (
-            <HomeVideo
-              channelId={e.snippet.channelId}
-              videoId={e.id}
-              key={e.id}
-              img={e.snippet.thumbnails.high.url}
-              channel={channels[index].snippet.localized.title}
-              title={e.snippet.title}
-              views={e.statistics.viewCount}
-              likes={e.statistics.likeCount}
-              timestamp={e.snippet.publishedAt}
+        {homeVideos && channels && homeVideos.map((e, index) => {
+          if(channels[index] !=undefined){
+            return (
+              <HomeVideo
+                channelId={e.snippet.channelId}
+                videoId={e.id}
+                key={e.id}
+                img={e.snippet.thumbnails.high.url}
+                title={e.snippet.title}
+                views={e.statistics.viewCount}
+                likes={e.statistics.likeCount}
+                timestamp={e.snippet.publishedAt}
+                description={e.snippet.description}
+                channel={channels[index].snippet.localized.title}
               channelImg={channels[index].snippet.thumbnails.high.url}
               subscribers={channels[index].statistics.subscriberCount}
-              description={e.snippet.description}
-            />
-          );
+              />
+            );
+          }
+        
+
         })}
       </InfiniteScroll>
     );
