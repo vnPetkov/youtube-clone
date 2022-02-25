@@ -3,22 +3,16 @@ import Button from "@mui/material/Button";
 import styles from "./Comments.module.scss";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { useState } from "react";
-import { doc, updateDoc } from "firebase/firestore";
+import { doc, setDoc } from "firebase/firestore";
 import { db } from "../../firebase/firebaseConfig";
 
 export default function Comments(props) {
-  const [firebaseComments, setFirebaseComments] = useState([]);
-  const logged = useSelector((state) => state.userData.logged);
   const firebaseCommentsArr = useSelector(
     (state) => state.databaseComments.commentsArr
   );
 
   const currentUserId = useSelector((state) => state.userData.uid);
-  const selectorTest = useSelector((state)=>{
-    console.log(state)
-  })
-
+  const currentName = useSelector((state) => state.userData.name);
 
   let comments = props.comments.items;
   const watchedVideoId = props.videoId;
@@ -38,12 +32,6 @@ export default function Comments(props) {
       type: "ADD_COMMENT",
       newCommentsArr: firebaseCommentsArr,
     });
-
-    // const userDoc = doc(db, "domments");
-    // const newFields = {
-
-    // };
-    // updateDoc(userDoc, newFields);
   };
 
   const dispatch = useDispatch();
@@ -51,7 +39,7 @@ export default function Comments(props) {
     console.log("aktivirane");
     let currentComment = document.getElementById("commentInput").value;
     let commentObj = {
-      userId: currentUserId,
+      userName: currentName,
       comment: currentComment,
     };
 
@@ -65,6 +53,11 @@ export default function Comments(props) {
             comments: [commentObj],
           },
         });
+
+    firebaseCommentsArr.forEach((e) => {
+      let videoCommentsRef = doc(db, "comments", watchedVideoId);
+      setDoc(videoCommentsRef, e);
+    });
   };
 
   return (
@@ -103,8 +96,8 @@ export default function Comments(props) {
             let commentText = el.comment;
             let commentUserPic =
               "https://pm1.narvii.com/8123/89cb06ef5b80554ebbb1bdfc6b15a2d56ebec483r1-1842-2000v2_hq.jpg";
-            let commentUserName = "current user";
-            let commentData = new Date().toString()
+            let commentUserName = el.userName;
+            let commentData = new Date().toString();
             let commentChannelId = "current channel";
             //TODO: да сложа в юсър слайс юсърнейм и картинка са да може да се слагат при коментарите
 

@@ -1,6 +1,3 @@
-let user = JSON.parse(localStorage.getItem("user"));
-const initialState = user ? { loggedIn: true, user } : {};
-
 const INITIAL_STATE = {
   commentsArr: [],
 };
@@ -16,6 +13,7 @@ export const commentsReducer = (state = INITIAL_STATE, action) => {
       };
 
     case "ADD_VIDEO_COMMENTS":
+      console.log("activated commentsReducer");
       return {
         ...state,
         commentsArr: [...state.commentsArr, action.newVideoComments],

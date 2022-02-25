@@ -1,17 +1,26 @@
-let user = JSON.parse(localStorage.getItem("user"));
-const initialState = user ? { loggedIn: true, user } : {};
+// import { useEffect } from "react";
 
-const INITIAL_STATE = user
-  ? {}
-  : {
-      logged: false,
-      uid: "",
-      profileImg: "",
-      historyVideos: [],
-      likedVideos: [],
-      dislikedVideos: [],
-      uploadedVideos: [],
-    };
+// let loggedUser = localStorage.getItem("user");
+// useEffect(() => {
+//   if(localStorage.getItem("user")){
+//     const user = await signInWithEmailAndPassword(
+//       auth,
+//       loginEmail,
+//       loginPassword
+//     );
+//   }
+// })
+
+const INITIAL_STATE = {
+  logged: false,
+  uid: "",
+  name: "",
+  profileImg: "",
+  historyVideos: [],
+  likedVideos: [],
+  dislikedVideos: [],
+  uploadedVideos: [],
+};
 
 export const userReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
@@ -20,6 +29,8 @@ export const userReducer = (state = INITIAL_STATE, action) => {
         ...state,
         logged: true,
         uid: action.profileUid,
+        name: action.userName,
+        profileImg: action.image,
         historyVideos: action.history,
         likedVideos: action.liked,
         dislikedVideos: action.disliked,
