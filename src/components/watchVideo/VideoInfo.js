@@ -139,8 +139,8 @@ export default function VideoInfo(props) {
           anchorClass={styles.ShowMore}
           onClick={executeOnClick}
           expanded={false}
-          width={1300}
-          truncatedEndingComponent={"... "}
+          width={1200}
+          truncatedEndingComponent={""}
         >
           <p className={styles.description}>{videoInfo.snippet.description}</p>
         </ShowMoreText>
