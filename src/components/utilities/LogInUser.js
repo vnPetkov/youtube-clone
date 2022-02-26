@@ -17,15 +17,17 @@ export default function LoginUser() {
   let changePath = useNavigate();
 
   return async (email, password) => {
-    const errMessage = document.querySelector("#logErr");
-    errMessage.innerHTML = "";
-    if (email === "" || password === "") {
-      errMessage.innerHTML = "The fields are not filled!";
-      return;
-    }
+    // const errMessage = document.querySelector("#logErr");
+    // errMessage.innerHTML = "";
+    // if (email === "" || password === "") {
+    //   errMessage.innerHTML = "The fields are not filled!";
+    //   return;
+    // }
+    //TODO: може тази проверка да се изнесе в редукс май
 
     const user = await signInWithEmailAndPassword(auth, email, password);
     console.log("PHOTO : ", user.user.photoURL);
+    console.log("disp name : ", user.user.displayName);
 
     localStorage.setItem("user", JSON.stringify([email, password]));
 

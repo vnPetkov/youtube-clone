@@ -14,6 +14,7 @@
     }
 
     p {
+      height: 100% !important;
       color: rgb(95, 95, 95);
       font-size: 14px;
     }
@@ -28,11 +29,15 @@
       margin-left: 10px;
     }
     span {
-      margin-left: 20px;
+      // margin-left: 20px;
+      font-size: 14px !important;
+      font-weight: 500;
+      letter-spacing: 0.5px;
       display: flex;
+      flex-flow: column wrap;
 
       p {
-        margin-left: 10px;
+        // margin-left: 10px;
         font-size: 14px;
         font-weight: 500;
         height: 17px;
@@ -46,6 +51,7 @@
       align-items: center;
 
       > div {
+    
         display: flex;
         align-items: center;
       }
@@ -54,15 +60,34 @@
       color: #030303;
       display: block;
       width: 615px;
-      margin-top: 20px;
+      // margin-top: 20px;
       margin-left: 60px;
     }
   }
 }
+.channelInformation{
+  display: flex;
+}
 .avatar {
   margin-right: 15px;
 }
-
-.channelInformation{
+.description{
+  color: #030303 !important;
+  height: 100%;
   display: flex;
+  flex-flow: column wrap;
+
+  position: relative;
+}
+.ShowMore{
+  flex-flow: row wrap;
+  display:flex;
+  
+}
+
+.likesCountSpan{
+  display:flex;
+  align-items: center;
+  flex-flow: row wrap !important;
+  margin-right: 15px;
 }

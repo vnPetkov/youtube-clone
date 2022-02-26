@@ -2,10 +2,11 @@ import styles from "../history/History.module.scss";
 import HorizontalCard from "../cards/HorizontalCard";
 import card_styles from "../cards/HorizontalCard.module.scss";
 import { useSelector } from "react-redux";
-import SignInButton from "../buttons/SignInButton";
 import SettingsBackupRestoreIcon from "@mui/icons-material/SettingsBackupRestore";
+import OndemandVideoIcon from '@mui/icons-material/OndemandVideo';
 import FetchVideosById from "../utilities/FetchVideosById";
 import { useEffect, useState } from "react";
+import SignInButton from "../buttons/SignInButton"
 
 export default function Upload() {
   const [uploadVideos, setUploadVideos] = useState([]);
@@ -55,9 +56,8 @@ export default function Upload() {
       ))
     : (content = (
         <div className={styles.HistorySignedOut}>
-          <SettingsBackupRestoreIcon className={styles.rewind} />
-          <h2>Keep track of what you watch</h2>
-          <p>Watch history isn't viewable when signed out. </p>
+          <OndemandVideoIcon className={styles.rewind} />
+          <h2>You are not logged in. Login to see your videos!</h2>
           <SignInButton />
         </div>
       ));

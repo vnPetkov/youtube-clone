@@ -13,8 +13,8 @@ import WatchVideo from "./components/watchVideo/WatchVideo";
 import Login from "./components/login/Login";
 import Register from "./components/login/Register";
 import Channel from "./components/channel/Channel";
+import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 import { useDispatch, useSelector } from "react-redux";
-
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "../src/firebase/firebaseConfig";
@@ -29,16 +29,6 @@ function App() {
 
   const auth = getAuth();
   const dispatch = useDispatch();
-  //let changePath = useNavigate();
-
-  // useEffect(() => {
-  //   window.addEventListener("load", async () => {
-  //     let user = JSON.parse(localStorage.getItem("user"));
-  //     console.log(user[1]);
-  //     let loginFunc = LoginUser();
-  //     loginFunc(user[0], user[1]);
-  //   });
-  // }, []);
 
   useEffect(() => {
     window.addEventListener("load", async () => {
@@ -55,25 +45,24 @@ function App() {
           JSON.stringify([storageUser[0], storageUser[1]])
         );
 
-        console.log(user);
         const userDocRef = doc(db, "users", user.user.uid);
         const docSnap = await getDoc(userDocRef);
         let dataBaseHistory = docSnap.data().historyVideos;
         let dataBaseLiked = docSnap.data().likedVideos;
         let dataBaseDisliked = docSnap.data().dislikedVideos;
         let dataBaseUploaded = docSnap.data().uploadedVideos;
-        console.log("database : ", dataBaseUploaded);
 
         dispatch({
           type: "LOGIN",
           profileUid: user.user.uid,
+          userName: user.user.displayName,
+          image: user.user.photoURL,
           history: dataBaseHistory,
           liked: dataBaseLiked,
           disliked: dataBaseDisliked,
           uploaded: dataBaseUploaded,
         });
         dispatch({ type: "LOGIN_CLOSED" });
-        //changePath("/");
       }
     });
   }, []);
@@ -101,7 +90,10 @@ function App() {
               element={
                 <>
                   <Sidebar sidebarOpen={sidebarOpen} />
-                  <Home selectedCategory={selectedCategory} />
+                  <Home
+                    selectedCategory={selectedCategory}
+                    setSidebarOpen={setSidebarOpen}
+                  />
                 </>
               }
             />

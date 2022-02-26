@@ -69,7 +69,7 @@ export default function Register() {
   };
 
   return (
-    <div class={styles.form}>
+    <div className={styles.form}>
       <img src={header_logo} alt="google logo" />
       <form id="regForm">
         <input
