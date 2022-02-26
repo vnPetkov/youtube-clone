@@ -33,9 +33,14 @@ export default function Header({
 
   const [autocompleteResults, setAutocompleteResults] = useState([]);
   const [modalIsOpen, setIsOpen] = useState(false);
+  const [currentUploaded, setCurrentUploaded] = useState([]);
   const logged = useSelector((state) => state.userData.logged);
   const currentUserId = useSelector((state) => state.userData.uid);
+
   const uploadedArr = useSelector((state) => state.userData.uploadedVideos);
+  useEffect(() => {
+    setCurrentUploaded(uploadedArr);
+  }, [uploadedArr]);
 
   function openModal() {
     setIsOpen(true);
@@ -69,11 +74,12 @@ export default function Header({
       });
   };
   const dispatch = useDispatch();
-  const uploadVideo = () => {
+  const uploadVideo = async () => {
     let input = document.getElementById("videoFileInput");
     let freader = new FileReader();
     freader.readAsDataURL(input.files[0]);
-    freader.onload = function () {
+    console.log("freader res", freader.result);
+    freader.onload = async () => {
       let uploadVideoObj = {
         src: freader.result,
         name: "Our home",
@@ -85,12 +91,9 @@ export default function Header({
         video: uploadVideoObj,
       });
 
+      console.log("array: to be uploaded : ", currentUploaded);
       const userDoc = doc(db, "users", currentUserId);
-      console.log(uploadedArr);
-      const newFields = {
-        uploadedVideos: [...uploadedArr],
-      };
-      updateDoc(userDoc, newFields);
+      await updateDoc(userDoc, { uploadedVideos: currentUploaded });
     };
   };
   return (

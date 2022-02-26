@@ -24,20 +24,21 @@ export default function History() {
         <>
           <h4>История на гледане</h4>
           <div className={styles.historyCards}>
-            {historyVideos.map((e) => {
-              return (
-                <HorizontalCard
-                  key={e.id}
-                  img={e.snippet.thumbnails.high.url}
-                  user={e.snippet.channelTitle}
-                  title={e.snippet.title}
-                  desc={e.snippet.description}
-                  views={e.statistics.viewCount}
-                  uploaded={e.snippet.publishedAt}
-                  currentClass={card_styles.history_card}
-                />
-              );
-            })}
+            {historyVideos &&
+              historyVideos.map((e) => {
+                return (
+                  <HorizontalCard
+                    key={e.id}
+                    img={e.snippet.thumbnails.high.url}
+                    user={e.snippet.channelTitle}
+                    title={e.snippet.title}
+                    desc={e.snippet.description}
+                    views={e.statistics.viewCount}
+                    uploaded={e.snippet.publishedAt}
+                    currentClass={card_styles.history_card}
+                  />
+                );
+              })}
           </div>
         </>
       ))

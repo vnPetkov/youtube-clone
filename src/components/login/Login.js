@@ -32,7 +32,7 @@ export default function Login() {
       >
         Sign in
       </button>
-      <p></p>
+      <p id="logErr"></p>
       <br />
       <Link to={"/register"}>Create account</Link>
     </div>

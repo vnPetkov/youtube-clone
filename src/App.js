@@ -43,38 +43,38 @@ function App() {
   useEffect(() => {
     window.addEventListener("load", async () => {
       let storageUser = JSON.parse(localStorage.getItem("user"));
-      console.log(storageUser[1]);
+      if (storageUser) {
+        const user = await signInWithEmailAndPassword(
+          auth,
+          storageUser[0],
+          storageUser[1]
+        );
 
-      const user = await signInWithEmailAndPassword(
-        auth,
-        storageUser[0],
-        storageUser[1]
-      );
+        localStorage.setItem(
+          "user",
+          JSON.stringify([storageUser[0], storageUser[0]])
+        );
 
-      localStorage.setItem(
-        "user",
-        JSON.stringify([storageUser[0], storageUser[0]])
-      );
+        console.log(user);
+        const userDocRef = doc(db, "users", user.user.uid);
+        const docSnap = await getDoc(userDocRef);
+        let dataBaseHistory = docSnap.data().historyVideos;
+        let dataBaseLiked = docSnap.data().likedVideos;
+        let dataBaseDisliked = docSnap.data().dislikedVideos;
+        let dataBaseUploaded = docSnap.data().uploadedVideos;
+        console.log("database : ", dataBaseUploaded);
 
-      console.log(user);
-      const userDocRef = doc(db, "users", user.user.uid);
-      const docSnap = await getDoc(userDocRef);
-      let dataBaseHistory = docSnap.data().historyVideos;
-      let dataBaseLiked = docSnap.data().likedVideos;
-      let dataBaseDisliked = docSnap.data().dislikedVideos;
-      let dataBaseUploaded = docSnap.data().uploadedVideos;
-      console.log("database : ", dataBaseUploaded);
-
-      dispatch({
-        type: "LOGIN",
-        profileUid: user.user.uid,
-        history: dataBaseHistory,
-        liked: dataBaseLiked,
-        disliked: dataBaseDisliked,
-        uploaded: dataBaseUploaded,
-      });
-      dispatch({ type: "LOGIN_CLOSED" });
-      //changePath("/");
+        dispatch({
+          type: "LOGIN",
+          profileUid: user.user.uid,
+          history: dataBaseHistory,
+          liked: dataBaseLiked,
+          disliked: dataBaseDisliked,
+          uploaded: dataBaseUploaded,
+        });
+        dispatch({ type: "LOGIN_CLOSED" });
+        //changePath("/");
+      }
     });
   }, []);
 

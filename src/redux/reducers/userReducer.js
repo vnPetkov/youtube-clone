@@ -1,16 +1,3 @@
-// import { useEffect } from "react";
-
-// let loggedUser = localStorage.getItem("user");
-// useEffect(() => {
-//   if(localStorage.getItem("user")){
-//     const user = await signInWithEmailAndPassword(
-//       auth,
-//       loginEmail,
-//       loginPassword
-//     );
-//   }
-// })
-
 const INITIAL_STATE = {
   logged: false,
   uid: "",
@@ -47,7 +34,7 @@ export const userReducer = (state = INITIAL_STATE, action) => {
         uploadedVideos: [],
       };
 
-    ////////////////////////////////////////////////
+    /////////////////////USER DATA///////////////////////////
 
     case "HISTORIZE":
       return {

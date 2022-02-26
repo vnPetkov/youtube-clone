@@ -17,6 +17,13 @@ export default function LoginUser() {
   let changePath = useNavigate();
 
   return async (email, password) => {
+    // const errMessage = document.querySelector("#logErr");
+    // errMessage.innerHTML = "";
+    // if (email === "" || password === "") {
+    //   errMessage.innerHTML = "The fields are not filled!";
+    //   return;
+    // }
+
     const user = await signInWithEmailAndPassword(auth, email, password);
 
     localStorage.setItem("user", JSON.stringify([email, password]));
@@ -29,24 +36,12 @@ export default function LoginUser() {
     let dataBaseDisliked = docSnap.data().dislikedVideos;
     let dataBaseUploaded = docSnap.data().uploadedVideos;
 
-    // const commentsCollection = collection(db, "comments");
-    // // const docSnap = await getDoc(userDocRef);
-    // console.log("database Comments ref : ", commentsCollection);
-
-    // const snapshot = await firebase.firestore().collection('events').get()
-    // return snapshot.docs.map(doc => doc.data());
-
     const q = query(collection(db, "comments"));
     //TODO: ima opciq za durpane po uslovie, moje da se napravi da ne se durpata vsichki klipove a samo tozi koito sega e otvoren za gledane
 
     const querySnapshot = await getDocs(q);
     //let databaseComments = querySnapshot.map((doc) => doc.data());
     querySnapshot.forEach((doc) => console.log("daaaaaaaaaaa : ", doc.data()));
-
-    // dispatch({
-    //   type: "ADD_VIDEO_COMMENTS",
-    //   newVideoComments: databaseComments,
-    // });
     console.log(user.user.photoURL);
 
     dispatch({
