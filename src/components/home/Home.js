@@ -3,15 +3,19 @@ import HomeVideo from "./HomeVideo";
 import React, { useState, useEffect } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
 import FetchVideo from "../utilities/FetchVideo";
+import { TailSpin } from  'react-loader-spinner'
 import API_KEY from "../utilities/API_KEY";
 import LoginUser from "../utilities/LogInUser";
 
-export default function Home({ categoryTitle }) {
+export default function Home({ categoryTitle, setSidebarOpen }) {
   const [homeVideos, setHomeVideos] = useState([]);
 
   const [channels, setChannels] = useState([]);
   const [nextPageToken, setNextPageToken] = useState("");
   let content = null;
+  useEffect(()=>{
+    setSidebarOpen(true)
+  },[])
 
   // TODO FETCH CATEGORIES HAVE TO FINISH IT
   useEffect(() => {
@@ -54,7 +58,7 @@ export default function Home({ categoryTitle }) {
           }, 2000);
         }}
         hasMore={true}
-        loader={<div>ЗАРЕЖДАНИНГ...</div>}
+        loader={<TailSpin color="grey" height={80} width={80} />}
       >
         {homeVideos &&
           channels &&

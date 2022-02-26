@@ -4,6 +4,7 @@ import card_styles from "../cards/HorizontalCard.module.scss";
 import { useDispatch, useSelector } from "react-redux";
 import SignInButton from "../buttons/SignInButton";
 import SettingsBackupRestoreIcon from "@mui/icons-material/SettingsBackupRestore";
+import ThumbUpOffAltIcon from '@mui/icons-material/ThumbUpOffAlt';
 import DeleteOutlinedIcon from "@mui/icons-material/DeleteOutlined";
 import FetchVideosById from "../utilities/FetchVideosById";
 import { useEffect, useState } from "react";
@@ -35,40 +36,39 @@ export default function History() {
     updateDoc(userDoc, newFields);
   };
 
-  logged && likedVideos.length !== 0
+  logged
     ? (content = (
-        <>
-          <h4>История на гледане</h4>
-          <div className={styles.historyCards}>
-            {likedVideos.map((e) => {
-              return (
-                <>
-                  <HorizontalCard
-                    key={e.id}
-                    img={e.snippet.thumbnails.high.url}
-                    user={e.snippet.channelTitle}
-                    title={e.snippet.title}
-                    currentClass={card_styles.history_card}
-                  />
-                  <span onClick={() => removeVideo(likedArr, e.id)}>
-                    <DeleteOutlinedIcon />
-                  </span>
+      <>
+        <h4>История на гледане</h4>
+        <div className={styles.historyCards}>
+          {likedVideos && likedVideos.map((e) => {
+            return (
+              <>
+                <HorizontalCard
+                  key={e.id}
+                  img={e.snippet.thumbnails.high.url}
+                  user={e.snippet.channelTitle}
+                  title={e.snippet.title}
+                  currentClass={card_styles.history_card}
+                />
+                <span onClick={() => removeVideo(likedArr, e.id)}>
+                  <DeleteOutlinedIcon />
+                </span>
 
-                  <hr />
-                </>
-              );
-            })}
-          </div>
-        </>
-      ))
-    : (content = (
-        <div className={styles.HistorySignedOut}>
-          <SettingsBackupRestoreIcon className={styles.rewind} />
-          <h2>Keep track of what you watch</h2>
-          <p>Watch history isn't viewable when signed out. </p>
-          <SignInButton />
+                <hr />
+              </>
+            );
+          })}
         </div>
-      ));
+      </>
+    ))
+    : (content = (
+      <div className={styles.HistorySignedOut}>
+        <ThumbUpOffAltIcon className={styles.rewind} />
+        <h2>You are not logged in. Login to see your liked videos!</h2>
+        <SignInButton />
+      </div>
+    ));
 
   return (
     <div className={styles.historyContainer}>

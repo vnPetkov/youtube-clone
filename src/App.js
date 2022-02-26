@@ -13,8 +13,8 @@ import WatchVideo from "./components/watchVideo/WatchVideo";
 import Login from "./components/login/Login";
 import Register from "./components/login/Register";
 import Channel from "./components/channel/Channel";
+import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 import { useDispatch, useSelector } from "react-redux";
-
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "../src/firebase/firebaseConfig";
@@ -101,7 +101,7 @@ function App() {
               element={
                 <>
                   <Sidebar sidebarOpen={sidebarOpen} />
-                  <Home selectedCategory={selectedCategory} />
+                  <Home selectedCategory={selectedCategory} setSidebarOpen={setSidebarOpen} />
                 </>
               }
             />

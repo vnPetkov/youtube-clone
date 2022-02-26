@@ -11,8 +11,15 @@ import { useDispatch, useSelector } from "react-redux";
 import { db } from "../../firebase/firebaseConfig.js";
 import { updateDoc, doc } from "firebase/firestore";
 import numberWithCommas from "../utilities/NumbersFormat";
+import ShowMoreText from "react-show-more-text";
 
 export default function VideoInfo(props) {
+  function executeOnClick(isExpanded) {
+    console.log(isExpanded);
+  }
+
+
+
   let videoInfo = props.videoInfo.items[0];
   let channelInfo = props.channelInfo;
   //TODO: da popravq vsichki curent na current
@@ -73,17 +80,19 @@ export default function VideoInfo(props) {
 
           <div>
             <span
+              className={styles.likesCountSpan}
               onClick={() => changeLiked(curentUserLiked, curentUserDisliked)}
             >
               {isLiked ? <ThumbUpIcon /> : <ThumbUpOutlinedIcon />}
               <p>
                 {isLiked
-                  ? videoInfo.statistics.likeCount + 1
-                  : videoInfo.statistics.likeCount}
+                  ? numberWithCommas(videoInfo.statistics.likeCount + 1)
+                  : numberWithCommas(videoInfo.statistics.likeCount)}
               </p>
             </span>
 
             <span
+             className={styles.likesCountSpan}
               onClick={() =>
                 changeDisliked(curentUserLiked, curentUserDisliked)
               }
@@ -107,7 +116,7 @@ export default function VideoInfo(props) {
               />
               <p>
                 <a href="...">{videoInfo.snippet.channelTitle}</a> <br />
-                {channelInfo.items[0].statistics.subscriberCount} subscribers
+                {numberWithCommas(channelInfo.items[0].statistics.subscriberCount)} subscribers
               </p>
             </div>
           </Link>
@@ -121,8 +130,21 @@ export default function VideoInfo(props) {
             </Button>
           </div>
         </div>
+        <ShowMoreText
+          /* Default options */
+          lines={3}
+          more="Show more"
+          less="Show less"
+          className={styles.ShowMore}
+          anchorClass={styles.ShowMore}
+          onClick={executeOnClick}
+          expanded={false}
+          width={1300}
+          truncatedEndingComponent={"... "}
+        >
+          <p className={styles.description}>{videoInfo.snippet.description}</p>
+        </ShowMoreText>
 
-        <p className={styles.description}>{videoInfo.snippet.description}</p>
       </div>
     </div>
   );

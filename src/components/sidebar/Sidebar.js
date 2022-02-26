@@ -26,6 +26,30 @@ export default function Sidebar({sidebarOpen}) {
           </div>
         </Link>
 
+        <Link to="/liked_page">
+          <div className={pathname === "/liked_page" ? styles.tabActive : styles.tab}>
+            <ThumbUpOutlinedIcon />
+            <h2>Liked videos</h2>
+          </div>
+        </Link>
+
+        
+        <Link to="/history_page">
+          <div className={pathname === "/history_page" ? styles.tabActive : styles.tab}>
+            <HistoryIcon />
+            <h2>History</h2>
+          </div>
+        </Link>
+
+        <Link to="/upload_page">
+          <div className={pathname === "/upload_page" ? styles.tabActive : styles.tab}>
+            <SlideshowOutlinedIcon />
+            <h2>Your videos</h2>
+          </div>
+        </Link>
+
+        <div></div>
+
         <Link to="/">
           <div className={`${styles.tab}`} >
             <ExploreOutlinedIcon />
@@ -47,7 +71,7 @@ export default function Sidebar({sidebarOpen}) {
           </div>
         </Link>
 
-        <div></div>
+      
 
         <Link to="/">
           <div className={`${styles.tab}`} >
@@ -56,19 +80,6 @@ export default function Sidebar({sidebarOpen}) {
           </div>
         </Link>
 
-        <Link to="/history_page">
-          <div className={pathname === "/history_page" ? styles.tabActive : styles.tab}>
-            <HistoryIcon />
-            <h2>History</h2>
-          </div>
-        </Link>
-
-        <Link to="/upload_page">
-          <div className={pathname === "/upload_page" ? styles.tabActive : styles.tab}>
-            <SlideshowOutlinedIcon />
-            <h2>Your videos</h2>
-          </div>
-        </Link>
 
         <Link to="/">
           <div className={`${styles.tab}`} >
@@ -77,12 +88,7 @@ export default function Sidebar({sidebarOpen}) {
           </div>
         </Link>
 
-        <Link to="/liked_page">
-          <div className={pathname === "/liked_page" ? styles.tabActive : styles.tab}>
-            <ThumbUpOutlinedIcon />
-            <h2>Liked videos</h2>
-          </div>
-        </Link>
+     
       </div>)
     );
   }
