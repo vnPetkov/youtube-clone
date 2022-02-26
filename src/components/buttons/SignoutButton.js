@@ -8,10 +8,10 @@ import { auth } from "../../firebase/firebaseConfig";
 
 function SignOutButton() {
   const dispatch = useDispatch();
-
   const logout = async () => {
     dispatch({ type: "LOGOUT" });
     await signOut(auth);
+    localStorage.removeItem("user");
   };
 
   return (

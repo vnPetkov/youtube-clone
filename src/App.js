@@ -52,7 +52,7 @@ function App() {
 
         localStorage.setItem(
           "user",
-          JSON.stringify([storageUser[0], storageUser[0]])
+          JSON.stringify([storageUser[0], storageUser[1]])
         );
 
         console.log(user);

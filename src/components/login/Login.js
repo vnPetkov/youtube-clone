@@ -7,8 +7,16 @@ import header_logo from "../../images/header_logo.svg";
 export default function Login() {
   const [loginEmail, setLoginEmail] = useState("");
   const [loginPassword, setLoginPassword] = useState("");
-  let loginFunc = LoginUser();
 
+  // let loginFunc;
+
+  // let errMessage = document.querySelector("#logErr");
+  // if (loginEmail === "" || loginPassword === "") {
+  //   errMessage.innerHTML = "The fields are not filled!";
+  // } else {
+  //   loginFunc = LoginUser();
+  // }
+  const loginFunc = LoginUser();
   return (
     <div className={styles.form}>
       <img src={header_logo} alt="google logo" />

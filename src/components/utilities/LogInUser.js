@@ -17,18 +17,18 @@ export default function LoginUser() {
   let changePath = useNavigate();
 
   return async (email, password) => {
-    // const errMessage = document.querySelector("#logErr");
-    // errMessage.innerHTML = "";
-    // if (email === "" || password === "") {
-    //   errMessage.innerHTML = "The fields are not filled!";
-    //   return;
-    // }
+    const errMessage = document.querySelector("#logErr");
+    errMessage.innerHTML = "";
+    if (email === "" || password === "") {
+      errMessage.innerHTML = "The fields are not filled!";
+      return;
+    }
 
     const user = await signInWithEmailAndPassword(auth, email, password);
+    console.log("PHOTO : ", user.user.photoURL);
 
     localStorage.setItem("user", JSON.stringify([email, password]));
 
-    console.log(user);
     const userDocRef = doc(db, "users", user.user.uid);
     const docSnap = await getDoc(userDocRef);
     let dataBaseHistory = docSnap.data().historyVideos;
@@ -36,13 +36,10 @@ export default function LoginUser() {
     let dataBaseDisliked = docSnap.data().dislikedVideos;
     let dataBaseUploaded = docSnap.data().uploadedVideos;
 
-    const q = query(collection(db, "comments"));
-    //TODO: ima opciq za durpane po uslovie, moje da se napravi da ne se durpata vsichki klipove a samo tozi koito sega e otvoren za gledane
-
-    const querySnapshot = await getDocs(q);
-    //let databaseComments = querySnapshot.map((doc) => doc.data());
-    querySnapshot.forEach((doc) => console.log("daaaaaaaaaaa : ", doc.data()));
-    console.log(user.user.photoURL);
+    // const q = query(collection(db, "comments"));
+    // //TODO: ima opciq za durpane po uslovie, moje da se napravi da ne se durpata vsichki klipove a samo tozi koito sega e otvoren za gledane
+    // const querySnapshot = await getDocs(q);
+    // querySnapshot.forEach((doc) => console.log("daaaaaaaaaaa : ", doc.data()));
 
     dispatch({
       type: "LOGIN",

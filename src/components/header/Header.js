@@ -16,7 +16,7 @@ import VideoCallOutlinedIcon from "@mui/icons-material/VideoCallOutlined";
 import SignOutButton from "../buttons/SignoutButton";
 import { useDispatch, useSelector } from "react-redux";
 import UploadModal from "./UploadModal";
-import { doc, updateDoc } from "firebase/firestore";
+import { collection, doc, setDoc, updateDoc } from "firebase/firestore";
 import { db } from "../../firebase/firebaseConfig";
 
 export default function Header({
@@ -78,7 +78,7 @@ export default function Header({
     let input = document.getElementById("videoFileInput");
     let freader = new FileReader();
     freader.readAsDataURL(input.files[0]);
-    console.log("freader res", freader.result);
+
     freader.onload = async () => {
       let uploadVideoObj = {
         src: freader.result,
@@ -86,14 +86,19 @@ export default function Header({
         channel: "Deep space geeks",
         description: "uahfauifhsuoghpuognrgujbntquojwrnquowgnqe",
       };
-      dispatch({
+      console.log("freader dada", uploadVideoObj);
+      await dispatch({
         type: "CHANGE_UPLOADED",
         video: uploadVideoObj,
       });
-
-      console.log("array: to be uploaded : ", currentUploaded);
-      const userDoc = doc(db, "users", currentUserId);
-      await updateDoc(userDoc, { uploadedVideos: currentUploaded });
+      console.log("array: to be uploaded : ", [
+        ...currentUploaded,
+        uploadVideoObj,
+      ]);
+      const userDocRef = doc(db, "users", currentUserId);
+      await setDoc(userDocRef, {
+        uploadedVideos: [...currentUploaded, uploadVideoObj],
+      });
     };
   };
   return (
