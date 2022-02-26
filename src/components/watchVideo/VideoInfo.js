@@ -132,7 +132,7 @@ export default function VideoInfo(props) {
         </div>
         <ShowMoreText
           /* Default options */
-          lines={3}
+          lines={1}
           more="Show more"
           less="Show less"
           className={styles.ShowMore}
