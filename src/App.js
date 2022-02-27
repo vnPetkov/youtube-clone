@@ -100,6 +100,8 @@ function App() {
                 <>
                   <Sidebar sidebarOpen={sidebarOpen} />
                   <Home
+                    searchResults={searchResults}
+                    setSearchResults={setSearchResults}
                     selectedCategory={selectedCategory}
                     setSidebarOpen={setSidebarOpen}
                   />

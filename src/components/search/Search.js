@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import TuneIcon from "@mui/icons-material/Tune";
 import card_styles from "../cards/HorizontalCard.module.scss";
 import styles from "./Search.module.scss"
@@ -6,6 +6,8 @@ import HorizontalCard from "../cards/HorizontalCard";
 
 export default function Search({ searchResults }) {
   searchResults = searchResults.items;
+  useEffect(()=>{
+  },)
   return (
     <div className={styles.search_wrapper}>
       <div>

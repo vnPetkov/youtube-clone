@@ -33,7 +33,7 @@ export default function Header({
   setSearch,
   setSearchResults,
   inputFocus,
-  setInputFocus,
+  setInputFocus
 }) {
   const history = useNavigate();
 
@@ -230,7 +230,7 @@ export default function Header({
       <Routes>
         <Route
           path="/"
-          element={<HomeCategories setSelectedCategory={setSelectedCategory} />}
+          element={<HomeCategories setSelectedCategory={setSelectedCategory} setSearchResults={setSearchResults} />}
         />
       </Routes>
     </div>
