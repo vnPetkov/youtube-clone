@@ -13,11 +13,17 @@ import { BsSearch, BsThreeDotsVertical } from "react-icons/bs";
 import MenuIcon from "@mui/icons-material/Menu";
 import AppsIcon from "@mui/icons-material/Apps";
 import VideoCallOutlinedIcon from "@mui/icons-material/VideoCallOutlined";
-import SignOutButton from "../buttons/SignoutButton";
+import {
+  HeaderTab,
+  ChangePicTab,
+  ChangeNameTab,
+  SignOutTab,
+} from "../buttons/UserManagerTabs";
 import { useDispatch, useSelector } from "react-redux";
 import UploadModal from "./UploadModal";
-import { collection, doc, setDoc, updateDoc } from "firebase/firestore";
+import { doc, setDoc } from "firebase/firestore";
 import { db } from "../../firebase/firebaseConfig";
+import { Avatar } from "@mui/material";
 
 export default function Header({
   setSelectedCategory,
@@ -34,8 +40,11 @@ export default function Header({
   const [autocompleteResults, setAutocompleteResults] = useState([]);
   const [modalIsOpen, setIsOpen] = useState(false);
   const [currentUploaded, setCurrentUploaded] = useState([]);
+  const [userManagerIsActive, setUserManagerIsVisible] = useState(false);
+
   const logged = useSelector((state) => state.userData.logged);
   const currentUserId = useSelector((state) => state.userData.uid);
+  const profilePicture = useSelector((state) => state.userData.profileImg);
 
   const uploadedArr = useSelector((state) => state.userData.uploadedVideos);
   useEffect(() => {
@@ -73,6 +82,8 @@ export default function Header({
         history("/search_page");
       });
   };
+
+  // UPLOAD VIDEO
   const dispatch = useDispatch();
   const uploadVideo = async () => {
     let input = document.getElementById("videoFileInput");
@@ -86,21 +97,18 @@ export default function Header({
         channel: "Deep space geeks",
         description: "uahfauifhsuoghpuognrgujbntquojwrnquowgnqe",
       };
-      console.log("freader dada", uploadVideoObj);
       await dispatch({
         type: "CHANGE_UPLOADED",
         video: uploadVideoObj,
       });
-      console.log("array: to be uploaded : ", [
-        ...currentUploaded,
-        uploadVideoObj,
-      ]);
+
       const userDocRef = doc(db, "users", currentUserId);
       await setDoc(userDocRef, {
         uploadedVideos: [...currentUploaded, uploadVideoObj],
       });
     };
   };
+
   return (
     <div className={styles.headerContainer}>
       <div>
@@ -189,7 +197,33 @@ export default function Header({
           <span>
             <BsThreeDotsVertical />
           </span>
-          {logged ? <SignOutButton /> : <SignInButton />}
+          {logged ? (
+            <>
+              <Avatar
+                className={styles.avatar}
+                alt={"profile"}
+                src={profilePicture}
+                sx={{ width: 30, height: 30 }}
+                onClick={() => {
+                  setUserManagerIsVisible(!userManagerIsActive);
+                }}
+              />
+              <div
+                className={
+                  userManagerIsActive
+                    ? styles.activeUserManager
+                    : styles.inActiveUserManager
+                }
+              >
+                <HeaderTab />
+                <ChangePicTab />
+                <ChangeNameTab />
+                <SignOutTab />
+              </div>
+            </>
+          ) : (
+            <SignInButton />
+          )}
         </div>
       </div>
 

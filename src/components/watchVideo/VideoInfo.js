@@ -1,8 +1,4 @@
 import React from "react";
-import ThumbUpOutlinedIcon from "@mui/icons-material/ThumbUpOutlined";
-import ThumbDownOutlinedIcon from "@mui/icons-material/ThumbDownOutlined";
-import ThumbDownIcon from "@mui/icons-material/ThumbDown";
-import ThumbUpIcon from "@mui/icons-material/ThumbUp";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import { Link } from "react-router-dom";
@@ -12,13 +8,12 @@ import { db } from "../../firebase/firebaseConfig.js";
 import { updateDoc, doc } from "firebase/firestore";
 import numberWithCommas from "../utilities/NumbersFormat";
 import ShowMoreText from "react-show-more-text";
+import Like_dislikeBtn from "../buttons/Like-dislikeBtn";
 
 export default function VideoInfo(props) {
   function executeOnClick(isExpanded) {
     console.log(isExpanded);
   }
-
-
 
   let videoInfo = props.videoInfo.items[0];
   let channelInfo = props.channelInfo;
@@ -81,9 +76,13 @@ export default function VideoInfo(props) {
           <div>
             <span
               className={styles.likesCountSpan}
-              onClick={() => changeLiked(curentUserLiked, curentUserDisliked)}
+              onClick={
+                logged
+                  ? () => changeLiked(curentUserLiked, curentUserDisliked)
+                  : null
+              }
             >
-              {isLiked ? <ThumbUpIcon /> : <ThumbUpOutlinedIcon />}
+              <Like_dislikeBtn likedState={isLiked} btnType={"like"} />
               <p>
                 {isLiked
                   ? numberWithCommas(videoInfo.statistics.likeCount + 1)
@@ -92,12 +91,14 @@ export default function VideoInfo(props) {
             </span>
 
             <span
-             className={styles.likesCountSpan}
-              onClick={() =>
-                changeDisliked(curentUserLiked, curentUserDisliked)
+              className={styles.likesCountSpan}
+              onClick={
+                logged
+                  ? () => changeDisliked(curentUserLiked, curentUserDisliked)
+                  : null
               }
             >
-              {isDisliked ? <ThumbDownIcon /> : <ThumbDownOutlinedIcon />}
+              <Like_dislikeBtn dislikedState={isDisliked} />
               <p>DISLIKE</p>
             </span>
           </div>
@@ -116,7 +117,10 @@ export default function VideoInfo(props) {
               />
               <p>
                 <a href="...">{videoInfo.snippet.channelTitle}</a> <br />
-                {numberWithCommas(channelInfo.items[0].statistics.subscriberCount)} subscribers
+                {numberWithCommas(
+                  channelInfo.items[0].statistics.subscriberCount
+                )}{" "}
+                subscribers
               </p>
             </div>
           </Link>
@@ -132,19 +136,18 @@ export default function VideoInfo(props) {
         </div>
         <ShowMoreText
           /* Default options */
-          lines={3}
+          lines={1}
           more="Show more"
           less="Show less"
           className={styles.ShowMore}
           anchorClass={styles.ShowMore}
           onClick={executeOnClick}
           expanded={false}
-          width={1300}
-          truncatedEndingComponent={"... "}
+          width={1200}
+          truncatedEndingComponent={""}
         >
           <p className={styles.description}>{videoInfo.snippet.description}</p>
         </ShowMoreText>
-
       </div>
     </div>
   );

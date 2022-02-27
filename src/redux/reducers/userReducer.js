@@ -36,8 +36,19 @@ export const userReducer = (state = INITIAL_STATE, action) => {
         uploadedVideos: [],
       };
 
-    /////////////////////USER DATA///////////////////////////
+    ////////////////////////PROFILE DATA///////////////////////////////
+    case "CHANGE_PIC":
+      return {
+        ...state,
+        profileImg: action.newPic,
+      };
+    case "CHANGE_NAME":
+      return {
+        ...state,
+        name: action.newName,
+      };
 
+    /////////////////////USER ACTIVITY DATA///////////////////////////
     case "HISTORIZE":
       return {
         ...state,

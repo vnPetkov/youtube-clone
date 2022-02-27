@@ -26,8 +26,6 @@ export default function LoginUser() {
     //TODO: може тази проверка да се изнесе в редукс май
 
     const user = await signInWithEmailAndPassword(auth, email, password);
-    console.log("PHOTO : ", user.user.photoURL);
-    console.log("disp name : ", user.user.displayName);
 
     localStorage.setItem("user", JSON.stringify([email, password]));
 

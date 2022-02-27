@@ -1,0 +1,56 @@
+.header {
+  display: flex;
+  width: 100%;
+  padding: 15px;
+  border-bottom: 1px solid #cccccc;
+  h3 {
+    margin-left: 20px;
+    font-size: 20px;
+    font-weight: 700;
+  }
+}
+.tab {
+  width: 100%;
+  padding: 15px;
+  color: black;
+  > div {
+    display: flex;
+  }
+  .inActiveInputDiv {
+    display: none;
+  }
+  .activeInputDiv {
+    display: flex;
+    padding: 10px;
+    height: 50px;
+    align-items: center;
+    justify-content: space-between;
+  }
+  h2 {
+    margin-left: 20px;
+    font-size: 16px;
+    font-weight: 500;
+  }
+
+  button {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    margin: 0 15px;
+    height: 25px;
+    width: 110px;
+    padding: 5px 5px;
+    color: #065fd4;
+    border: 1px solid #065fd4;
+    letter-spacing: 0.5px;
+    text-decoration: none;
+  }
+}
+.tab:hover {
+  background-color: lightgrey;
+  cursor: pointer;
+}
+.signOut {
+  border-top: 1px solid #cccccc;
+  display: flex;
+}

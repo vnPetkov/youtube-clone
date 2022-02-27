@@ -1,7 +1,6 @@
 import styles from "./SignInButton.module.scss";
 import { Link } from "react-router-dom";
 import { FaRegUserCircle } from "react-icons/fa";
-import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 
 function SignInButton() {
