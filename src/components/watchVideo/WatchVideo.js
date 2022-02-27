@@ -40,7 +40,7 @@ export default function WatchVideo(props) {
   // Fetch comments
   useEffect(() => {
     fetch(
-      `https://www.googleapis.com/youtube/v3/commentThreads?key=${API_KEY}&textFormat=plainText&part=snippet&videoId=${params.videoId}&maxResults=50`
+      `https://www.googleapis.com/youtube/v3/commentThreads?key=${API_KEY}&textFormat=plainText&part=snippet&videoId=${params.videoId}&maxResults=15`
     )
       .then((res) => res.json())
       .then((data) => {
@@ -92,7 +92,7 @@ export default function WatchVideo(props) {
           }, 1000);
         }}
         hasMore={true}
-        loader={<div>ЗАРЕЖДАНИНГ...</div>}
+        loader={<div></div>}
       >
         {relatedVideos.map((e, index) => {
           return (

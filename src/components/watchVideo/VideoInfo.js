@@ -8,7 +8,7 @@ import { db } from "../../firebase/firebaseConfig.js";
 import { updateDoc, doc } from "firebase/firestore";
 import numberWithCommas from "../utilities/NumbersFormat";
 import ShowMoreText from "react-show-more-text";
-import Like_dislikeBtn from "../buttons/Like-dislikeBtn";
+import LikeDislikeBtn from "../buttons/Like-dislikeBtn";
 
 export default function VideoInfo(props) {
   function executeOnClick(isExpanded) {
@@ -82,7 +82,7 @@ export default function VideoInfo(props) {
                   : null
               }
             >
-              <Like_dislikeBtn likedState={isLiked} btnType={"like"} />
+              <LikeDislikeBtn likedState={isLiked} btnType={"like"} />
               <p>
                 {isLiked
                   ? numberWithCommas(videoInfo.statistics.likeCount + 1)
@@ -98,7 +98,7 @@ export default function VideoInfo(props) {
                   : null
               }
             >
-              <Like_dislikeBtn dislikedState={isDisliked} />
+              <LikeDislikeBtn dislikedState={isDisliked} />
               <p>DISLIKE</p>
             </span>
           </div>

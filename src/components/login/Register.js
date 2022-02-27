@@ -10,6 +10,7 @@ import {
 } from "firebase/auth";
 import { db } from "../../firebase/firebaseConfig.js";
 import { setDoc, doc } from "firebase/firestore";
+import { useDispatch } from "react-redux";
 
 export default function Register() {
   const [registerEmail, setRegisterEmail] = useState("");
@@ -18,6 +19,7 @@ export default function Register() {
   const [registerPassword2, setRegisterPassword2] = useState("");
 
   const auth = getAuth();
+  const dispatch = useDispatch();
 
   const register = async () => {
     const errMessage = document.querySelector("#regErr");
@@ -70,17 +72,21 @@ export default function Register() {
 
   return (
     <div className={styles.form}>
-      <img src={header_logo} alt="google logo" />
+      <Link to={"/"} onClick={dispatch({ type: "LOGIN_OPENED" })}>
+        <img src={header_logo} alt="google logo" />
+      </Link>
       <form id="regForm">
         <input
           type="email"
           name="email"
+          maxLength="20"
           placeholder="Email"
           onChange={(event) => setRegisterEmail(event.target.value.trim())}
         />
         <input
           type="text"
-          name="email"
+          name="name"
+          maxLength="15"
           placeholder="Your name"
           onChange={(event) =>
             setRegisterDisplayName(event.target.value.trim())
@@ -89,12 +95,14 @@ export default function Register() {
         <input
           type="password"
           name="Password"
+          maxLength="15"
           placeholder="Password"
           onChange={(event) => setRegisterPassword(event.target.value.trim())}
         />
         <input
           type="password"
           name="Password2"
+          maxLength="15"
           placeholder="Repeat password"
           onChange={(event) => setRegisterPassword2(event.target.value.trim())}
         />

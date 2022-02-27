@@ -11,7 +11,7 @@ import ThumbDownIcon from "@mui/icons-material/ThumbDown";
 import { useSelector } from "react-redux";
 import SignInButton from "./SignInButton";
 
-export default function Like_dislikeBtn(props) {
+export default function LikeDislikeBtn(props) {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [open, setOpen] = React.useState(false);
   const [placement, setPlacement] = React.useState();

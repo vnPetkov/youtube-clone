@@ -36,11 +36,6 @@ export default function LoginUser() {
     let dataBaseDisliked = docSnap.data().dislikedVideos;
     let dataBaseUploaded = docSnap.data().uploadedVideos;
 
-    // const q = query(collection(db, "comments"));
-    // //TODO: ima opciq za durpane po uslovie, moje da se napravi da ne se durpata vsichki klipove a samo tozi koito sega e otvoren za gledane
-    // const querySnapshot = await getDocs(q);
-    // querySnapshot.forEach((doc) => console.log("daaaaaaaaaaa : ", doc.data()));
-
     dispatch({
       type: "LOGIN",
       profileUid: user.user.uid,
@@ -51,7 +46,8 @@ export default function LoginUser() {
       disliked: dataBaseDisliked,
       uploaded: dataBaseUploaded,
     });
-    dispatch({ type: "LOGIN_CLOSED" });
+
     changePath("/");
+    dispatch({ type: "LOGIN_CLOSED" });
   };
 }

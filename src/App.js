@@ -62,8 +62,12 @@ function App() {
           disliked: dataBaseDisliked,
           uploaded: dataBaseUploaded,
         });
-        dispatch({ type: "LOGIN_CLOSED" });
       }
+      console.log(window.location.pathname);
+      window.location.pathname === "/login" ||
+      window.location.pathname === "/register"
+        ? dispatch({ type: "LOGIN_OPENED" })
+        : dispatch({ type: "LOGIN_CLOSED" });
     });
   }, []);
 
