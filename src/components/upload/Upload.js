@@ -3,10 +3,10 @@ import HorizontalCard from "../cards/HorizontalCard";
 import card_styles from "../cards/HorizontalCard.module.scss";
 import { useSelector } from "react-redux";
 import SettingsBackupRestoreIcon from "@mui/icons-material/SettingsBackupRestore";
-import OndemandVideoIcon from '@mui/icons-material/OndemandVideo';
+import OndemandVideoIcon from "@mui/icons-material/OndemandVideo";
 import FetchVideosById from "../utilities/FetchVideosById";
 import { useEffect, useState } from "react";
-import SignInButton from "../buttons/SignInButton"
+import SignInButton from "../buttons/SignInButton";
 
 export default function Upload() {
   const [uploadVideos, setUploadVideos] = useState([]);
@@ -19,7 +19,6 @@ export default function Upload() {
     logged && setUploadVideos(uploadedArr);
   }, []);
 
-  //TODO: чудя се тук да може директно да ги пускаме за гледане клипчетата или да препращаме към лач пейджа, май второто е по-добре
   logged
     ? (content = (
         <>
@@ -37,18 +36,6 @@ export default function Upload() {
                     height="480"
                   ></iframe>
                 </div>
-
-                // <div key={index}>
-                //   <video
-                //     width="720"
-                //     height="480"
-                //     controls="controls"
-                //     id="video"
-                //     src={e.src}
-                //   >
-                //     <source id="src" />
-                //   </video>
-                // </div>
               );
             })}
           </div>

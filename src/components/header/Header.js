@@ -1,6 +1,5 @@
 import API_KEY from "../utilities/API_KEY";
 import React, { useEffect, useState } from "react";
-
 import Autocomplete from "./Autocomplete";
 import SignInButton from "../buttons/SignInButton";
 import styles from "./Header.module.scss";
@@ -8,7 +7,7 @@ import header_logo from "../../images/header_logo.svg";
 import header_delete from "../../images/header_delete.png";
 import HomeCategories from "./HomeCategories";
 import { Link, Route, Routes, useNavigate } from "react-router-dom";
-import { FaMicrophone, FaRegUserCircle } from "react-icons/fa";
+import { FaMicrophone } from "react-icons/fa";
 import { BsSearch, BsThreeDotsVertical } from "react-icons/bs";
 import MenuIcon from "@mui/icons-material/Menu";
 import AppsIcon from "@mui/icons-material/Apps";
@@ -19,10 +18,8 @@ import {
   ChangeNameTab,
   SignOutTab,
 } from "../buttons/UserManagerTabs";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import UploadModal from "./UploadModal";
-import { doc, setDoc } from "firebase/firestore";
-import { db } from "../../firebase/firebaseConfig";
 import { Avatar } from "@mui/material";
 
 export default function Header({
@@ -33,23 +30,17 @@ export default function Header({
   setSearch,
   setSearchResults,
   inputFocus,
-  setInputFocus
+  setInputFocus,
 }) {
   const history = useNavigate();
 
   const [autocompleteResults, setAutocompleteResults] = useState([]);
   const [modalIsOpen, setIsOpen] = useState(false);
-  const [currentUploaded, setCurrentUploaded] = useState([]);
   const [userManagerIsActive, setUserManagerIsVisible] = useState(false);
 
   const logged = useSelector((state) => state.userData.logged);
-  const currentUserId = useSelector((state) => state.userData.uid);
-  const profilePicture = useSelector((state) => state.userData.profileImg);
 
-  const uploadedArr = useSelector((state) => state.userData.uploadedVideos);
-  useEffect(() => {
-    setCurrentUploaded(uploadedArr);
-  }, [uploadedArr]);
+  const profilePicture = useSelector((state) => state.userData.profileImg);
 
   function openModal() {
     setIsOpen(true);
@@ -81,32 +72,6 @@ export default function Header({
         setInputFocus(false);
         history("/search_page");
       });
-  };
-
-  // UPLOAD VIDEO
-  const dispatch = useDispatch();
-  const uploadVideo = async () => {
-    let input = document.getElementById("videoFileInput");
-    let freader = new FileReader();
-    freader.readAsDataURL(input.files[0]);
-
-    freader.onload = async () => {
-      let uploadVideoObj = {
-        src: freader.result,
-        name: "Our home",
-        channel: "Deep space geeks",
-        description: "uahfauifhsuoghpuognrgujbntquojwrnquowgnqe",
-      };
-      await dispatch({
-        type: "CHANGE_UPLOADED",
-        video: uploadVideoObj,
-      });
-
-      const userDocRef = doc(db, "users", currentUserId);
-      await setDoc(userDocRef, {
-        uploadedVideos: [...currentUploaded, uploadVideoObj],
-      });
-    };
   };
 
   return (
@@ -185,11 +150,7 @@ export default function Header({
         <div className={styles.header_signin}>
           <span className={styles.videoUploadSpan}>
             <VideoCallOutlinedIcon onClick={openModal} />
-            <UploadModal
-              uploadVideo={uploadVideo}
-              modalIsOpen={modalIsOpen}
-              setIsOpen={setIsOpen}
-            />
+            <UploadModal modalIsOpen={modalIsOpen} setIsOpen={setIsOpen} />
           </span>
           <span>
             <AppsIcon />
@@ -230,7 +191,12 @@ export default function Header({
       <Routes>
         <Route
           path="/"
-          element={<HomeCategories setSelectedCategory={setSelectedCategory} setSearchResults={setSearchResults} />}
+          element={
+            <HomeCategories
+              setSelectedCategory={setSelectedCategory}
+              setSearchResults={setSearchResults}
+            />
+          }
         />
       </Routes>
     </div>

@@ -54,6 +54,11 @@ export const userReducer = (state = INITIAL_STATE, action) => {
         ...state,
         historyVideos: [...state.historyVideos, action.videoId],
       };
+    case "CLEAR_HISTORY":
+      return {
+        ...state,
+        historyVideos: [],
+      };
     case "CHANGE_LIKED":
       return {
         ...state,
