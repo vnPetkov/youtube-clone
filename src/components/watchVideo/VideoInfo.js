@@ -85,7 +85,7 @@ export default function VideoInfo(props) {
               <LikeDislikeBtn likedState={isLiked} btnType={"like"} />
               <p>
                 {isLiked
-                  ? numberWithCommas(videoInfo.statistics.likeCount + 1)
+                  ? numberWithCommas(videoInfo.statistics.likeCount)
                   : numberWithCommas(videoInfo.statistics.likeCount)}
               </p>
             </span>
