@@ -35,7 +35,7 @@ export default function WatchVideo(props) {
         setVideoInfo(data);
         setVideoInfoReady(true);
       });
-  }, []);
+  }, [params]);
 
   // Fetch comments
   useEffect(() => {

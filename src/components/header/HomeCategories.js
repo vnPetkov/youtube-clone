@@ -8,15 +8,15 @@ export default function HomeCategories({setSelectedCategory}) {
   let content = null;
 
 
-  // function fetchByCategory(title) {
-  //   fetch(`https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=20&q=${title}&type=video&key=${API_KEY}`)
-  //     .then(res => res.json())
-  //     .then(res => {
-  //       console.log(res)
-  //     })
-  // }
+  function fetchByCategory(title) {
+    fetch(`https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=20&q=${title}&type=video&key=${API_KEY}`)
+      .then(res => res.json())
+      .then(res => {
+        console.log(res)
+      })
+  }
 
-
+ 
   useEffect(() => {
     fetch(`https://youtube.googleapis.com/youtube/v3/videoCategories?part=snippet&regionCode=BG&key=${API_KEY}`)
       .then((resp) => resp.json())

@@ -8,20 +8,20 @@ import { useDispatch } from "react-redux";
 export default function Login() {
   const [loginEmail, setLoginEmail] = useState("");
   const [loginPassword, setLoginPassword] = useState("");
+  const [areEmpty, setAreEmpty] = useState(false);
+  const [errMessage, setErrMessage] = useState("");
 
   // let loginFunc;
-
   // let errMessage = document.querySelector("#logErr");
   // if (loginEmail === "" || loginPassword === "") {
   //   errMessage.innerHTML = "The fields are not filled!";
   // } else {
   //   loginFunc = LoginUser();
   // }
-  const dispatch = useDispatch();
   const loginFunc = LoginUser();
   return (
     <div className={styles.form}>
-      <Link to={"/"} onClick={dispatch({ type: "LOGIN_OPENED" })}>
+      <Link to={"/"}>
         <img src={header_logo} alt="google logo" />
       </Link>
       <input
@@ -41,12 +41,18 @@ export default function Login() {
       <button
         className={styles.formButtons}
         onClick={() => {
-          loginFunc(loginEmail, loginPassword);
+          if (loginEmail === "" || loginPassword === "") {
+            setErrMessage("The fields are not filled!");
+          } else {
+            loginFunc(loginEmail, loginPassword).catch((err) =>
+              setErrMessage("Invalid username or password!")
+            );
+          }
         }}
       >
         Sign in
       </button>
-      <p id="logErr"></p>
+      <p id="logErr">{errMessage && errMessage}</p>
       <br />
       <Link to={"/register"}>Create account</Link>
     </div>

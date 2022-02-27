@@ -17,35 +17,34 @@ export default function Register() {
   const [registerDisplayName, setRegisterDisplayName] = useState("");
   const [registerPassword, setRegisterPassword] = useState("");
   const [registerPassword2, setRegisterPassword2] = useState("");
+  const [currentErr, setCurrentErr] = useState("");
 
   const auth = getAuth();
   const dispatch = useDispatch();
 
   const register = async () => {
-    const errMessage = document.querySelector("#regErr");
-    errMessage.innerHTML = "";
     if (
       registerEmail === "" ||
       registerDisplayName === "" ||
       registerPassword === ""
     ) {
-      errMessage.innerHTML = "The fields are not filled!";
+      setCurrentErr("The fields are not filled!");
       return;
     } else if (registerPassword.length < 6) {
-      errMessage.innerHTML = "Password must contain more then 5 characters!";
+      setCurrentErr("Password must contain more then 5 characters!");
       return;
     } else if (registerPassword !== registerPassword2) {
-      errMessage.innerHTML = "Passwords must match!";
+      setCurrentErr("Passwords must match!");
       return;
     } else if (!/^[A-Za-z0-9]*$/.test(registerPassword)) {
-      errMessage.innerHTML = "Password must contain only letters and numbers!";
+      setCurrentErr("Password must contain only letters and numbers!");
       return;
     } else if (
       [registerEmail, registerDisplayName, registerPassword].some(
         (e) => e.indexOf(" ") !== -1
       )
     ) {
-      errMessage.innerHTML = "The fields must not contain whitespaces";
+      setCurrentErr("The fields must not contain whitespaces");
       return;
     }
 
@@ -53,21 +52,29 @@ export default function Register() {
       auth,
       registerEmail,
       registerPassword
-    ).catch((err) => (errMessage.innerHTML = err.message));
+    ).catch((err) => {
+      if (err.message.includes("already")) {
+        setCurrentErr("This email is alredy taken!");
+      } else if (err.message.includes("invalid")) {
+        setCurrentErr("Please enter valid email!");
+      }
+    });
     updateProfile(auth.currentUser, {
       displayName: registerDisplayName,
       photoURL:
         "https://img.favpng.com/6/14/19/computer-icons-user-profile-icon-design-png-favpng-vcvaCZNwnpxfkKNYzX3fYz7h2.jpg",
     });
     console.log(user.user.uid);
+
     await setDoc(doc(db, "users", user.user.uid), {
       historyVideos: [],
       likedVideos: [],
       dislikedVideos: [],
       uploadedVideos: [],
     });
-    //document.getAnimations("regForm").reset();
-    errMessage.innerHTML = "Your registration is successful!";
+    document.getElementById("regForm").reset();
+
+    setCurrentErr("Your registration is successful!");
   };
 
   return (
@@ -110,7 +117,7 @@ export default function Register() {
       <button className={styles.formButtons} onClick={register}>
         Register
       </button>
-      <p id="regErr"></p>
+      <p id="regErr">{currentErr && currentErr}</p>
       <br />
       <Link to={"/login"}>Sign in</Link>
     </div>

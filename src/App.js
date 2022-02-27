@@ -30,6 +30,15 @@ function App() {
   const auth = getAuth();
   const dispatch = useDispatch();
 
+  const path = window.location.pathname
+  useEffect(() => {
+    if (path === '/login' || path === "register") {
+      dispatch({ type: "LOGIN_OPENED" })
+    } else {
+      dispatch({ type: "LOGIN_CLOSED" })
+    }
+  }, [path])
+
   useEffect(() => {
     window.addEventListener("load", async () => {
       let storageUser = JSON.parse(localStorage.getItem("user"));
@@ -63,11 +72,7 @@ function App() {
           uploaded: dataBaseUploaded,
         });
       }
-      console.log(window.location.pathname);
-      window.location.pathname === "/login" ||
-      window.location.pathname === "/register"
-        ? dispatch({ type: "LOGIN_OPENED" })
-        : dispatch({ type: "LOGIN_CLOSED" });
+
     });
   }, []);
 
