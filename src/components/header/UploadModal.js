@@ -6,6 +6,7 @@ import CloseIcon from "@mui/icons-material/Close";
 import { useDispatch, useSelector } from "react-redux";
 import { doc, setDoc } from "firebase/firestore";
 import { db } from "../../firebase/firebaseConfig";
+import DragDrop from "./DragDrop"
 
 Modal.setAppElement("#root");
 
@@ -18,7 +19,7 @@ const customStyles = {
     bottom: "auto",
     marginRight: "-50%",
     transform: "translate(-50%, -50%)",
-    width: "350px",
+    width: "370px",
     height: "400px",
     display: "flex",
     flexFlow: "column wrap",
@@ -123,8 +124,9 @@ export default function UploadModal({ modalIsOpen, setIsOpen }) {
         <button onClick={closeModal} className={styles.closeModalBtn}>
           <CloseIcon />
         </button>
-        <form id="form">
+        <form id="form" className={styles.uploadForm}>
           <input type="file" accept=".mp4,.wmv,.mpg" id="videoFileInput" />
+          <DragDrop/>
           <input
             type="text"
             id="title"

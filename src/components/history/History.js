@@ -49,6 +49,7 @@ export default function History() {
                 historyVideos.map((e) => {
                   return (
                     <HorizontalCard
+                      videoId={e.id}
                       key={e.id}
                       img={e.snippet.thumbnails.high.url}
                       user={e.snippet.channelTitle}

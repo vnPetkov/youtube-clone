@@ -20,9 +20,7 @@ export default function Upload() {
 
   const removeUploaded = (currentUploaded, videoId) => {
     let index = currentUploaded.findIndex((e) => e.timestamp === videoId);
-    console.log(index);
     currentUploaded.splice(index, 1);
-
     dispatch({ type: "CHANGE_UPLOADED", newUploadedArr: currentUploaded });
 
     const userDoc = doc(db, "users", curentUserId);

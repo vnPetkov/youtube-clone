@@ -47,7 +47,7 @@ export default function WatchVideo(props) {
         setComments(data);
         setCommentsReady(true);
       });
-  }, []);
+  }, [params]);
 
   // Fetch channel image
   useEffect(() => {
@@ -61,7 +61,7 @@ export default function WatchVideo(props) {
           setChannelInfoReady(true);
         });
     }
-  }, [videoInfoReady]);
+  }, [videoInfoReady, params]);
 
   function fetchRelatedVideos() {
     FetchVideo(nextPageToken)
@@ -78,7 +78,7 @@ export default function WatchVideo(props) {
 
   useEffect(() => {
     fetchRelatedVideos();
-  }, []);
+  }, [params]);
 
   return (
     <div className={styles.watchVideo}>

@@ -1,4 +1,7 @@
 import React from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { db } from "../../firebase/firebaseConfig.js";
+import { updateDoc, doc } from "firebase/firestore";
 import { Link } from "react-router-dom";
 // import styles from "./HorizontalCard.module.scss"
 
@@ -13,13 +16,30 @@ export default function HorizontalCard({
   uploaded,
   currentClass,
   channelId
-  
+
 }) {
+  const logged = useSelector((state) => state.userData.logged);
+  const curentUserId = useSelector((state) => state.userData.uid);
+  const curentUserHistory = useSelector(
+    (state) => state.userData.historyVideos
+  );
+
+  const dispatch = useDispatch();
+  const addHistory = (userId, currentHistory) => {
+    !currentHistory.some((e) => e === videoId) &&
+      (function () {
+        dispatch({ type: "HISTORIZE", videoId: videoId });
+        const userDoc = doc(db, "users", userId);
+        const newFields = { historyVideos: [...currentHistory, videoId] };
+        updateDoc(userDoc, newFields);
+      })();
+  };
 
   return (
     <Link
       to={`/watchVideo_page/${videoId}/`}
-      key = {videoId}
+      key={videoId}
+      onClick={() => addHistory(curentUserId, curentUserHistory)}
     >
       <div className={currentClass}>
         <img src={img} alt="video poster" />
@@ -31,7 +51,7 @@ export default function HorizontalCard({
           </div>
           <div>
             {/* <img src={userPic} alt="user pic" /> */}
-            <Link  to={`/channel/${channelId}`}>{user}</Link>
+            <Link to={`/channel/${channelId}`}>{user}</Link>
           </div>
           <p>{desc}</p>
         </div>

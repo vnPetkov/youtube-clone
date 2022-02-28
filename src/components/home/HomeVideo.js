@@ -30,7 +30,6 @@ export default function HomeVideo(props) {
 
   return (
     <Link
-      // channelId={props.channelId}
       to={`/watchVideo_page/${props.videoId}/`}
       onClick={() => addHistory(curentUserId, curentUserHistory)}
     >

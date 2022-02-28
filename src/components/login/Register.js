@@ -64,7 +64,7 @@ export default function Register() {
       photoURL:
         "https://img.favpng.com/6/14/19/computer-icons-user-profile-icon-design-png-favpng-vcvaCZNwnpxfkKNYzX3fYz7h2.jpg",
     });
-    console.log(user.user.uid);
+    // console.log(user.user.uid);
 
     await setDoc(doc(db, "users", user.user.uid), {
       historyVideos: [],

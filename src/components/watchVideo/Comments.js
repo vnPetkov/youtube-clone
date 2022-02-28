@@ -1,6 +1,7 @@
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import styles from "./Comments.module.scss";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { doc, setDoc } from "firebase/firestore";
@@ -13,6 +14,7 @@ export default function Comments(props) {
   const watchedVideoId = props.videoId;
   let comments = props.comments.items;
 
+  const [writeComment, setWriteComment] = useState("");
   const firebaseCommentsArr = useSelector(
     (state) => state.databaseComments.commentsArr
   );
@@ -37,7 +39,7 @@ export default function Comments(props) {
     let commentObj = {
       userName: profileName,
       userPic: profilePicture,
-      comment: currentComment,
+      comment: writeComment,
     };
     videoCommentsIndex !== -1
       ? pushComment(videoCommentsIndex, commentObj)
@@ -52,6 +54,7 @@ export default function Comments(props) {
       let videoCommentsRef = doc(db, "comments", watchedVideoId);
       setDoc(videoCommentsRef, e);
     });
+    setWriteComment("");
   };
 
   return (
@@ -68,6 +71,9 @@ export default function Comments(props) {
             <input
               type="text"
               placeholder="Add comment..."
+              value = {writeComment}
+              onChange={(e)=>{
+                setWriteComment(e.target.value)}}
               id="commentInput"
             ></input>
           ) : (
@@ -136,7 +142,7 @@ export default function Comments(props) {
               el.snippet.topLevelComment.snippet.authorChannelId.value;
 
             return (
-              <Link to={`/channel/${commentChannelId}/`} key={commentText}>
+              <Link to={`/channel/${commentChannelId}/`} key={el.id}>
                 <div className={styles.comment} key={commentText}>
                   <Avatar
                     className={styles.avatar}
