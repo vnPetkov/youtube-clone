@@ -1,6 +1,5 @@
 const INITIAL_STATE = {
   showHeader: true,
-  showSidebar: true,
 };
 
 export const navsReducer = (state = INITIAL_STATE, action) => {
@@ -21,4 +20,3 @@ export const navsReducer = (state = INITIAL_STATE, action) => {
       return state;
   }
 };
-//TODO: SET SIDE BAR VISSIBILLITY

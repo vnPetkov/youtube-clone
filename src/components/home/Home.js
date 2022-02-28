@@ -3,9 +3,8 @@ import HomeVideo from "./HomeVideo";
 import React, { useState, useEffect } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
 import FetchVideo from "../utilities/FetchVideo";
-import { TailSpin } from  'react-loader-spinner'
+import { TailSpin } from "react-loader-spinner";
 import API_KEY from "../utilities/API_KEY";
-import LoginUser from "../utilities/LogInUser";
 
 export default function Home({ categoryTitle, setSidebarOpen }) {
   const [homeVideos, setHomeVideos] = useState([]);
@@ -13,9 +12,9 @@ export default function Home({ categoryTitle, setSidebarOpen }) {
   const [channels, setChannels] = useState([]);
   const [nextPageToken, setNextPageToken] = useState("");
   let content = null;
-  useEffect(()=>{
-    setSidebarOpen(true)
-  },[])
+  useEffect(() => {
+    setSidebarOpen(true);
+  }, []);
 
   // TODO FETCH CATEGORIES HAVE TO FINISH IT
   useEffect(() => {

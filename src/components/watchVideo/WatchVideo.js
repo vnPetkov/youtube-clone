@@ -80,38 +80,6 @@ export default function WatchVideo(props) {
     fetchRelatedVideos();
   }, []);
 
-  if (relatedVideos.length !== 0 && channels.length !== 0) {
-    content = (
-      <InfiniteScroll
-        className={styles.relatedContainer}
-        dataLength={relatedVideos.length}
-        next={() => {
-          setTimeout(() => {
-            console.log("infinite scroll activated");
-            fetchRelatedVideos();
-          }, 1000);
-        }}
-        hasMore={true}
-        loader={<div></div>}
-      >
-        {relatedVideos.map((e, index) => {
-          return (
-            <HorizontalCard
-              videoId={e.id}
-              img={e.snippet.thumbnails.high.url}
-              user={e.snippet.channelTitle}
-              title={e.snippet.title}
-              desc={e.snippet.description}
-              views={e.statistics.viewCount}
-              uploaded={e.snippet.publishedAt}
-              currentClass={styles.horizonntalCard}
-              key={e.id}
-            />
-          );
-        })}
-      </InfiniteScroll>
-    );
-  }
   return (
     <div className={styles.watchVideo}>
       <div className={styles.mainColumn}>
@@ -134,7 +102,26 @@ export default function WatchVideo(props) {
         )}
       </div>
 
-      <div className={styles.relatedColumn}>{content}</div>
+      <div className={styles.relatedColumn}>
+        <div className={styles.relatedContainer}>
+          {relatedVideos.length !== 0 &&
+            relatedVideos.map((e, index) => {
+              return (
+                <HorizontalCard
+                  videoId={e.id}
+                  img={e.snippet.thumbnails.high.url}
+                  user={e.snippet.channelTitle}
+                  title={e.snippet.title}
+                  desc={e.snippet.description}
+                  views={e.statistics.viewCount}
+                  uploaded={e.snippet.publishedAt}
+                  currentClass={styles.horizonntalCard}
+                  key={e.id}
+                />
+              );
+            })}
+        </div>
+      </div>
     </div>
   );
 }

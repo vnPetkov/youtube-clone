@@ -19,7 +19,7 @@ const customStyles = {
     marginRight: "-50%",
     transform: "translate(-50%, -50%)",
     width: "350px",
-    height: "250px",
+    height: "400px",
     display: "flex",
     flexFlow: "column wrap",
     alignItems: "center",
@@ -29,9 +29,13 @@ const customStyles = {
 
 export default function UploadModal({ modalIsOpen, setIsOpen }) {
   const [currentUploaded, setCurrentUploaded] = useState([]);
+  const [uploadVidTitle, setUploadVidTitle] = useState("");
+  const [uploadVidDesc, setUploadVidDesc] = useState("");
+  const [errMessage, setErrMessage] = useState("");
 
   const currentUserId = useSelector((state) => state.userData.uid);
   const uploadedArr = useSelector((state) => state.userData.uploadedVideos);
+  const fileInput = document.getElementById("videoFileInput");
 
   useEffect(() => {
     setCurrentUploaded(uploadedArr);
@@ -41,29 +45,69 @@ export default function UploadModal({ modalIsOpen, setIsOpen }) {
     setIsOpen(false);
   }
 
-  // UPLOAD VIDEO
-  const dispatch = useDispatch();
-  const uploadVideo = async () => {
-    let input = document.getElementById("videoFileInput");
-    let freader = new FileReader();
-    freader.readAsDataURL(input.files[0]);
+  const getTime = () => {
+    let today = new Date();
+    let date =
+      today.getFullYear() +
+      "-" +
+      (today.getMonth() + 1) +
+      "-" +
+      today.getDate();
+    let time =
+      today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+    return date + " " + time;
+  };
 
+  function fileValidation() {
+    let allowedExtensions = /(\.mp4|\.wmv|\.mpg)$/i;
+    if (!allowedExtensions.exec(fileInput.value)) {
+      document.getElementById("form").reset();
+      return false;
+    }
+    return true;
+  }
+
+  const dispatch = useDispatch();
+  const uploadVideo = async (currentUploadedArr) => {
+    if (fileInput.files[0] === undefined) {
+      setErrMessage("There is no file to upload!");
+      return;
+    }
+    if (uploadVidTitle === "") {
+      console.log(uploadVidTitle);
+      setErrMessage("The video must have title!");
+      return;
+    }
+    if (!fileValidation()) {
+      setErrMessage("Invalid file extension!");
+      return;
+    }
+    let freader = new FileReader();
+    freader.readAsDataURL(fileInput.files[0]);
     freader.onload = async () => {
       let uploadVideoObj = {
         src: freader.result,
-        name: "Our home",
-        channel: "Deep space geeks",
-        description: "uahfauifhsuoghpuognrgujbntquojwrnquowgnqe",
+        name: uploadVidTitle,
+        description: uploadVidDesc,
+        timestamp: getTime(),
       };
-      await dispatch({
+      currentUploadedArr.unshift(uploadVideoObj);
+      dispatch({
         type: "CHANGE_UPLOADED",
-        video: uploadVideoObj,
+        newUploadedArr: currentUploadedArr,
       });
 
       const userDocRef = doc(db, "users", currentUserId);
       await setDoc(userDocRef, {
-        uploadedVideos: [...currentUploaded, uploadVideoObj],
-      });
+        uploadedVideos: [...currentUploadedArr],
+      })
+        .then(() => setErrMessage("The video is uploaded!"))
+        .catch((err) => {
+          if (err.message.includes("maximum")) {
+            setErrMessage("The video size is too big!");
+          }
+        });
+      document.getElementById("form").reset();
     };
   };
 
@@ -79,22 +123,33 @@ export default function UploadModal({ modalIsOpen, setIsOpen }) {
         <button onClick={closeModal} className={styles.closeModalBtn}>
           <CloseIcon />
         </button>
-
-        <input type="file" accept="video/*" id="videoFileInput" />
-        <input type="text" id="title" placeholder="Your video title" />
-        <input
-          type="text"
-          id="description"
-          placeholder="Your video description"
-        />
+        <form id="form">
+          <input type="file" accept=".mp4,.wmv,.mpg" id="videoFileInput" />
+          <input
+            type="text"
+            id="title"
+            maxLength="20"
+            placeholder="Your video title"
+            onChange={(event) => setUploadVidTitle(event.target.value.trim())}
+          />
+          <textarea
+            id="description"
+            placeholder="Your video description"
+            rows="4"
+            cols="23"
+            maxLength="80"
+            onChange={(event) => setUploadVidDesc(event.target.value.trim())}
+          />
+        </form>
 
         <Button
           variant="contained"
-          onClick={uploadVideo}
+          onClick={() => uploadVideo(currentUploaded)}
           className={styles.uploadBtn}
         >
           Upload
         </Button>
+        <p>{errMessage && errMessage}</p>
       </Modal>
     </div>
   );

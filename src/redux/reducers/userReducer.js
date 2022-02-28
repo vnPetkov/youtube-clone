@@ -72,7 +72,7 @@ export const userReducer = (state = INITIAL_STATE, action) => {
     case "CHANGE_UPLOADED":
       return {
         ...state,
-        uploadedVideos: [...state.uploadedVideos, action.video],
+        uploadedVideos: [...action.newUploadedArr],
       };
 
     default:
