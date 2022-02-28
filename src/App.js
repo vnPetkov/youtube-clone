@@ -32,7 +32,7 @@ function App() {
 
   const path = window.location.pathname;
   useEffect(() => {
-    if (path === '/login' || path === "/register") {
+    if (path == "/login" || path == "/register") {
       dispatch({ type: "LOGIN_OPENED" })
     } else {
       dispatch({ type: "LOGIN_CLOSED" })

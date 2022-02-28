@@ -57,7 +57,7 @@ export default function Home({ categoryTitle, setSidebarOpen }) {
           }, 2000);
         }}
         hasMore={true}
-        loader={<TailSpin color="grey" height={80} width={80} />}
+        loader={<div className={styles.loaderDiv}><TailSpin color="grey" height={80} width={80} style={{ position: "absolute", bottom: "10px" }} /></div>}
       >
         {homeVideos &&
           channels &&

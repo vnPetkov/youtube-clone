@@ -2,7 +2,7 @@
   width: 100%;
   background-color: #f9f9f9;
   padding: 25px 70px;
-
+  position: relative;
   > div {
     padding-top: 60px;
     display: flex;
@@ -17,4 +17,9 @@
       flex-wrap: wrap;
     }
   }
+}
+
+.loaderDiv{
+  position: absolute;
+  bottom: 10px;
 }
