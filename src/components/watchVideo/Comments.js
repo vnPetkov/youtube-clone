@@ -1,10 +1,10 @@
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import styles from "./Comments.module.scss";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { doc, setDoc } from "firebase/firestore";
+import { collection, doc, setDoc } from "firebase/firestore";
 import { db } from "../../firebase/firebaseConfig";
 
 export default function Comments(props) {
@@ -15,6 +15,8 @@ export default function Comments(props) {
   let comments = props.comments.items;
 
   const [writeComment, setWriteComment] = useState("");
+  const [updatedCommentsArr, setupdatedCommentsArr] = useState([]);
+
   const firebaseCommentsArr = useSelector(
     (state) => state.databaseComments.commentsArr
   );
@@ -35,7 +37,6 @@ export default function Comments(props) {
 
   const dispatch = useDispatch();
   const uploadComment = () => {
-    let currentComment = document.getElementById("commentInput").value;
     let commentObj = {
       userName: profileName,
       userPic: profilePicture,
@@ -50,9 +51,11 @@ export default function Comments(props) {
             comments: [commentObj],
           },
         });
-    firebaseCommentsArr.forEach((e) => {
-      let videoCommentsRef = doc(db, "comments", watchedVideoId);
-      setDoc(videoCommentsRef, e);
+
+    console.log("prateno kum FB   ", firebaseCommentsArr);
+    firebaseCommentsArr.forEach(async (e) => {
+      console.log(e);
+      await setDoc(doc(db, "comments", e.videoId), e);
     });
     setWriteComment("");
   };
@@ -71,9 +74,10 @@ export default function Comments(props) {
             <input
               type="text"
               placeholder="Add comment..."
-              value = {writeComment}
-              onChange={(e)=>{
-                setWriteComment(e.target.value)}}
+              value={writeComment}
+              onChange={(e) => {
+                setWriteComment(e.target.value);
+              }}
               id="commentInput"
             ></input>
           ) : (

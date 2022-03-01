@@ -2,14 +2,7 @@ import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { db } from "../../firebase/firebaseConfig";
-import {
-  collection,
-  doc,
-  getDocs,
-  getDoc,
-  query,
-  where,
-} from "firebase/firestore";
+import { collection, doc, getDoc, getDocs, query } from "firebase/firestore";
 
 export default function LoginUser() {
   const auth = getAuth();
@@ -17,14 +10,6 @@ export default function LoginUser() {
   let changePath = useNavigate();
 
   return async (email, password) => {
-    // const errMessage = document.querySelector("#logErr");
-    // errMessage.innerHTML = "";
-    // if (email === "" || password === "") {
-    //   errMessage.innerHTML = "The fields are not filled!";
-    //   return;
-    // }
-    //TODO: може тази проверка да се изнесе в редукс май
-
     const user = await signInWithEmailAndPassword(auth, email, password);
 
     localStorage.setItem("user", JSON.stringify([email, password]));
@@ -35,6 +20,12 @@ export default function LoginUser() {
     let dataBaseLiked = docSnap.data().likedVideos;
     let dataBaseDisliked = docSnap.data().dislikedVideos;
     let dataBaseUploaded = docSnap.data().uploadedVideos;
+
+    const commentsCollRef = query(collection(db, "comments"));
+    const commentsCollSnapshot = await getDocs(commentsCollRef);
+    commentsCollSnapshot.forEach((e) =>
+      dispatch({ type: "ADD_VIDEO_COMMENTS", newVideoComments: e.data() })
+    );
 
     dispatch({
       type: "LOGIN",

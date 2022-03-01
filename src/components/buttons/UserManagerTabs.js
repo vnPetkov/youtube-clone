@@ -105,6 +105,7 @@ function SignOutTab() {
   const dispatch = useDispatch();
   const logout = async () => {
     dispatch({ type: "LOGOUT" });
+    dispatch({ type: "CLEAR_COMMENTS" });
     await signOut(auth);
     localStorage.removeItem("user");
   };

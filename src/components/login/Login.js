@@ -3,21 +3,12 @@ import { Link } from "react-router-dom";
 import styles from "./Login.module.scss";
 import LoginUser from "../utilities/LogInUser";
 import header_logo from "../../images/header_logo.svg";
-import { useDispatch } from "react-redux";
 
 export default function Login() {
   const [loginEmail, setLoginEmail] = useState("");
   const [loginPassword, setLoginPassword] = useState("");
-  const [areEmpty, setAreEmpty] = useState(false);
   const [errMessage, setErrMessage] = useState("");
 
-  // let loginFunc;
-  // let errMessage = document.querySelector("#logErr");
-  // if (loginEmail === "" || loginPassword === "") {
-  //   errMessage.innerHTML = "The fields are not filled!";
-  // } else {
-  //   loginFunc = LoginUser();
-  // }
   const loginFunc = LoginUser();
   return (
     <div className={styles.form}>

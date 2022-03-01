@@ -1,7 +1,6 @@
 import "./App.scss";
 import React, { useState, useEffect } from "react";
-import { BrowserRouter, Route, Routes, useNavigate } from "react-router-dom";
-
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Header from "./components/header/Header.js";
 import Sidebar from "./components/sidebar/Sidebar.js";
 import Home from "./components/home/Home.js";
@@ -16,7 +15,7 @@ import Channel from "./components/channel/Channel";
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 import { useDispatch, useSelector } from "react-redux";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
-import { doc, getDoc } from "firebase/firestore";
+import { collection, doc, getDoc, getDocs, query } from "firebase/firestore";
 import { db } from "../src/firebase/firebaseConfig";
 
 function App() {
@@ -33,11 +32,11 @@ function App() {
   const path = window.location.pathname;
   useEffect(() => {
     if (path == "/login" || path == "/register") {
-      dispatch({ type: "LOGIN_OPENED" })
+      dispatch({ type: "LOGIN_OPENED" });
     } else {
-      dispatch({ type: "LOGIN_CLOSED" })
+      dispatch({ type: "LOGIN_CLOSED" });
     }
-  }, [path])
+  }, [path]);
 
   useEffect(() => {
     window.addEventListener("load", async () => {
@@ -49,17 +48,18 @@ function App() {
           storageUser[1]
         );
 
-        localStorage.setItem(
-          "user",
-          JSON.stringify([storageUser[0], storageUser[1]])
-        );
-
         const userDocRef = doc(db, "users", user.user.uid);
         const docSnap = await getDoc(userDocRef);
         let dataBaseHistory = docSnap.data().historyVideos;
         let dataBaseLiked = docSnap.data().likedVideos;
         let dataBaseDisliked = docSnap.data().dislikedVideos;
         let dataBaseUploaded = docSnap.data().uploadedVideos;
+
+        const commentsCollRef = query(collection(db, "comments"));
+        const commentsCollSnapshot = await getDocs(commentsCollRef);
+        commentsCollSnapshot.forEach((e) =>
+          dispatch({ type: "ADD_VIDEO_COMMENTS", newVideoComments: e.data() })
+        );
 
         dispatch({
           type: "LOGIN",
@@ -72,7 +72,6 @@ function App() {
           uploaded: dataBaseUploaded,
         });
       }
-
     });
   }, []);
 
