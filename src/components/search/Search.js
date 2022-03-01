@@ -1,13 +1,12 @@
 import React, { useEffect } from "react";
 import TuneIcon from "@mui/icons-material/Tune";
 import card_styles from "../cards/HorizontalCard.module.scss";
-import styles from "./Search.module.scss"
+import styles from "./Search.module.scss";
 import HorizontalCard from "../cards/HorizontalCard";
 
 export default function Search({ searchResults }) {
   searchResults = searchResults.items;
-  useEffect(()=>{
-  },)
+  useEffect(() => {});
   return (
     <div className={styles.search_wrapper}>
       <div>
@@ -26,7 +25,6 @@ export default function Search({ searchResults }) {
                   user={element.snippet.channelTitle}
                   title={element.snippet.title}
                   desc={element.snippet.description}
-                  // userPic={userPic}
                   channelId={element.snippet.channelId}
                   views="359578"
                   uploaded={element.snippet.publishedAt}

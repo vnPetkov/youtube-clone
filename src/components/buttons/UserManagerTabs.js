@@ -34,6 +34,12 @@ function ChangePicTab() {
   const dispatch = useDispatch();
   const changePic = async () => {
     let input = document.getElementById("imgFileInput");
+
+    let allowedExtensions = /(\.jpg|\.png)$/i;
+    if (!allowedExtensions.exec(input.value)) {
+      alert("The file must be with .jpg or .png extension");
+      return;
+    }
     let freader = new FileReader();
     freader.readAsDataURL(input.files[0]);
     freader.onload = async () => {

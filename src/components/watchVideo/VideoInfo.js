@@ -17,7 +17,6 @@ export default function VideoInfo(props) {
 
   let videoInfo = props.videoInfo.items[0];
   let channelInfo = props.channelInfo;
-  //TODO: da popravq vsichki curent na current
   const logged = useSelector((state) => state.userData.logged);
   const curentUserId = useSelector((state) => state.userData.uid);
   const curentUserLiked = useSelector((state) => state.userData.likedVideos);

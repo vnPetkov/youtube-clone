@@ -4,7 +4,6 @@ import React, { useState, useEffect } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
 import FetchVideo from "../utilities/FetchVideo";
 import { TailSpin } from "react-loader-spinner";
-import API_KEY from "../utilities/API_KEY";
 
 export default function Home({ categoryTitle, setSidebarOpen }) {
   const [homeVideos, setHomeVideos] = useState([]);
@@ -15,18 +14,6 @@ export default function Home({ categoryTitle, setSidebarOpen }) {
   useEffect(() => {
     setSidebarOpen(true);
   }, []);
-
-  // TODO FETCH CATEGORIES HAVE TO FINISH IT
-  useEffect(() => {
-    fetch(
-      `https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=10&q=${categoryTitle}&type=video&key=${API_KEY}`
-    )
-      .then((res) => res.json())
-      .then((res) => {
-        // console.log(res)
-        // HOMEVIDEOS(res)
-      });
-  }, [categoryTitle]);
 
   function fetchHomeVideos() {
     FetchVideo(nextPageToken)

@@ -60,6 +60,7 @@ export default function History() {
                     <>
                       <HorizontalCard
                         key={e.id}
+                        videoId={e.id}
                         img={e.snippet.thumbnails.high.url}
                         user={e.snippet.channelTitle}
                         title={e.snippet.title}

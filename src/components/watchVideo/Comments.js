@@ -1,10 +1,10 @@
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import styles from "./Comments.module.scss";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { collection, doc, setDoc } from "firebase/firestore";
+import { doc, setDoc } from "firebase/firestore";
 import { db } from "../../firebase/firebaseConfig";
 
 export default function Comments(props) {
@@ -15,7 +15,6 @@ export default function Comments(props) {
   let comments = props.comments.items;
 
   const [writeComment, setWriteComment] = useState("");
-  const [updatedCommentsArr, setupdatedCommentsArr] = useState([]);
 
   const firebaseCommentsArr = useSelector(
     (state) => state.databaseComments.commentsArr
@@ -23,9 +22,6 @@ export default function Comments(props) {
   const videoCommentsIndex = firebaseCommentsArr.findIndex((video) => {
     return video.videoId === watchedVideoId;
   });
-
-  //TODO: трябва всички селектори на редукса  дето се повтарят в почти всеки файл да ги накеркенечим в конст.джс в утилитис папката
-  //TODO:  тези селектори Краси спомен, че може да ги направим на функции които приемат части от пътя или целия път
 
   const pushComment = (index, obj) => {
     firebaseCommentsArr[index].comments.unshift(obj);
@@ -37,25 +33,27 @@ export default function Comments(props) {
 
   const dispatch = useDispatch();
   const uploadComment = () => {
-    let commentObj = {
-      userName: profileName,
-      userPic: profilePicture,
-      comment: writeComment,
-    };
-    videoCommentsIndex !== -1
-      ? pushComment(videoCommentsIndex, commentObj)
-      : dispatch({
-          type: "ADD_VIDEO_COMMENTS", ////////////////ako НЕ Е коментирано видото до сега --> създаване на целия обект
-          newVideoComments: {
-            videoId: watchedVideoId,
-            comments: [commentObj],
-          },
-        });
+    if (writeComment !== "") {
+      let commentObj = {
+        userName: profileName,
+        userPic: profilePicture,
+        comment: writeComment,
+      };
+      videoCommentsIndex !== -1
+        ? pushComment(videoCommentsIndex, commentObj)
+        : dispatch({
+            type: "ADD_VIDEO_COMMENTS",
+            newVideoComments: {
+              videoId: watchedVideoId,
+              comments: [commentObj],
+            },
+          });
 
-    firebaseCommentsArr.forEach(async (e) => {
-      await setDoc(doc(db, "comments", e.videoId), e);
-    });
-    setWriteComment("");
+      firebaseCommentsArr.forEach(async (e) => {
+        await setDoc(doc(db, "comments", e.videoId), e);
+      });
+      setWriteComment("");
+    }
   };
 
   return (

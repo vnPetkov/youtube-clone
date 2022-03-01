@@ -74,7 +74,6 @@ export const userReducer = (state = INITIAL_STATE, action) => {
         ...state,
         uploadedVideos: [...action.newUploadedArr],
       };
-
     default:
       return state;
   }

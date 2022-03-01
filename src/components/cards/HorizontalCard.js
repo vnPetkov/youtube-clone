@@ -3,9 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { db } from "../../firebase/firebaseConfig.js";
 import { updateDoc, doc } from "firebase/firestore";
 import { Link } from "react-router-dom";
-// import styles from "./HorizontalCard.module.scss"
 
-// CAN ADD PROPERTIES FOR WIDTH AND HEIGHT LATER
 export default function HorizontalCard({
   videoId,
   img,
@@ -15,15 +13,12 @@ export default function HorizontalCard({
   views,
   uploaded,
   currentClass,
-  channelId
-
+  channelId,
 }) {
-  const logged = useSelector((state) => state.userData.logged);
   const curentUserId = useSelector((state) => state.userData.uid);
   const curentUserHistory = useSelector(
     (state) => state.userData.historyVideos
   );
-
   const dispatch = useDispatch();
   const addHistory = (userId, currentHistory) => {
     !currentHistory.some((e) => e === videoId) &&
