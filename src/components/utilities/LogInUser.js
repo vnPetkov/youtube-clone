@@ -20,6 +20,7 @@ export default function LoginUser() {
     let dataBaseLiked = docSnap.data().likedVideos;
     let dataBaseDisliked = docSnap.data().dislikedVideos;
     let dataBaseUploaded = docSnap.data().uploadedVideos;
+    let dataBaseProfileImg = docSnap.data().profileImg;
 
     const commentsCollRef = query(collection(db, "comments"));
     const commentsCollSnapshot = await getDocs(commentsCollRef);
@@ -31,7 +32,7 @@ export default function LoginUser() {
       type: "LOGIN",
       profileUid: user.user.uid,
       userName: user.user.displayName,
-      image: user.user.photoURL,
+      image: dataBaseProfileImg,
       history: dataBaseHistory,
       liked: dataBaseLiked,
       disliked: dataBaseDisliked,

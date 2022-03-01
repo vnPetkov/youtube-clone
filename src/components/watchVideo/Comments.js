@@ -52,9 +52,7 @@ export default function Comments(props) {
           },
         });
 
-    console.log("prateno kum FB   ", firebaseCommentsArr);
     firebaseCommentsArr.forEach(async (e) => {
-      console.log(e);
       await setDoc(doc(db, "comments", e.videoId), e);
     });
     setWriteComment("");

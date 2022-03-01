@@ -1,8 +1,6 @@
 import API_KEY from "./API_KEY";
 
 export default function FetchVideosById(idArr) {
-  console.log("активиране ");
-
   let idString = idArr.map((id) => "&id=" + id).join("");
   let finalResult = [];
 
@@ -13,7 +11,6 @@ export default function FetchVideosById(idArr) {
     .then((result) => result.items)
     .then((result) => {
       finalResult = result;
-      console.log(finalResult);
       return finalResult;
     });
 }

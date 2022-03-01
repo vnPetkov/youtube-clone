@@ -51,13 +51,21 @@ export default function Home({ categoryTitle, setSidebarOpen }) {
         style={{ display: "flex", justifyContent: "center" }}
         dataLength={homeVideos.length}
         next={() => {
-          console.log("previous result : ", homeVideos, channels);
           setTimeout(() => {
             fetchHomeVideos();
           }, 2000);
         }}
         hasMore={true}
-        loader={<div className={styles.loaderDiv}><TailSpin color="grey" height={80} width={80} style={{ position: "absolute", bottom: "10px" }} /></div>}
+        loader={
+          <div className={styles.loaderDiv}>
+            <TailSpin
+              color="grey"
+              height={80}
+              width={80}
+              style={{ position: "absolute", bottom: "10px" }}
+            />
+          </div>
+        }
       >
         {homeVideos &&
           channels &&

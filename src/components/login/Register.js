@@ -61,12 +61,10 @@ export default function Register() {
     });
     updateProfile(auth.currentUser, {
       displayName: registerDisplayName,
-      photoURL:
-        "https://img.favpng.com/6/14/19/computer-icons-user-profile-icon-design-png-favpng-vcvaCZNwnpxfkKNYzX3fYz7h2.jpg",
     });
-    // console.log(user.user.uid);
 
     await setDoc(doc(db, "users", user.user.uid), {
+      profileImg: "",
       historyVideos: [],
       likedVideos: [],
       dislikedVideos: [],

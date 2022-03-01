@@ -6,7 +6,7 @@ import CloseIcon from "@mui/icons-material/Close";
 import { useDispatch, useSelector } from "react-redux";
 import { doc, setDoc } from "firebase/firestore";
 import { db } from "../../firebase/firebaseConfig";
-import DragDrop from "./DragDrop"
+import DragDrop from "./DragDrop";
 
 Modal.setAppElement("#root");
 
@@ -75,7 +75,6 @@ export default function UploadModal({ modalIsOpen, setIsOpen }) {
       return;
     }
     if (uploadVidTitle === "") {
-      console.log(uploadVidTitle);
       setErrMessage("The video must have title!");
       return;
     }
@@ -126,7 +125,7 @@ export default function UploadModal({ modalIsOpen, setIsOpen }) {
         </button>
         <form id="form" className={styles.uploadForm}>
           <input type="file" accept=".mp4,.wmv,.mpg" id="videoFileInput" />
-          <DragDrop/>
+          <DragDrop />
           <input
             type="text"
             id="title"
