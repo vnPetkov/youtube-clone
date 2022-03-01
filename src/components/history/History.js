@@ -37,16 +37,19 @@ export default function History() {
       <div className={styles.HistorySignedIn}>
         {logged ? (
           <>
-            <h4>History of watched videos</h4>
-            <span>
-              <Button variant="contained" onClick={clearHistory}>
-                Clear history videos
-              </Button>
-            </span>
+            <div className={styles.HistoryHeading}>
 
+              <h4>History of watched videos</h4>
+              <span>
+                <Button variant="contained" onClick={clearHistory}>
+                  Clear history videos
+                </Button>
+              </span>
+            </div>
             <div className={styles.historyCards}>
               {historyVideos &&
                 historyVideos.map((e) => {
+                  console.log(e)
                   return (
                     <HorizontalCard
                       videoId={e.id}
@@ -54,6 +57,7 @@ export default function History() {
                       img={e.snippet.thumbnails.high.url}
                       user={e.snippet.channelTitle}
                       title={e.snippet.title}
+                      channelId={e.snippet.channelId}
                       desc={e.snippet.description}
                       views={e.statistics.viewCount}
                       uploaded={e.snippet.publishedAt}

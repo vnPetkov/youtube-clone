@@ -1,3 +1,6 @@
+a{
+  color: black;
+}
 .historyContainer {
   display: flex;
   align-items: start;
@@ -38,5 +41,12 @@
     display: flex;
     flex-direction: column;
     gap: 20px;
+  }
+}
+.HistoryHeading{
+  width:100%;
+  text-align: center;
+  h4,button{
+    margin-bottom: 20px;
   }
 }

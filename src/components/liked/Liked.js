@@ -59,6 +59,7 @@ export default function History() {
                   return (
                     <>
                       <HorizontalCard
+                      channelId={e.snippet.channelId}
                         key={e.id}
                         videoId={e.id}
                         img={e.snippet.thumbnails.high.url}
@@ -92,7 +93,7 @@ export default function History() {
             <SignInButton />
           </div>
         )}
-        ;
+        
       </div>
     </div>
   );
